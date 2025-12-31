@@ -53,7 +53,14 @@ LFLAGS += $(LFLAGS_OS)
 #two last flags are for compiling an external library for readline
 SAN_ASAN = -fsanitize=address,undefined -fno-omit-frame-pointer
 
-C_SHELL_FILES += 
+C_SHELL_FILES += \
+		events/hooks.c \
+		events/mouse_hooks.c \
+		events/key_actions.c \
+		events/actions_wrapper_1.c \
+		events/actions_wrapper_2.c \
+		events/actions_wrapper_3.c \
+		events/actions_wrapper_4.c 
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)

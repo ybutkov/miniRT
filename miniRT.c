@@ -6,11 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 16:21:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2025/12/31 17:59:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "map.h"
+#include "miniRT.h"
 #include <mlx.h>
+#include <stdlib.h>
 
 static void	exit_program(t_map *map, char *message)
 {
@@ -63,7 +66,8 @@ int	main(int argc, char const *argv[])
 	t_app	*app;
 
 	if (argc != 2)
-		exit_program(NULL, "Error. There should be one argument - file name");
+		exit_program(NULL,
+			"Error. There should be one argument - file name *.rt");
 	map = read_map_from_file(argv[1]);
 	if (!map)
 		exit_program(NULL, "Error reading map from file");
