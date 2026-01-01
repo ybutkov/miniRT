@@ -29,6 +29,7 @@ LIBFT_NAME = ft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 INCLUDES = -Iincludes
+INCLUDES += -I$(MINILIBX_DIR)
 INCLUDES += -I$(LIBFT_DIR)/includes
 
 PRINT_FLAG = -s --no-print-directory
