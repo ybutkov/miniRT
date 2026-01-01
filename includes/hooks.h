@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:35:50 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 16:36:12 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/01 21:04:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,12 @@ typedef struct s_key_actions
 	t_key_action		*(*get_action)(struct s_key_actions *key_actions,
 			int key);
 }						t_key_actions;
+
+int						close_window(t_app *app);
+int						key_pressed_hook(int key, t_app *app);
+t_key_actions			*init_key_actions(void);
+int						ft_mouse_move(int x, int y, t_app *app);
+int						ft_mouse_press(int button, int x, int y, t_app *app);
+int						ft_mouse_release(int button, int x, int y, t_app *app);
 
 #endif

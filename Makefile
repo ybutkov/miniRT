@@ -55,6 +55,9 @@ LFLAGS += $(LFLAGS_OS)
 SAN_ASAN = -fsanitize=address,undefined -fno-omit-frame-pointer
 
 C_SHELL_FILES += \
+		app_op/app_core.c \
+		app_op/app_core_2.c \
+		app_op/app_basic.c \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \
