@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 16:23:15 by ybutkov          ###   ########.fr       */
+/*   Updated: 2025/12/31 18:29:51 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 # define INFO_PANEL_WIDTH 400
-# define MIN_TIME_FRAMES 16
+# define MIN_TIME_FRAMES 16  // calculate time for render and change?
 # define SHIFT_SIZE 10
 # define ZOOM_SIZE_PERCENT 5
 
