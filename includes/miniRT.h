@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/01 21:40:39 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/01 22:23:33 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ void							free_scene(t_scene *scene);
 
 // --- Parsing functions ---
 void							parse_line(char *line, t_scene *scene);
-void							parse_scene(char *filename, t_scene *scene);
+void							parse_scene(const char *filename,
+									t_scene *scene);
 void							parse_ambient(char **tokens, t_scene *scene);
 void							parse_camera(char **tokens, t_scene *scene);
 void							parse_light(char **tokens, t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:22:08 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/01 21:59:47 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/01 22:39:51 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ void	init_scene(t_scene *scene)
 void	print_scene(t_scene *scene)
 {
 	int			sphere;
+	int			plane;
+	int			cylinder;
 	t_object	*obj;
 
-	sphere = 0, plane;
-	sphere = 0, plane = 0, cylinder;
+	sphere = 0;
+	plane = 0;
+	cylinder = 0;
 	if (!scene)
 		return ;
 	printf("===== Scene =====\n");
@@ -41,7 +44,7 @@ void	print_scene(t_scene *scene)
 		printf("Ambient light: ratio %f, color (%d,%d,%d)\n",
 			scene->ambient->ratio, scene->ambient->color.r,
 			scene->ambient->color.g, scene->ambient->color.b);
-	sphere = 0, plane = 0, cylinder = 0;
+	// Count objects
 	obj = scene->objects;
 	while (obj)
 	{

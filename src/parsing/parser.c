@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/01 21:58:08 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/01 22:34:48 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_line(char *line, t_scene *scene)
 	free_split(tokens);
 }
 
-void	parse_scene(char *filename, t_scene *scene)
+void	parse_scene(const char *filename, t_scene *scene)
 {
 	int		fd;
 	char	*line;
