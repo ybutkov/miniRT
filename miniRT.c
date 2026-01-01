@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/01 21:07:47 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/01 21:46:52 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "miniRT.h"
 #include "utils.h"
 #include <mlx.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static void	exit_program(t_map *map, char *message)
 {
@@ -66,11 +66,15 @@ int	main(int argc, char const *argv[])
 {
 	t_map	*map;
 	t_app	*app;
+	t_scene	scene;
 
 	if (argc != 2)
-		exit_program(NULL,
-			"Error. There should be one argument - file name *.rt");
-	map = NULL; // parcer
+		exit_program(NULL, "Error. There should be one argument
+			- file name *.rt");
+	init_scene(&scene);
+	parse_scene(av[1], &scene);
+	print_scene(&scene);
+	free_scene(&scene);
 	if (!map)
 		exit_program(NULL, "Error reading map from file");
 	app = init_app(map, (char *)argv[1]);
