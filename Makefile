@@ -66,6 +66,13 @@ C_SHELL_FILES += \
 		events/actions_wrapper_3.c \
 		events/actions_wrapper_4.c 
 
+C_SHELL_FILES += \
+		parsing/parser.c \
+		parsing/parser_elements.c \
+		parsing/parser_utils.c \
+		parsing/scene.c \
+		parsing/utils.c
+
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)
 

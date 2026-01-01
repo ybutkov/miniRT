@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/01 21:07:47 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/02 00:23:15 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "miniRT.h"
 #include "utils.h"
 #include <mlx.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static void	exit_program(t_map *map, char *message)
 {
@@ -65,15 +65,21 @@ static t_app	*init_app(t_map *map, char *title)
 int	main(int argc, char const *argv[])
 {
 	t_map	*map;
-	t_app	*app;
+	t_scene	scene;
 
+	// t_app	*app;
+	(void)init_app;
+	map = NULL;
 	if (argc != 2)
-		exit_program(NULL,
-			"Error. There should be one argument - file name *.rt");
-	map = NULL; // parcer
-	if (!map)
-		exit_program(NULL, "Error reading map from file");
-	app = init_app(map, (char *)argv[1]);
-	mlx_loop(app->mlx);
+		exit_program(NULL, "Error. There should be one argument \
+- file name *.rt");
+	init_scene(&scene);
+	parse_scene(argv[1], &scene);
+	print_scene(&scene);
+	free_scene(&scene);
+	// if (!map)
+	// 	exit_program(NULL, "Error reading map from file");
+	// app = init_app(map, (char *)argv[1]);
+	// mlx_loop(app->mlx);
 	return (0);
 }
