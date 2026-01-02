@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 23:36:08 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:42:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,6 @@ typedef struct s_vec3
 	double						y;
 	double						z;
 }								t_vec3;
-
-typedef struct s_color
-{
-	int							r;
-	int							g;
-	int							b;
-}								t_color;
 
 // elements
 typedef struct s_ambient
