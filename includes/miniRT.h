@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/02 19:48:29 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/03 00:18:24 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+# define OK 1
+# define NO 0
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 # define INFO_PANEL_WIDTH 400
@@ -146,12 +148,12 @@ t_color							parse_color(char *str);
 void							check_normalized(t_vec3 v);
 
 // Parsing atof
-void							parse_number(const char *str, t_atof *atof, int *i);
+int								is_validate_real(const char *str);
 float							ft_atof(const char *str);
 
 // Error
 // void							ft_error(t_scene *scene);
-void							ft_error(void);
+// void							ft_error(void);
 
 void							error_exit(char *msg);
 void							free_split(char **split);

@@ -72,7 +72,7 @@ C_SHELL_FILES += \
 		parsing/parser_utils.c \
 		parsing/scene.c \
 		parsing/utils.c \
-		parsing/error.c
+# 		errors/error.c
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)
