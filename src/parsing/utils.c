@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/01 22:02:36 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/02 19:48:56 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,51 @@ int	ft_split_len(char **split)
 	return (i);
 }
 
-double	ft_atof(const char *str)
+void	parse_number(const char *str, t_atof *atof, int *i)
 {
-	return (atof(str));
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		if (atof->dot_count == 0)
+			atof->res = atof->res * 10.0f + (str[*i] - '0');
+		else
+		{
+			atof->res = atof->res * 10.0f + (str[*i] - '0');
+			atof->f *= 10.0f;
+		}
+		(*i)++;
+	}
+	if (str[*i] == '.')
+	{
+		atof->dot_count++;
+		if (atof->dot_count > 1)
+			ft_error();
+		(*i)++;
+		parse_number(str, atof, i);
+	}
+}
+
+float	ft_atof(const char *str)
+{
+	t_atof	atof;
+	int		i;
+
+	atof.res = 0.0f;
+	atof.sign = 1.0f;
+	atof.f = 1.0f;
+	atof.dot_count = 0;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			atof.sign = -1.0f;
+		i++;
+	}
+	if ((str[i] < '0' || str[i] > '9') && str[i] != '.')
+		ft_error();
+	parse_number(str, &atof, &i);
+	if (str[i] != '\0')
+		ft_error();
+	return (atof.sign * (atof.res / atof.f));
 }

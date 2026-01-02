@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/01 22:23:33 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/02 19:48:29 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@
 # define ZOOM_SIZE_PERCENT 5
 
 typedef struct s_key_actions	t_key_actions;
+
+typedef struct s_atof
+{
+	float		res;
+	float		sign;
+	float		f;
+	int			dot_count;
+}				t_atof;
 
 typedef struct s_app
 {
@@ -119,7 +127,7 @@ void							init_scene(t_scene *scene);
 void							print_scene(t_scene *scene);
 void							free_scene(t_scene *scene);
 
-// --- Parsing functions ---
+// --- Parsing functions
 void							parse_line(char *line, t_scene *scene);
 void							parse_scene(const char *filename,
 									t_scene *scene);
@@ -137,10 +145,18 @@ t_vec3							parse_vec3(char *str);
 t_color							parse_color(char *str);
 void							check_normalized(t_vec3 v);
 
+// Parsing atof
+void							parse_number(const char *str, t_atof *atof, int *i);
+float							ft_atof(const char *str);
+
+// Error
+// void							ft_error(t_scene *scene);
+void							ft_error(void);
+
 void							error_exit(char *msg);
 void							free_split(char **split);
 int								ft_split_len(char **split);
-double							ft_atof(const char *str);
+// double							ft_atof(const char *str);
 
 t_app							*create_app(t_map *map);
 
