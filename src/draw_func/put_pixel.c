@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   app_basic.c                                        :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 21:08:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:43:42 by ybutkov          ###   ########.fr       */
+/*   Created: 2026/01/03 22:52:16 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/03 22:57:39 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "app_internal.h"
+#include "miniRT.h"
+#include "map.h"
 
-void	draw_map(t_app *app)
+void	ft_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	int			x;
-	int			y;
-	int			color;
+	char	*dst;
 
-	y = 0;
-	while (y < app->map->height)
+	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
 	{
-		x = 0;
-		while (x < app->map->width)
-		{
-			color = 235478;
-			ft_mlx_pixel_put(app->img, x, y, color);
-			x++;
-		}
-		y++;
+		dst = img->addr
+			+ (y * img->line_length + x * (img->bits_per_pixel / 8));
+		*(unsigned int*)dst = color;
+		// dst[0] = (color) & 0xFF;
+		// dst[1] = (color >> 8) & 0xFF;
+		// dst[2] = (color >> 16) & 0xFF;
+		// dst[3] = 0;
 	}
 }

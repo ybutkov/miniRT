@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   app_basic.c                                        :+:      :+:    :+:   */
+/*   ray_core.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 21:08:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:43:42 by ybutkov          ###   ########.fr       */
+/*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/03 21:46:36 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "app_internal.h"
+#include "vectors.h"
+#include "rays.h"
 
-void	draw_map(t_app *app)
+t_ray	create_ray(t_vec3 start, t_vec3 direction)
 {
-	int			x;
-	int			y;
-	int			color;
+	t_ray	ray;
 
-	y = 0;
-	while (y < app->map->height)
-	{
-		x = 0;
-		while (x < app->map->width)
-		{
-			color = 235478;
-			ft_mlx_pixel_put(app->img, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	ray.start = start;
+	ray.direction = vector_norm(direction);
+	return (ray);
+}
+
+t_vec3  ray_at_pos(t_ray ray, double pos)
+{
+	return (vector_add(ray.start, vector_mult(ray.direction, pos)));
 }

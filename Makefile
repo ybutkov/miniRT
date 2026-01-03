@@ -58,13 +58,23 @@ C_SHELL_FILES += \
 		app_op/app_core.c \
 		app_op/app_core_2.c \
 		app_op/app_basic.c \
+		map_op/map_core.c \
+		map_op/map_core_2.c \
+		map_op/map_transform.c \
+		map_op/map_basic.c \
+		draw_func/put_pixel.c \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \
 		events/actions_wrapper_1.c \
 		events/actions_wrapper_2.c \
 		events/actions_wrapper_3.c \
-		events/actions_wrapper_4.c 
+		events/actions_wrapper_4.c
+
+C_SHELL_FILES += \
+		math/color/color_core.c \
+		math/ray/ray_core.c \
+		math/vector/vector_core.c
 
 C_SHELL_FILES += \
 		parsing/parse_ambient.c \

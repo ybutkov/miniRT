@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   app_basic.c                                        :+:      :+:    :+:   */
+/*   rays.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 21:08:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:43:42 by ybutkov          ###   ########.fr       */
+/*   Created: 2026/01/03 21:28:01 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/03 21:46:47 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "app_internal.h"
+#ifndef RAYS_H
+# define RAYS_H
 
-void	draw_map(t_app *app)
+# include "vectors.h"
+
+typedef struct s_ray
 {
-	int			x;
-	int			y;
-	int			color;
+	t_vec3	start;
+	t_vec3	direction;
+}			t_ray;
 
-	y = 0;
-	while (y < app->map->height)
-	{
-		x = 0;
-		while (x < app->map->width)
-		{
-			color = 235478;
-			ft_mlx_pixel_put(app->img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
+t_ray		create_ray(t_vec3 start, t_vec3 direction);
+t_vec3		ray_at_pos(t_ray ray, double pos);
+
+#endif

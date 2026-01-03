@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 23:36:29 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:43:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 #include "miniRT.h"
 #include "utils.h"
+#include "constants.h"
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,24 +63,38 @@ static t_app	*init_app(t_map *map, char *title)
 	return (app);
 }
 
+// int	main(int argc, char const *argv[])
+// {
+// 	t_map	*map;
+// 	t_scene	scene;
+// 	t_app	*app;
+
+// 	(void)init_app;
+// 	map = NULL;
+// 	if (argc != 2)
+// 		exit_program(NULL, ERROR_MSG_ARGS);
+// 	init_scene(&scene);
+// 	parse_scene(argv[1], &scene);
+// 	print_scene(&scene);
+// 	free_scene(&scene);
+// 	// if (!map)
+// 	// 	exit_program(NULL, "Error reading map from file");
+// 	app = init_app(map, (char *)argv[1]);
+// 	mlx_loop(app->mlx);
+// 	return (0);
+// }
+
 int	main(int argc, char const *argv[])
 {
 	t_map	*map;
-	t_scene	scene;
+	// t_scene	scene;
+	t_app	*app;
 
-	// t_app	*app;
 	(void)init_app;
-	map = NULL;
-	if (argc != 2)
-		exit_program(NULL, "Error. There should be one argument \
-- file name *.rt");
-	init_scene(&scene);
-	parse_scene(argv[1], &scene);
-	print_scene(&scene);
-	free_scene(&scene);
-	// if (!map)
-	// 	exit_program(NULL, "Error reading map from file");
-	// app = init_app(map, (char *)argv[1]);
-	// mlx_loop(app->mlx);
+	(void)argc;
+	(void)argv;
+	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
+	app = init_app(map, (char *)argv[1]);
+	mlx_loop(app->mlx);
 	return (0);
 }

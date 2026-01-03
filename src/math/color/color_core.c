@@ -6,11 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 23:20:16 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/03 19:23:23 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/03 22:01:12 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "colors.h"
+#include <math.h>
 
 int	color_to_int(t_color color)
 {

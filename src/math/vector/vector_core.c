@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/03 19:49:16 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/03 23:40:09 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "vectors.h"
+#include <math.h>
 
 t_vec3	vector_add(t_vec3 v1, t_vec3 v2)
 {
@@ -33,6 +34,16 @@ t_vec3	vector_sub(t_vec3 v1, t_vec3 v2)
 	return (vector);
 }
 
+t_vec3	vector_mult(t_vec3 v1, double scalar)
+{
+	t_vec3	vector;
+
+	vector.x = v1.x * scalar;
+	vector.y = v1.y * scalar;
+	vector.z = v1.z * scalar;
+	return (vector);
+}
+
 double	vector_dot_product(t_vec3 v1, t_vec3 v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
@@ -48,10 +59,9 @@ t_vec3	vector_norm(t_vec3 v1)
 	t_vec3	vector;
 	double	len;
 
-	ft_memset(&vector, 0, sizeof(t_vec3));
 	len = vector_length(v1);
 	if (len == 0)
-		return (vector);
+		return ((t_vec3){0, 0, 0});
 	vector.x = v1.x / len;
 	vector.y = v1.y / len;
 	vector.z = v1.z / len;
