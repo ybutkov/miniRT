@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:34:08 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/03 00:19:23 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/03 19:25:39 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,12 @@ typedef struct s_color
 	double	r;
 	double	g;
 	double	b;
-
-	int		(*rgb_to_int)(struct s_color *color);
-	void	(*add)(struct s_color *this, struct s_color other);
-	void	(*mix)(struct s_color *this, struct s_color color_obj,
-			double intensity);
-	void	(*mult)(struct s_color *this, double scalar);
-
 }			t_color;
 
 t_color		create_color(int r, int g, int b);
+t_color		color_add(t_color c1, t_color c2);
+t_color		color_mix(t_color c1, t_color c2, double intensity);
+t_color		color_mult(t_color c1, double scalar);
+int			color_to_int(t_color color);
 
 #endif
