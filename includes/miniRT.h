@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:42:42 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:44:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 # define MINIRT_H
 
+# include "colors.h"
 # include "hooks.h"
 # include "libft.h"
 # include "map.h"
 # include "mouse.h"
+# include "objects.h"
+# include "rays.h"
+# include "vectors.h"
 # include <math.h>
 # include <mlx.h>
 # include <stdint.h>
@@ -71,12 +75,12 @@ typedef struct s_app
 }								t_app;
 
 // Vector and Color
-typedef struct s_vec3
-{
-	double						x;
-	double						y;
-	double						z;
-}								t_vec3;
+// typedef struct s_vec3
+// {
+// 	double						x;
+// 	double						y;
+// 	double						z;
+// }								t_vec3;
 
 // elements
 typedef struct s_ambient
@@ -85,12 +89,12 @@ typedef struct s_ambient
 	t_color						color;
 }								t_ambient;
 
-typedef struct s_camera
-{
-	t_vec3						pos;
-	t_vec3						dir;
-	int							fov;
-}								t_camera;
+// typedef struct s_camera
+// {
+// 	t_vec3						pos;
+// 	t_vec3						dir;
+// 	int							fov;
+// }								t_camera;
 
 typedef struct s_light
 {
@@ -158,6 +162,9 @@ void							error_exit(const char *msg, t_scene *scene);
 void							free_split(char **split);
 int								ft_split_len(char **split);
 
+// draw
+void							ft_mlx_pixel_put(t_img *img, int x, int y,
+									int color);
 t_app							*create_app(t_map *map);
 
 void							parse_file(int fd, t_scene *scene);
