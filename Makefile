@@ -72,9 +72,14 @@ C_SHELL_FILES += \
 		events/actions_wrapper_4.c
 
 C_SHELL_FILES += \
+		objects/camera_core.c \
+		objects/sphere_core.c
+
+C_SHELL_FILES += \
 		math/color/color_core.c \
 		math/ray/ray_core.c \
-		math/vector/vector_core.c
+		math/vector/vector_core.c \
+		math/math_utils.c
 
 C_SHELL_FILES += \
 		parsing/parse_ambient.c \

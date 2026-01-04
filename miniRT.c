@@ -6,12 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:43:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:44:30 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 #include "miniRT.h"
+#include "vectors.h"
+#include "colors.h"
 #include "utils.h"
 #include "constants.h"
 #include <mlx.h>
@@ -83,6 +85,23 @@ static t_app	*init_app(t_map *map, char *title)
 // 	mlx_loop(app->mlx);
 // 	return (0);
 // }
+void	add_test_objs(t_map *map)
+{
+	t_camera	camera;
+	t_obj		*obj;
+	t_vec3		pos;
+
+	pos = create_vector(50, 50, 5);
+	obj = create_sphere(pos, 10, create_color(255, 0, 0));
+	map->objects = obj;
+	pos = create_vector(20, 25, 15);
+	obj = create_sphere(pos, 10, create_color(150, 150, 150));
+	map->objects->next = obj;
+	pos = create_vector(35, 35, -50);
+	camera = create_camera(pos, create_vector(0.0, 0.0, 1.0), 70.0, map);
+	map->camera = camera;
+
+}
 
 int	main(int argc, char const *argv[])
 {
@@ -94,6 +113,7 @@ int	main(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
+	add_test_objs(map);
 	app = init_app(map, (char *)argv[1]);
 	mlx_loop(app->mlx);
 	return (0);

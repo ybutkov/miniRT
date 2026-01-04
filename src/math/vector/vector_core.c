@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/03 23:40:09 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/04 16:58:17 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_vec3	vector_norm(t_vec3 v1)
 
 	len = vector_length(v1);
 	if (len == 0)
-		return ((t_vec3){0, 0, 0});
+		return (create_vector(0, 0, 0));
 	vector.x = v1.x / len;
 	vector.y = v1.y / len;
 	vector.z = v1.z / len;
