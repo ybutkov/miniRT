@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/03 22:17:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/04 17:41:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_map	*create_map(size_t width, size_t height)
 		return (NULL);
 	map->width = width;
 	map->height = height;
+	map->objects = NULL;
 	map->points = (t_point *)malloc(sizeof(t_point) * width * height);
 	if (!map->points)
 		return (free(map), NULL);

@@ -72,9 +72,14 @@ C_SHELL_FILES += \
 		events/actions_wrapper_4.c
 
 C_SHELL_FILES += \
+		objects/camera_core.c \
+		objects/sphere_core.c
+
+C_SHELL_FILES += \
 		math/color/color_core.c \
 		math/ray/ray_core.c \
-		math/vector/vector_core.c
+		math/vector/vector_core.c \
+		math/math_utils.c
 
 C_SHELL_FILES += \
 		parsing/parser.c \
@@ -107,7 +112,7 @@ fclean f: clean
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean $(PRINT_FLAG)
 	@rm -f $(MINILIB_ZIP_FILE)
-	[ -d $(MINILIBX_DIR) ] && rm -rf $(MINILIBX_DIR)
+	@[ -d $(MINILIBX_DIR) ] && rm -rf $(MINILIBX_DIR) || true
 	@echo "fclean OK"
 
 re	: fclean all
