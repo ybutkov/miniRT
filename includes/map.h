@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 16:38:04 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/04 21:54:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define MAP_H
 
 # include "point.h"
+# include "objects.h"
 # include <stddef.h>
 
 typedef enum e_projection
@@ -26,6 +27,8 @@ typedef enum e_projection
 typedef struct s_map
 {
 	t_point			*points;
+	t_obj			*objects;
+	t_camera		camera;
 	int				width;
 	int				height;
 	double			zoom;
