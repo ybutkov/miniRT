@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:03:20 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 19:12:37 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:42:38 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,3 @@ t_light	*parse_light(char **tokens)
     return (result);
 }
 
-// void	parse_light(char **tokens, t_scene *scene)
-// {
-// 	if (scene->ambient)
-// 	exit_with_tokens(tokens, scene, "Light already defined");
-// 	if (ft_split_len(tokens) < 3)
-// 		error_exit("Invalid light format", NULL);
-// 	scene->light = malloc(sizeof(t_light));
-// 	scene->light->pos = parse_vec3(tokens[1]);
-// 	scene->light->ratio = ft_atof(tokens[2]);
-// 	scene->light->color = parse_color(tokens[3]);
-// 	if (scene->light->ratio < 0.0 || scene->light->ratio > 1.0)
-// 		error_exit("Light ratio out of range", NULL);
-// }

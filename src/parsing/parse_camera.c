@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:22:35 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 19:06:13 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:42:41 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,3 @@ t_camera	*parse_camera(char **tokens)
 	result->fov = (int)ft_atof(tokens[3]);
 	return (result);
 }
-
-// void	parse_camera(char **tokens, t_scene *scene)
-// {
-// 	if (scene->ambient)
-// 	exit_with_tokens(tokens, scene, "Camera already defined");
-// 	if (ft_split_len(tokens) != 4)
-// 		error_exit("Invalid camera format", NULL);
-// 	scene->camera = malloc(sizeof(t_camera));
-// 	scene->camera->pos = parse_vec3(tokens[1]);
-// 	scene->camera->dir = parse_vec3(tokens[2]);
-// 	scene->camera->fov = ft_atoi(tokens[3]);
-// 	check_normalized(scene->camera->dir);
-// 	if (scene->camera->fov < 0 || scene->camera->fov > 180)
-// 		error_exit("Invalid FOV", NULL);
-// }

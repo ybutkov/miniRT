@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:13:37 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 19:15:30 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:42:34 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,3 @@ t_object	*parse_sphere(char **tokens)
     result->next = NULL;
     return (result);
 }
-
-// void	parse_sphere(char **tokens, t_scene *scene)
-// {
-// 	t_object	*obj;
-
-// 	if (ft_split_len(tokens) != 4)
-// 		error_exit("Invalid sphere format", NULL);
-// 	obj = malloc(sizeof(t_object));
-// 	obj->type = SPHERE;
-// 	obj->pos = parse_vec3(tokens[1]);
-// 	obj->diameter = ft_atof(tokens[2]);
-// 	obj->color = parse_color(tokens[3]);
-// 	if (obj->diameter <= 0)
-// 		error_exit("Invalid sphere diameter", NULL);
-// 	obj->next = scene->objects;
-// 	scene->objects = obj;
-// }

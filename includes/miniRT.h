@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 19:34:42 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:45:26 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ int								ft_split_len(char **split);
 t_app							*create_app(t_map *map);
 
 void							parse_file(int fd, t_scene *scene);
-void							parse_error_exit(t_parse_error err, int line_num, char *line);
+void					parse_error_exit(t_parse_error err, int line_num, char *line);
+t_parse_error					parse_line(char *line, t_scene *scene);
 
 
 

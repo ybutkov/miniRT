@@ -68,17 +68,16 @@ C_SHELL_FILES += \
 
 C_SHELL_FILES += \
 		parsing/parse_ambient.c \
-		parsing/parse_camera.c \
-		parsing/parse_light.c \
-		parsing/parse_sphere.c \
-		parsing/parse_plane.c \
-		parsing/parse_cylinder.c \
-		parsing/parser.c \
-		parsing/parser_elements.c \
-		parsing/parser_utils.c \
-		parsing/scene.c \
-		parsing/utils.c 
-# 		errors/error.c
+        parsing/parse_camera.c \
+        parsing/parse_light.c \
+        parsing/parse_sphere.c \
+        parsing/parse_plane.c \
+        parsing/parse_cylinder.c \
+        parsing/parser.c \
+        parsing/parser_utils.c \
+        parsing/scene.c \
+        parsing/utils.c 
+		
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)

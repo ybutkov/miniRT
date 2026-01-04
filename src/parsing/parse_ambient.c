@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:27:23 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 18:57:55 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:56:20 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,3 @@ t_ambient	*parse_ambient(char **tokens)
 	result->color = parse_color(tokens[2]);
 	return (result);
 }
-
-// void	parse_ambient(char **tokens, t_scene *scene)
-// {
-// 	if (scene->ambient)
-// 	exit_with_tokens(tokens, scene, "Ambient already defined");
-// 	if (ft_split_len(tokens) != 3)
-// 		error_exit("Invalid ambient format", NULL);
-// 	scene->ambient = malloc(sizeof(t_ambient));
-// 	scene->ambient->ratio = ft_atof(tokens[1]);
-// 	scene->ambient->color = parse_color(tokens[2]);
-// 	if (scene->ambient->ratio < 0.0 || scene->ambient->ratio > 1.0)
-// 		error_exit("Ambient ratio out of range", NULL);
-// }
