@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/02 23:56:35 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 00:00:02 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 #include <string.h>
 #include <stddef.h>
 
-void	error_exit(char *msg)
+void	error_exit(const char *msg, t_scene *scene)
 {
+	if (scene)
+		free_scene(scene);
 	write(2, "Error\n", 6);
-	if (msg)
-	{
-		write(2, msg, ft_strlen(msg));
-		write(2, "\n", 1);
-	}
-	exit(EXIT_FAILURE);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
+	exit(1);
 }
+
 
 void	free_split(char **split)
 {
@@ -98,8 +98,7 @@ float	ft_atof(const char *str)
 	int		i;
 
 	if (!is_validate_real(str))
-		error_exit("Invalid float value");
-
+		error_exit("Invalid float value", NULL);
 	res = 0.0f;
 	sign = 1.0f;
 	div = 1.0f;

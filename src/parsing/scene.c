@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:22:08 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/01 22:39:51 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:28:40 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,40 @@ void	print_scene(t_scene *scene)
 			scene->light->pos.y, scene->light->pos.z, scene->light->ratio);
 }
 
-void	free_scene(t_scene *scene)
+void	free_object_list(t_object *objects)
 {
-	t_object	*obj;
 	t_object	*tmp;
 
+	while (objects)
+	{
+		tmp = objects->next;
+		// free_object_data(objects);
+		free(objects);
+		objects = tmp;
+	}
+}
+
+void	free_tokens(char **tokens)
+{
+	int	i;
+
+	i = 0;
+	if (!tokens)
+		return ;
+	while (tokens[i])
+		free(tokens[i++]);
+	free(tokens);
+}
+
+
+void	free_scene(t_scene *scene)
+{
 	if (!scene)
 		return ;
-	// Ambient
-	if (scene->ambient)
-		free(scene->ambient);
-	// Camera
-	if (scene->camera)
-		free(scene->camera);
-	// Light
-	if (scene->light)
-		free(scene->light);
-	// Objects
-	obj = scene->objects;
-	while (obj)
-	{
-		tmp = obj->next;
-		free(obj);
-		obj = tmp;
-	}
-	// Reset pointers
+	free(scene->ambient);
+	free(scene->camera);
+	free(scene->light);
+	free_object_list(scene->objects);
 	scene->ambient = NULL;
 	scene->camera = NULL;
 	scene->light = NULL;
