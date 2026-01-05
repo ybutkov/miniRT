@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:53:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/09/29 18:39:01 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/05 17:18:50 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	shift(t_map *map, int x, int y)
 {
 	map->offset_x += x;
 	map->offset_y += y;
+	//
+	map->camera.pos = vector_sub(map->camera.pos, create_vector((double)x, (double)y, 0.0));
+	update_camera(&map->camera);
 }
 
 void	zoom_in(t_map *map, int percent)
