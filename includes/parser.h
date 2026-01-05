@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 19:31:17 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/05 21:49:31 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ int			is_validate_plane(char **tokens);
 // Cylinder cy
 t_object	*parse_cylinder(char **tokens);
 int			is_validate_cylinder(char **tokens);
+
+int         is_normalized(t_vec3 v);
 
 #endif

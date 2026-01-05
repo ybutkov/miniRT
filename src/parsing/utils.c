@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 00:00:02 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/05 22:37:55 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ float	ft_atof(const char *str)
 	float	div;
 	int		i;
 
-	if (!is_validate_real(str))
-		error_exit("Invalid float value", NULL);
 	res = 0.0f;
 	sign = 1.0f;
 	div = 1.0f;
@@ -130,52 +128,11 @@ float	ft_atof(const char *str)
 	return (res * sign / div);
 }
 
-
-// void	parse_number(const char *str, t_atof *atof, int *i)
-// {
-// 	while (str[*i] >= '0' && str[*i] <= '9')
-// 	{
-// 		if (atof->dot_count == 0)
-// 			atof->res = atof->res * 10.0f + (str[*i] - '0');
-// 		else
-// 		{
-// 			atof->res = atof->res * 10.0f + (str[*i] - '0');
-// 			atof->f *= 10.0f;
-// 		}
-// 		(*i)++;
-// 	}
-// 	if (str[*i] == '.')
-// 	{
-// 		atof->dot_count++;
-// 		if (atof->dot_count > 1)
-// 			ft_error();
-// 		(*i)++;
-// 		parse_number(str, atof, i);
-// 	}
-// }
-
-// float	ft_atof(const char *str)
-// {
-// 	t_atof	atof;
-// 	int		i;
-
-// 	atof.res = 0.0f;
-// 	atof.sign = 1.0f;
-// 	atof.f = 1.0f;
-// 	atof.dot_count = 0;
-// 	i = 0;
-// 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-// 		i++;
-// 	if (str[i] == '-' || str[i] == '+')
-// 	{
-// 		if (str[i] == '-')
-// 			atof.sign = -1.0f;
-// 		i++;
-// 	}
-// 	if ((str[i] < '0' || str[i] > '9') && str[i] != '.')
-// 		ft_error();
-// 	parse_number(str, &atof, &i);
-// 	if (str[i] != '\0')
-// 		ft_error();
-// 	return (atof.sign * (atof.res / atof.f));
-// }
+int is_normalized(t_vec3 v) 
+{ 
+	double len; 
+	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z); 
+	if (fabs(len - 1.0) > 0.001) 
+		return (NO); 
+	return (OK); 
+}

@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 20:28:44 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/05 22:56:53 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void	parse_file(int fd, t_scene *scene)
 	int				line_num;
 	t_parse_error	err;
 
+    write(1, "qweawe\n", 7);
 	line_num = 0;
 	while ((line = get_next_line(fd)))
 	{
 		line_num++;
 		err = parse_line(line, scene);
-		if (err != PARSE_OK && err != PARSE_EMPTY_LINE)
+        printf("%d\n", err);
+		if (!(err == PARSE_OK || err == PARSE_EMPTY_LINE))
 			parse_error_exit(err, line_num, line);
 		free(line);
 	}

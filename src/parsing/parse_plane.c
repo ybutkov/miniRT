@@ -6,12 +6,11 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:19:32 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/04 20:42:36 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/05 21:48:50 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-
+#include "miniRT.h"
 #include "parser.h"
 #include <math.h>
 
@@ -34,15 +33,6 @@ int	is_validate_plane(char **tokens)
     if (is_valid_color(split) == NO)
         return (free_split(split), NO);
     free_split(split);
-    return (OK);
-}
-static int	is_normalized(t_vec3 v)
-{
-    double	len;
-
-    len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    if (fabs(len - 1.0) > 0.001)
-        return (NO);
     return (OK);
 }
 
