@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   light_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 21:05:58 by ybutkov          ###   ########.fr       */
+/*   Created: 2026/01/05 18:39:54 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/05 18:47:04 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
+#include "objects.h"
+#include "constants.h"
+#include <stdlib.h>
 
-# define CONSTANTS_H
+t_light	*create_light(t_vec3 pos, double ratio, t_color color)
+{
+	t_light	*light;
 
-# define OK 1
-# define NO 0
-# define HANDLE_ERROR_NULL NULL
-# define ERROR_MSG_ARGS "Error. There should be one argument - file name *.rt"
-
-# define DEFAULT_BRIGHTNESS 1
-# define EPSILON 1e-4
-
-#endif
+	light = malloc(sizeof(t_light));
+	if (light == NULL)
+		return (HANDLE_ERROR_NULL);
+	light->pos = pos;
+	light->ratio = ratio;
+	light->color = color;
+	light->next = NULL;
+	return (light);
+}

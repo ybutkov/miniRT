@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 17:11:36 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/05 22:12:56 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,34 @@ typedef struct s_sphere
 	double				radius_sq;
 }						t_sphere;
 
+typedef struct s_light
+{
+	t_vec3				pos;
+	double				ratio;
+	t_color				color;
+	struct s_light		*next;
+}						t_light;
+
+typedef struct s_ambient
+{
+	double				ratio;
+	t_color				color;
+}						t_ambient;
+
+typedef struct s_plane
+{
+	t_vec3				point;
+	t_vec3				normal;
+	t_color				color;
+}						t_plane;
+
 // dir, right, up (w,u,v)
 typedef struct s_camera
 {
 	t_vec3				pos;
 	t_vec3				dir;
 	t_vec3				right;
-	t_vec3				up; 
+	t_vec3				up;
 	int					fov;
 	double				aspect_ratio;
 	t_vec3				horizontal;
@@ -59,11 +80,16 @@ typedef struct s_camera
 	t_vec3				lower_left_pos;
 }						t_camera;
 
+t_obj					*create_obj(t_color color, double brightness);
+t_obj					*create_plane(t_vec3 point, t_vec3 normal,
+							t_color color);
 t_obj					*create_sphere(t_vec3 pos, double diametr,
 							t_color color);
 t_camera				create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);
 void					update_camera(t_camera *cam);
 int						solve_quadratic(t_vec3 abc, double *t1, double *t2);
+t_light					*create_light(t_vec3 pos, double ratio, t_color color);
+t_ambient				create_ambient(double ratio, t_color color);
 
 #endif

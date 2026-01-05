@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 16:54:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/05 20:46:52 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 980 //1920
+# define WINDOW_HEIGHT 570 //1080
 # define INFO_PANEL_WIDTH 400
 # define MIN_TIME_FRAMES 16 // calculate time for render and change?
 # define SHIFT_SIZE 1
@@ -63,11 +63,11 @@ typedef struct s_app
 // }								t_vec3;
 
 // elements
-typedef struct s_ambient
-{
-	double						ratio;
-	t_color						color;
-}								t_ambient;
+// typedef struct s_ambient
+// {
+// 	double						ratio;
+// 	t_color						color;
+// }								t_ambient;
 
 // typedef struct s_camera
 // {
@@ -76,12 +76,12 @@ typedef struct s_ambient
 // 	int							fov;
 // }								t_camera;
 
-typedef struct s_light
-{
-	t_vec3						pos;
-	double						ratio;
-	t_color						color;
-}								t_light;
+// typedef struct s_light
+// {
+// 	t_vec3						pos;
+// 	double						ratio;
+// 	t_color						color;
+// }								t_light;
 
 // objs
 typedef enum e_obj_type
