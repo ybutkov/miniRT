@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 19:12:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/05 17:11:36 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ typedef struct s_sphere
 	double				radius_sq;
 }						t_sphere;
 
+// dir, right, up (w,u,v)
 typedef struct s_camera
 {
 	t_vec3				pos;
 	t_vec3				dir;
+	t_vec3				right;
+	t_vec3				up; 
 	int					fov;
 	double				aspect_ratio;
 	t_vec3				horizontal;
@@ -60,6 +63,7 @@ t_obj					*create_sphere(t_vec3 pos, double diametr,
 							t_color color);
 t_camera				create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);
+void					update_camera(t_camera *cam);
 int						solve_quadratic(t_vec3 abc, double *t1, double *t2);
 
 #endif

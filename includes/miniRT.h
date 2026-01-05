@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:44:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:45:36 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define WINDOW_HEIGHT 1080
 # define INFO_PANEL_WIDTH 400
 # define MIN_TIME_FRAMES 16 // calculate time for render and change?
-# define SHIFT_SIZE 10
+# define SHIFT_SIZE 1
 # define ZOOM_SIZE_PERCENT 5
 
 typedef struct s_key_actions	t_key_actions;
