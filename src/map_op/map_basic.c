@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:53:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 18:20:17 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 21:22:19 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void	zoom_in(t_map *map, int percent)
 	// if (map->zoom < 1.0)
 	// 	map->zoom = 1.0;
 	// change from percent to shift
+	printf("%f %f %f\n", map->camera.pos.x, map->camera.pos.y, map->camera.pos.z);
 	map->camera.pos = vector_sub(map->camera.pos, create_vector(0.0, 0.0, (double)percent));
 	printf("%f %f %f\n", map->camera.pos.x, map->camera.pos.y, map->camera.pos.z);
+	printf("------------------------------------------------------------------------\n");
 	fflush(stdout);
 	update_camera(&map->camera);
 }
