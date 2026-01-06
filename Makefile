@@ -72,8 +72,10 @@ C_SHELL_FILES += \
 		events/actions_wrapper_4.c
 
 C_SHELL_FILES += \
+		objects/obj_core.c \
 		objects/camera_core.c \
 		objects/sphere_core.c \
+		objects/cylinder_core.c \
 		objects/plane_core.c \
 		objects/light_core.c \
 		objects/ambient_core.c

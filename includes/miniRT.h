@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 20:46:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 18:59:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WINDOW_WIDTH 980 //1920
-# define WINDOW_HEIGHT 570 //1080
+# define WINDOW_WIDTH 1080 //1920
+# define WINDOW_HEIGHT 572 // 1080
 # define INFO_PANEL_WIDTH 400
 # define MIN_TIME_FRAMES 16 // calculate time for render and change?
 # define SHIFT_SIZE 1
