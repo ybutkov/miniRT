@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 18:03:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 21:19:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_mouse_press(int button, int x, int y, t_app *app)
 	else if (button == MOUSE_MIDDLE_BUTTON)
 		app->mouse.middle_button = 1;
 	else if (button == MOUSE_SCROLL_UP)
-		app->map->zoom++;
-	else if (button == MOUSE_SCROLL_DOWN && app->map->zoom > 1)
-		app->map->zoom--;
+		app->map->zoom_in(app->map, app->map->zoom_size);
+	else if (button == MOUSE_SCROLL_DOWN)
+		app->map->zoom_in(app->map, -app->map->zoom_size);
 	app->map->is_change = 1;
 	return (0);
 }
