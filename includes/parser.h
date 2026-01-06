@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 21:49:31 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:02:54 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include "miniRT.h"
 
 //ambient A
-int	    is_valid_color(char	**split);
-int	    is_valid_color_part(const char *s);
-int	    is_valid_ambient(char **tokens);
+int	        is_valid_color(char	**split);
+int	        is_valid_color_part(const char *s);
+int	        is_valid_ambient(char **tokens);
 t_ambient	*parse_ambient(char **tokens);
 
 //camera C

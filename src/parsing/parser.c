@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 22:56:53 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 21:00:46 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include "parser.h"
 #include <unistd.h>
+#include <string.h>
 
 void	exit_with_tokens(char **tokens, t_scene *scene, const char *msg)
 {
@@ -42,13 +43,13 @@ void	parse_error_exit(t_parse_error err, int line_num, char *line)
 	}
 	exit(EXIT_FAILURE);
 }
+
 void	parse_file(int fd, t_scene *scene)
 {
 	char			*line;
 	int				line_num;
 	t_parse_error	err;
 
-    write(1, "qweawe\n", 7);
 	line_num = 0;
 	while ((line = get_next_line(fd)))
 	{
@@ -56,25 +57,34 @@ void	parse_file(int fd, t_scene *scene)
 		err = parse_line(line, scene);
         printf("%d\n", err);
 		if (!(err == PARSE_OK || err == PARSE_EMPTY_LINE))
+        {
+            free(line);
+            close (fd);
 			parse_error_exit(err, line_num, line);
+        }
 		free(line);
 	}
 }
 
 t_parse_error	parse_line(char *line, t_scene *scene)
 {
-    char		**tokens;
-    t_ambient	*ambient;
-    t_camera	*camera;
-    t_light		*light;
-    t_object	*obj;
+    char    **tokens;
+    t_ambient   *ambient;
+    t_camera    *camera;
+    t_light     *light;
+    t_object    *obj;
 
+    if (line)
+    {
+        size_t len = strlen(line);
+        if (len > 0 && line[len - 1] == '\n')
+            line[len - 1] = '\0';
+    }
     tokens = ft_split(line, ' ');
     if (!tokens)
         return (PARSE_MALLOC_FAIL);
     if (!tokens[0])
         return (free_split(tokens), PARSE_EMPTY_LINE);
-
     if (!ft_strncmp(tokens[0], "A", 2))
     {
         ambient = parse_ambient(tokens);
@@ -132,15 +142,10 @@ t_parse_error	parse_line(char *line, t_scene *scene)
 void	parse_scene(const char *filename, t_scene *scene)
 {
 	int		fd;
-	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		error_exit("Failed to open file", NULL);
-	while ((line = get_next_line(fd)))
-	{
-		parse_line(line, scene);
-		free(line);
-	}
-	close(fd);
+    fd = open(filename, O_RDONLY);
+    if (fd < 0)
+        error_exit("Failed to open file", NULL);
+    parse_file(fd, scene);
+    close(fd);
 }

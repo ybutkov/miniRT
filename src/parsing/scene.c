@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:22:08 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 21:48:59 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 21:14:07 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	print_scene(t_scene *scene)
 		printf("Ambient light: ratio %f, color (%d,%d,%d)\n",
 			scene->ambient->ratio, scene->ambient->color.r,
 			scene->ambient->color.g, scene->ambient->color.b);
-	// Count objects
 	obj = scene->objects;
 	while (obj)
 	{
@@ -70,7 +69,6 @@ void	free_object_list(t_object *objects)
 	while (objects)
 	{
 		tmp = objects->next;
-		// free_object_data(objects);
 		free(objects);
 		objects = tmp;
 	}
@@ -87,7 +85,6 @@ void	free_tokens(char **tokens)
 		free(tokens[i++]);
 	free(tokens);
 }
-
 
 void	free_scene(t_scene *scene)
 {

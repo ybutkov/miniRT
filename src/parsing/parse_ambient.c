@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:27:23 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 22:42:57 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 20:26:01 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ t_ambient	*parse_ambient(char **tokens)
 
 	if (is_valid_ambient(tokens) == NO)
 		return (NULL);
-
 	result = malloc(sizeof(t_ambient));
 	if (!result)
 		return (NULL);
-
 	result->ratio = ft_atof(tokens[1]);
 	result->color = parse_color(tokens[2]);
 	return (result);

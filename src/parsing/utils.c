@@ -63,6 +63,7 @@ int	is_validate_real(const char *str)
 	i = 0;
 	dot = 0;
 	digit = 0;
+	printf("[DEBUG] Validating real number: %s\n", str); // Debug print
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -85,7 +86,11 @@ int	is_validate_real(const char *str)
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] != '\0')
+	{
+		printf("[DEBUG] Validation failed: unexpected character '%c'\n", str[i]); // Debug print
 		return (0);
+	}
+	printf("[DEBUG] Validation passed\n"); // Debug print
 	return (digit);
 }
 
