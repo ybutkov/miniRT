@@ -77,6 +77,7 @@ C_SHELL_FILES += \
 		objects/sphere_core.c \
 		objects/cylinder_core.c \
 		objects/plane_core.c \
+		objects/triangle_core.c \
 		objects/light_core.c \
 		objects/ambient_core.c
 

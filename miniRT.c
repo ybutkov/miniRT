@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:52:25 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:58:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	add_test_objs_3(t_map *map)
 	t_obj		*obj;
 	t_vec3		pos;
 
-	map->ambient = create_ambient(0, create_color(255, 255, 255));
+	map->ambient = create_ambient(0.1, create_color(255, 255, 255));
 
 	obj = create_plane(create_vector(0, 20, 0), create_vector(-10, -10, 0),
 			create_color(200, 200, 200));
@@ -178,6 +178,10 @@ void	add_test_objs_3(t_map *map)
 	pos = create_vector(-50, 45, 30);
 	obj = create_sphere(pos, 20, create_color(200, 200, 0));
 	map->objects->next->next->next->next->next->next = obj;
+
+	obj = create_triangle(create_vector(-50, 30, 0), create_vector(-30, 30, -20),
+		create_vector(-40, 40, 0), create_color(255, 155, 155));
+	map->objects->next->next->next->next->next->next->next = obj;
 
 	map->lights = create_light(create_vector(-50, -100, 20),
 			0.8, create_color(255, 255, 255));
