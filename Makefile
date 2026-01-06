@@ -73,6 +73,7 @@ C_SHELL_FILES += \
         parsing/parse_sphere.c \
         parsing/parse_plane.c \
         parsing/parse_cylinder.c \
+		parsing/parse_triangle.c \
         parsing/parser.c \
         parsing/parser_utils.c \
         parsing/scene.c \

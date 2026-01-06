@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 21:49:38 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:39:56 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	TRIANGLE,
 }								t_obj_type;
 
 typedef struct s_object
@@ -167,7 +168,7 @@ int								ft_split_len(char **split);
 t_app							*create_app(t_map *map);
 
 void							parse_file(int fd, t_scene *scene);
-void					parse_error_exit(t_parse_error err, int line_num, char *line);
+void							parse_error_exit(t_parse_error err, int line_num, char *line);
 t_parse_error					parse_line(char *line, t_scene *scene);
 
 

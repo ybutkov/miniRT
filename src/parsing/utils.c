@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 22:37:55 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 21:48:15 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	error_exit(const char *msg, t_scene *scene)
 	write(2, "\n", 1);
 	exit(1);
 }
-
 
 void	free_split(char **split)
 {

@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/06 21:00:46 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:41:30 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,14 @@ t_parse_error	parse_line(char *line, t_scene *scene)
     else if (!ft_strncmp(tokens[0], "cy", 3))
     {
         obj = parse_cylinder(tokens);
+        if (obj == NULL)
+            return (free_split(tokens), PARSE_INVALID_FORMAT);
+        obj->next = scene->objects;
+        scene->objects = obj;
+    }
+    else if (!ft_strncmp(tokens[0], "tr", 3))
+    {
+        obj = parse_triangle(tokens);
         if (obj == NULL)
             return (free_split(tokens), PARSE_INVALID_FORMAT);
         obj->next = scene->objects;
