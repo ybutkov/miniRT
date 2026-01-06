@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:47:43 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:52:25 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,20 +149,42 @@ void	add_test_objs_3(t_map *map)
 	t_obj		*obj;
 	t_vec3		pos;
 
-	map->ambient = create_ambient(0.2, create_color(255, 255, 255));
+	map->ambient = create_ambient(0, create_color(255, 255, 255));
 
 	obj = create_plane(create_vector(0, 20, 0), create_vector(-10, -10, 0),
 			create_color(200, 200, 200));
 	map->objects = obj;
 
-	pos = create_vector(0, 0, 50);
-	obj = create_sphere(pos, 10, create_color(255, 0, 0));
+	pos = create_vector(-10, 0, 50);
+	obj = create_sphere(pos, 15, create_color(255, 0, 0));
 	map->objects->next = obj;
+
+	pos = create_vector(-20, 15, 50);
+	obj = create_sphere(pos, 15, create_color(0, 255, 0));
+	map->objects->next->next = obj;
+
+	pos = create_vector(20, 15, 60);
+	obj = create_sphere(pos, 35, create_color(0, 0, 255));
+	map->objects->next->next->next = obj;
+
+	pos = create_vector(0, 0, 0);
+	obj = create_cylinder(pos, create_vector(0, 1, 0), 30, 50, create_color(255, 0, 255));
+	map->objects->next->next->next->next = obj;
+
+	pos = create_vector(-150, 10, 20);
+	obj = create_cylinder(pos, create_vector(1, 0, 0), 20, 40, create_color(155, 155, 155));
+	map->objects->next->next->next->next->next = obj;
+
+	pos = create_vector(-50, 45, 30);
+	obj = create_sphere(pos, 20, create_color(200, 200, 0));
+	map->objects->next->next->next->next->next->next = obj;
 
 	map->lights = create_light(create_vector(-50, -100, 20),
 			0.8, create_color(255, 255, 255));
+	map->lights->next = create_light(create_vector(-10, -50, -50),
+			0.4, create_color(255, 255, 255));
 
-	pos = create_vector(0, 0, -10);
+	pos = create_vector(0, 0, -70);
 	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);
 	map->camera = camera;
 

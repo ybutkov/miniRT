@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 22:15:48 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 14:46:01 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 #include "objects.h"
 #include "vectors.h"
 #include <stdlib.h>
-
-t_obj	*create_obj(t_color color, double brightness)
-{
-	t_obj	*obj;
-
-	obj = malloc(sizeof(t_obj));
-	if (obj == NULL)
-		return (HANDLE_ERROR_NULL);
-	obj->brightness = brightness;
-	obj->color = color;
-	obj->methods = NULL;
-	obj->data = NULL;
-	obj->next = NULL;
-	return (obj);
-}
 
 t_vec3	sphere_get_normal(t_obj *this, t_vec3 pos)
 {

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 22:12:56 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 18:35:44 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,14 @@ typedef struct s_sphere
 	double				radius;
 	double				radius_sq;
 }						t_sphere;
-
+typedef struct s_cylinder
+{
+	t_vec3				center;
+	t_vec3				normal;
+	double				radius;
+	double				radius_sq;
+	double				height;
+}						t_cylinder;
 typedef struct s_light
 {
 	t_vec3				pos;
@@ -85,11 +92,15 @@ t_obj					*create_plane(t_vec3 point, t_vec3 normal,
 							t_color color);
 t_obj					*create_sphere(t_vec3 pos, double diametr,
 							t_color color);
+t_obj					*create_cylinder(t_vec3 pos, t_vec3 normal,
+							double diametr, double height, t_color color);
 t_camera				create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);
 void					update_camera(t_camera *cam);
 int						solve_quadratic(t_vec3 abc, double *t1, double *t2);
 t_light					*create_light(t_vec3 pos, double ratio, t_color color);
 t_ambient				create_ambient(double ratio, t_color color);
+//
+double					plane_intersect(t_obj *this, t_vec3 origin, t_vec3 dir);
 
 #endif
