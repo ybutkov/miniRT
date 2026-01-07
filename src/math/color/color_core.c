@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 23:20:16 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 21:19:37 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 14:48:23 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,19 @@ int	color_to_int(t_color color)
 	return (r << 16 | g << 8 | b);
 }
 
-t_color	color_mix(t_color c1, t_color c2, double intensity)
+t_color	color_mix(t_color c1, t_color c2, double ratio)
 {
 	t_color	color;
+	double	inv_ratio;
 
-	color.r = c1.r * c2.r * intensity;
-	color.g = c1.g * c2.g * intensity;
-	color.b = c1.b * c2.b * intensity;
+	if (ratio > 1.0)
+		ratio = 1.0;
+	if (ratio < 0.0)
+		ratio = 0.0;
+	inv_ratio = 1.0 - ratio;
+	color.r = c1.r * inv_ratio + c2.r * ratio;
+	color.g = c1.g * inv_ratio + c2.g * ratio;
+	color.b = c1.b * inv_ratio + c2.b * ratio;
 	return (color);
 }
 

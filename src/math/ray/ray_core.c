@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 22:43:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 17:15:58 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 	t_vec3	normal;
 	t_vec3	view_dir;
 	t_vec3	light_direct;
+	t_vec3	sh_hit_point;
+	t_vec3	reflect_v;
 	double	total_intensity;
 	double	dot;
+	double	spec_dot;
 
 	normal = obj->methods->get_normal(obj, hit_point);
 	view_dir = vector_norm(vector_sub(map->camera.pos, hit_point));
@@ -87,8 +90,15 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 	{
 		light_direct = vector_norm(vector_sub(curr->pos, hit_point));
 		dot = vector_dot_product(normal, light_direct);
-		if (dot > 0 && is_in_shadow(map, hit_point, curr->pos) == NO)
+		sh_hit_point = vector_add(hit_point, vector_mult(normal, 0.01));
+		if (dot > 0 && is_in_shadow(map, sh_hit_point, curr->pos) == NO)
+		{
 			total_intensity += dot * curr->ratio;
+			reflect_v = vector_reflect(vector_mult(light_direct, -1), normal);
+			spec_dot = vector_dot_product(reflect_v, view_dir);
+			if (spec_dot > 0)
+				total_intensity += pow(spec_dot, 50) * curr->ratio;
+		}
 		curr = curr->next;
 	}
 	if (total_intensity > 1.0)
@@ -96,13 +106,18 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 	return (color_mult(obj->color, total_intensity));
 }
 
-t_color	trace_ray(t_ray ray, t_obj *obj, t_map *map)
+t_color	trace_ray(t_ray ray, t_obj *obj, t_map *map, int depth)
 {
 	t_obj	*closest_obj;
 	t_vec3	hit_point;
+	t_vec3	normal;
+	t_color	local_color;
+	t_ray	reflect_ray;
 	double	min_t;
 	double	t;
 
+	if (depth <= 0)
+		return (get_background_color(ray));
 	closest_obj = NULL;
 	min_t = INFINITY;
 	while (obj)
@@ -118,5 +133,14 @@ t_color	trace_ray(t_ray ray, t_obj *obj, t_map *map)
 	if (!closest_obj)
 		return (get_background_color(ray));
 	hit_point = ray_at_pos(ray, min_t);
-	return (calculate_light(map, closest_obj, hit_point));
+	normal = closest_obj->methods->get_normal(closest_obj, hit_point);
+	local_color = calculate_light(map, closest_obj, hit_point);
+	if (closest_obj->reflection > 0)
+	{
+		reflect_ray.direction = vector_reflect(ray.direction, normal);
+		reflect_ray.start = vector_add(hit_point, vector_mult(normal, 100 * EPSILON));
+		t_color reflect_color = trace_ray(reflect_ray, map->objects, map, depth - 1);
+		return (color_mix(local_color, reflect_color, closest_obj->reflection));
+	}
+	return (local_color);
 }

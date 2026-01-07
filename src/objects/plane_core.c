@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 22:12:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:12:54 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ t_vtable	*get_plane_methods(void)
 	return (&plane_methods);
 }
 
-t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color)
+t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color, double reflection)
 {
 	t_obj	*obj;
 	t_plane	*plane;
 
-	obj = create_obj(color, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	plane = malloc(sizeof(t_plane));

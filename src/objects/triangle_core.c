@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 21:49:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:14:31 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ t_vtable	*get_triangle_methods(void)
 	return (&triangle_methods);
 }
 
-t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3, t_color color)
+t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3, t_color color, double reflection)
 {
 	t_obj		*obj;
 	t_triangle	*triangle;
 
-	obj = create_obj(color, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	triangle = malloc(sizeof(t_triangle));

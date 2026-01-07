@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 14:46:01 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:14:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ t_vtable	*get_sphere_methods(void)
 	return (&sphere_methods);
 }
 
-t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color)
+t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color, double reflection)
 {
 	t_obj		*obj;
 	t_sphere	*sphere;
 
-	obj = create_obj(color, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	sphere = malloc(sizeof(t_sphere));
