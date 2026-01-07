@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:27:23 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/06 20:26:01 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 23:33:11 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	is_valid_color(char **split)
 {
 	if (!split || ft_split_len(split) != 3)
 		return (NO);
-	if (!is_valid_color_part(split[0])
-		|| !is_valid_color_part(split[1])
+	if (!is_valid_color_part(split[0]) || !is_valid_color_part(split[1])
 		|| !is_valid_color_part(split[2]))
 		return (NO);
 	return (OK);
@@ -83,4 +82,3 @@ t_ambient	*parse_ambient(char **tokens)
 	result->color = parse_color(tokens[2]);
 	return (result);
 }
-

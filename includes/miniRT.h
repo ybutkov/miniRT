@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 22:39:56 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 23:36:08 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,15 @@ typedef enum e_parse_error
 	PARSE_UNKNOWN_ID,
 	PARSE_INVALID_FORMAT,
 	PARSE_MALLOC_FAIL
-}	t_parse_error;
-
+}								t_parse_error;
 
 typedef struct s_atof
 {
-	float		res;
-	float		sign;
-	float		f;
-	int			dot_count;
-}				t_atof;
+	float						res;
+	float						sign;
+	float						f;
+	int							dot_count;
+}								t_atof;
 
 typedef struct s_app
 {
@@ -156,10 +155,11 @@ void							check_normalized(t_vec3 v);
 int								is_validate_real(const char *str);
 float							ft_atof(const char *str);
 
-//Free function
+// Free function
 void							free_object_list(t_object *objects);
 
-void							exit_with_tokens(char **tokens, t_scene *scene, const char *msg);
+void							exit_with_tokens(char **tokens, t_scene *scene,
+									const char *msg);
 void							error_exit(const char *msg, t_scene *scene);
 // void							error_exit(char *msg, t_scene *scene);
 void							free_split(char **split);
@@ -168,9 +168,8 @@ int								ft_split_len(char **split);
 t_app							*create_app(t_map *map);
 
 void							parse_file(int fd, t_scene *scene);
-void							parse_error_exit(t_parse_error err, int line_num, char *line);
+void							parse_error_exit(t_parse_error err,
+									int line_num, char *line);
 t_parse_error					parse_line(char *line, t_scene *scene);
-
-
 
 #endif

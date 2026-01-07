@@ -6,14 +6,14 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/06 21:48:15 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 23:35:25 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stddef.h>
 
 void	error_exit(const char *msg, t_scene *scene)
 {
@@ -88,7 +88,6 @@ int	is_validate_real(const char *str)
 	return (digit);
 }
 
-
 float	ft_atof(const char *str)
 {
 	float	res;
@@ -102,7 +101,6 @@ float	ft_atof(const char *str)
 	i = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -127,23 +125,23 @@ float	ft_atof(const char *str)
 	return (res * sign / div);
 }
 
-int is_normalized(t_vec3 v) 
-{ 
-	double len; 
-	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z); 
-	if (fabs(len - 1.0) > 0.001) 
-		return (NO); 
-	return (OK); 
+int	is_normalized(t_vec3 v)
+{
+	double	len;
+
+	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	if (fabs(len - 1.0) > 0.001)
+		return (NO);
+	return (OK);
 }
 
-int is_valid_vec3_split(char **split)
+int	is_valid_vec3_split(char **split)
 {
 	if (!split)
 		return (NO);
 	if (ft_split_len(split) != 3)
 		return (NO);
-	if (is_validate_real(split[0]) == NO
-		|| is_validate_real(split[1]) == NO
+	if (is_validate_real(split[0]) == NO || is_validate_real(split[1]) == NO
 		|| is_validate_real(split[2]) == NO)
 		return (NO);
 	return (OK);
