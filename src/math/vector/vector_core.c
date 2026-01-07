@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 16:58:17 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 22:33:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ t_vec3	vector_cross(t_vec3 v1, t_vec3 v2)
 	vector.y = v1.z * v2.x - v1.x * v2.z;
 	vector.z = v1.x * v2.y - v1.y * v2.x;
 	return (vector);
+}
+
+t_vec3	vector_reflect(t_vec3 ray, t_vec3 normal)
+{
+	double	dot;
+
+	dot = vector_dot_product(ray, normal);
+	return (vector_sub(ray, vector_mult(normal, 2.0 * dot)));
 }
 
 t_vec3	create_vector(double x, double y, double z)

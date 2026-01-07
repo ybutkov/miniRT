@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:26:58 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 15:32:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/06 22:34:02 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ double				vector_dot_product(t_vec3 v1, t_vec3 v2);
 double				vector_length(t_vec3 v1);
 t_vec3				vector_norm(t_vec3 v1);
 t_vec3				vector_cross(t_vec3 v1, t_vec3 v2);
+t_vec3				vector_reflect(t_vec3 ray, t_vec3 normal);
 
 #endif

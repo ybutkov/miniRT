@@ -6,12 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/04 17:41:05 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:42:15 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
 #include "map_internal.h"
+#include "miniRT.h"
 #include <math.h>
 
 static void	free_map(t_map *map)
@@ -25,6 +25,32 @@ void	set_rotation(struct s_map *map, double x, double y, double z)
 	map->rotation_x = x;
 	map->rotation_y = y;
 	map->rotation_z = z;
+}
+
+void	add_new_light(t_map *map, t_light *new_light)
+{
+	t_light	*cur;
+
+	cur = map->lights;
+	while (cur && cur->next)
+		cur = cur->next;
+	if (cur)
+		cur->next = new_light;
+	else
+		map->lights = new_light;
+}
+
+void	add_new_object(t_map *map, t_obj *new_obj)
+{
+	t_obj	*cur;
+
+	cur = map->objects;
+	while(cur && cur->next)
+		cur = cur->next;
+	if (cur)
+		cur->next = new_obj;
+	else
+		map->objects = new_obj;
 }
 
 t_map	*create_map(size_t width, size_t height)
@@ -54,5 +80,7 @@ t_map	*create_map(size_t width, size_t height)
 	map->rotate = rotate_map;
 	map->shift = shift;
 	map->zoom_in = zoom_in;
+	map->add_light = add_new_light;
+	map->add_obj = add_new_object;
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 18:53:11 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:13:34 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,12 @@ t_vtable	*get_cylinder_methods(void)
 }
 
 t_obj	*create_cylinder(t_vec3 pos, t_vec3 normal, double diametr,
-		double height, t_color color)
+		double height, t_color color, double reflection)
 {
 	t_obj		*obj;
 	t_cylinder	*cylinder;
 
-	obj = create_obj(color, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	cylinder = malloc(sizeof(t_cylinder));

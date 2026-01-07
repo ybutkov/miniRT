@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:57:32 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:58:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define MIN_TIME_FRAMES 16 // calculate time for render and change?
 # define SHIFT_SIZE 1
 # define ZOOM_SIZE_PERCENT 1
+# define REFLECTION_AMOUNT 5
+# define REFLECTION_DEFAULT 0
 
 typedef struct s_key_actions	t_key_actions;
 
