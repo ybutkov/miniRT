@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
@@ -62,7 +61,7 @@ int	is_validate_real(const char *str)
 	i = 0;
 	dot = 0;
 	digit = 0;
-	printf("[DEBUG] Validating real number: %s\n", str); // Debug print
+	(void)0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -85,11 +84,7 @@ int	is_validate_real(const char *str)
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] != '\0')
-	{
-		printf("[DEBUG] Validation failed: unexpected character '%c'\n", str[i]); // Debug print
 		return (0);
-	}
-	printf("[DEBUG] Validation passed\n"); // Debug print
 	return (digit);
 }
 
@@ -139,4 +134,17 @@ int is_normalized(t_vec3 v)
 	if (fabs(len - 1.0) > 0.001) 
 		return (NO); 
 	return (OK); 
+}
+
+int is_valid_vec3_split(char **split)
+{
+	if (!split)
+		return (NO);
+	if (ft_split_len(split) != 3)
+		return (NO);
+	if (is_validate_real(split[0]) == NO
+		|| is_validate_real(split[1]) == NO
+		|| is_validate_real(split[2]) == NO)
+		return (NO);
+	return (OK);
 }

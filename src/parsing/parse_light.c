@@ -22,6 +22,8 @@ int	is_validate_light(char **tokens)
     split = ft_split(tokens[1], ',');
     if (ft_split_len(split) != 3)
         return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
+        return (free_split(split), NO);
     free_split(split);
     if (is_validate_real(tokens[2]) == NO)
         return (NO);

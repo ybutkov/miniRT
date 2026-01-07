@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:28:49 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/05 21:48:46 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:04:38 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ int	is_validate_cylinder(char **tokens)
     split = ft_split(tokens[1], ',');
     if (ft_split_len(split) != 3)
         return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
+        return (free_split(split), NO);
     free_split(split);
     split = ft_split(tokens[2], ',');
     if (ft_split_len(split) != 3)
+        return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
         return (free_split(split), NO);
     free_split(split);
     if (is_validate_real(tokens[3]) == NO)

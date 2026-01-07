@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/06 22:42:22 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 22:27:28 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ t_object    *parse_triangle(char **tokens);
 int         is_validate_triangle(char **tokens);
 
 int         is_normalized(t_vec3 v);
+int         is_valid_vec3_split(char **split);
 
 #endif

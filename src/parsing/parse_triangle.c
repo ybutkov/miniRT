@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:24:16 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/06 23:07:34 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:49:01 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@ int	is_validate_triangle(char **tokens)
     split = ft_split(tokens[1], ',');
     if (!split || ft_split_len(split) != 3)
         return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
+        return (free_split(split), NO);
     free_split(split);
     split = ft_split(tokens[2], ',');
     if (!split || ft_split_len(split) != 3)
         return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
+        return (free_split(split), NO);
     free_split(split);
     split = ft_split(tokens[3], ',');
     if (!split || ft_split_len(split) != 3)
+        return (free_split(split), NO);
+    if (is_valid_vec3_split(split) == NO)
         return (free_split(split), NO);
     free_split(split);
     split = ft_split(tokens[4], ',');
@@ -36,6 +42,7 @@ int	is_validate_triangle(char **tokens)
     free_split(split);
     return (OK);
 }
+
 
 t_object    *parse_triangle(char **tokens)
 {
