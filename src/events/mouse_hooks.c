@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 21:19:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 19:24:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 
 int	ft_mouse_press(int button, int x, int y, t_app *app)
 {
-	(void)x;
-	(void)y;
+	app->mouse.x = x;
+	app->mouse.y = y;
+	app->mouse.click_x = x;
+	app->mouse.click_y = y;
+	
 	if (button == MOUSE_LEFT_BUTTON)
+	{
+		// Try to select an object at this position
+		app->selected_obj = select_object_at_screen_pos(app, x, y);
 		app->mouse.left_button = 1;
+	}
 	else if (button == MOUSE_RIGHT_BUTTON)
 		app->mouse.right_button = 1;
 	else if (button == MOUSE_MIDDLE_BUTTON)
@@ -37,7 +44,10 @@ int	ft_mouse_release(int button, int x, int y, t_app *app)
 	(void)x;
 	(void)y;
 	if (button == MOUSE_LEFT_BUTTON)
+	{
 		app->mouse.left_button = 0;
+		app->selected_obj = NULL;
+	}
 	else if (button == MOUSE_RIGHT_BUTTON)
 		app->mouse.right_button = 0;
 	else if (button == MOUSE_MIDDLE_BUTTON)
@@ -62,7 +72,11 @@ int	ft_mouse_move(int x, int y, t_app *app)
 	delta_y = y - mouse->prev_y;
 	mouse->prev_x = x;
 	mouse->prev_y = y;
-	if (mouse->left_button)
+	if (mouse->left_button && app->selected_obj)
+	{
+		move_selected_object(app, delta_x, delta_y);
+	}
+	else if (mouse->left_button)
 		app->map->shift(app->map, delta_x, delta_y);
 	else if (mouse->middle_button)
 		app->map->rotate(app->map, copysign(0.01, delta_x), 0, 0);

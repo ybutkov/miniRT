@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 20:00:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 20:03:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_app
 	long int					last_frame_time;
 	t_mouse_state				mouse;
 	t_key_actions				*key_actions;
+	t_obj						*selected_obj;
 
 	void						(*free)(struct s_app *app);
 	void						(*render)(struct s_app *app);
@@ -170,5 +171,15 @@ void							parse_file(int fd, t_scene *scene);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
 t_parse_error					parse_line(char *line, t_scene *scene);
+
+void							parse_file(int fd, t_scene *scene);
+void							parse_error_exit(t_parse_error err,
+									int line_num, char *line);
+t_parse_error					parse_line(char *line, t_scene *scene);
+
+t_obj							*select_object_at_screen_pos(t_app *app,
+									int screen_x, int screen_y);
+void							move_selected_object(t_app *app, int delta_x,
+									int delta_y);
 
 #endif

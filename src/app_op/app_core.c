@@ -87,11 +87,12 @@ t_app	*create_app(t_map *map)
 	app->img = (t_img *)malloc(sizeof(t_img));
 	if (!app->img)
 		return (NULL);
-	app->mouse = (t_mouse_state){0, 0, 0, 0, 0, -1, -1};
+	app->mouse = (t_mouse_state){0, 0, 0, 0, 0, -1, -1, 0, 0};
 	app->map = map;
 	app->render = render_map;
 	app->free = free_app;
 	app->clear_image = clear_image;
 	app->last_frame_time = get_time_in_milliseconds() - MIN_TIME_FRAMES - 1;
+	app->selected_obj = NULL;
 	return (app);
 }
