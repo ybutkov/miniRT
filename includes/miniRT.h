@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 16:31:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 16:35:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_app
 	long int					last_frame_time;
 	t_mouse_state				mouse;
 	t_key_actions				*key_actions;
+	t_obj						*selected_obj;
 
 	void						(*free)(struct s_app *app);
 	void						(*render)(struct s_app *app);
@@ -145,5 +146,11 @@ double							ft_atof(const char *str);
 void							ft_mlx_pixel_put(t_img *img, int x, int y,
 									int color);
 t_app							*create_app(t_map *map);
+
+
+t_obj							*select_object_at_screen_pos(t_app *app,
+									int screen_x, int screen_y);
+void							move_selected_object(t_app *app, int delta_x,
+									int delta_y);
 
 #endif

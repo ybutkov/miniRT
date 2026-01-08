@@ -28,6 +28,8 @@ typedef struct s_mouse_state
 	int	y;
 	int	prev_x;
 	int	prev_y;
+	int	click_x;
+	int	click_y;
 }		t_mouse_state;
 
 #endif
