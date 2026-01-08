@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:59:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 20:00:11 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ void	add_test_objs_2(t_map *map)
 	t_obj		*obj;
 	t_vec3		pos;
 
-	map->ambient = create_ambient(0.1, create_color(255, 255, 255));
+	map->ambient = create_ambient(0.0, create_color(255, 255, 255));
 
 	obj = create_plane(create_vector(0, 0, 0), create_vector(0, 1, 0),
-			create_color(150, 150, 150), 0.3);
+			create_color(150, 150, 150), 0.4);
 	map->add_obj(map, obj);
 
 	pos = create_vector(-5, 6, 10);
@@ -130,6 +130,15 @@ void	add_test_objs_2(t_map *map)
 
 	pos = create_vector(5, 5, 5);
 	obj = create_sphere(pos, 3, create_color(255, 0, 0), 0.0);
+	map->add_obj(map, obj);
+
+	pos = create_vector(0, 20, -50);
+	obj = create_sphere(pos, 30, create_color(0, 255, 0), 0.0);
+	map->add_obj(map, obj);
+
+
+	obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
+		create_vector(0, 20, 20), create_color(255, 255, 255), 0.8);
 	map->add_obj(map, obj);
 
 	// pos = create_vector(20, 15, 60);
@@ -141,6 +150,10 @@ void	add_test_objs_2(t_map *map)
 			0.6, create_color(255, 255, 255)));
 	map->add_light(map, create_light(create_vector(-15, 10, 5),
 			0.2, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(-35, -5, 5),
+			0.5, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(0, 20, 35),
+			0.8, create_color(255, 255, 255)));
 
 	pos = create_vector(0, 5, -15);
 	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);

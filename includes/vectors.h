@@ -41,5 +41,6 @@ double				vector_length(t_vec3 v1);
 t_vec3				vector_norm(t_vec3 v1);
 t_vec3				vector_cross(t_vec3 v1, t_vec3 v2);
 t_vec3				vector_reflect(t_vec3 ray, t_vec3 normal);
+t_vec3				vector_rotate_axis(t_vec3 v, t_vec3 axis, double angle);
 
 #endif

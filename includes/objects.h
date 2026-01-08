@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:15:31 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 00:29:31 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,15 @@ t_obj					*create_plane(t_vec3 point, t_vec3 normal,
 t_obj					*create_sphere(t_vec3 pos, double diametr,
 							t_color color, double reflection);
 t_obj					*create_cylinder(t_vec3 pos, t_vec3 normal,
-							double diametr, double height, t_color color, double reflection);
+							double diametr, double height, t_color color,
+							double reflection);
 t_obj					*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 							t_color color, double reflection);
 
 t_camera				create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);
 void					update_camera(t_camera *cam);
+void					rotate_camera(t_camera *cam, t_vec3 dir, double delta);
 int						solve_quadratic(t_vec3 abc, double *t1, double *t2);
 t_light					*create_light(t_vec3 pos, double ratio, t_color color);
 t_ambient				create_ambient(double ratio, t_color color);

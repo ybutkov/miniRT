@@ -134,6 +134,8 @@ t_color	trace_ray(t_ray ray, t_obj *obj, t_map *map, int depth)
 		return (get_background_color(ray));
 	hit_point = ray_at_pos(ray, min_t);
 	normal = closest_obj->methods->get_normal(closest_obj, hit_point);
+	if (vector_dot_product(normal, ray.direction) > 0)
+		normal = vector_mult(normal, -1);
 	local_color = calculate_light(map, closest_obj, hit_point);
 	if (closest_obj->reflection > 0)
 	{

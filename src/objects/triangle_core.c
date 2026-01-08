@@ -76,6 +76,7 @@ t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3, t_color color, double
 {
 	t_obj		*obj;
 	t_triangle	*triangle;
+	t_vec3		normal;
 
 	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
@@ -87,8 +88,9 @@ t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3, t_color color, double
 	triangle->p_1 = p_1;
 	triangle->p_2 = p_2;
 	triangle->p_3 = p_3;
-	triangle->normal = vector_norm(vector_cross(vector_sub(p_2, p_1),
+	normal = vector_norm(vector_cross(vector_sub(p_2, p_1),
 				vector_sub(p_3, p_1)));
+	triangle->normal = normal;
 	obj->data = triangle;
 	return (obj);
 }
