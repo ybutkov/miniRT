@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 20:00:11 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 20:00:28 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	add_test_objs_2(t_map *map)
 	map->add_obj(map, obj);
 
 	pos = create_vector(5, 5, 5);
-	obj = create_sphere(pos, 3, create_color(255, 0, 0), 0.0);
+	obj = create_sphere(pos, 3, create_color(255, 0, 0), 0.4);
 	map->add_obj(map, obj);
 
 	pos = create_vector(0, 20, -50);
