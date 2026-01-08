@@ -2,3 +2,5 @@
 .vscode
 *.dSYM/
 */build/*
+c_formatter_42/
+miniRT_formatted.c

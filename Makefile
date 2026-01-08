@@ -67,11 +67,18 @@ C_SHELL_FILES += \
 		events/actions_wrapper_4.c 
 
 C_SHELL_FILES += \
-		parsing/parser.c \
-		parsing/parser_elements.c \
-		parsing/parser_utils.c \
-		parsing/scene.c \
-		parsing/utils.c
+		parsing/parse_ambient.c \
+        parsing/parse_camera.c \
+        parsing/parse_light.c \
+        parsing/parse_sphere.c \
+        parsing/parse_plane.c \
+        parsing/parse_cylinder.c \
+		parsing/parse_triangle.c \
+        parsing/parser.c \
+        parsing/parser_utils.c \
+        parsing/scene.c \
+        parsing/utils.c 
+		
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)
