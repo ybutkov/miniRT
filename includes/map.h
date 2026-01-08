@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:34:54 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 16:18:35 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_map
 			double z);
 	void			(*rotate)(struct s_map *map, double x, double y, double z);
 	void			(*shift)(struct s_map *map, int x, int y);
-	void			(*zoom_in)(struct s_map *map, int percent);
+	void			(*zoom_in)(struct s_map *map, int delta);
 	void			(*add_obj)(struct s_map *map, t_obj *object);
 	void			(*add_light)(struct s_map *map, t_light *light);
 }					t_map;
