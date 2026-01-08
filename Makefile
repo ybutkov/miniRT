@@ -104,7 +104,7 @@ fclean f: clean
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean $(PRINT_FLAG)
 	@rm -f $(MINILIB_ZIP_FILE)
-	[ -d $(MINILIBX_DIR) ] && rm -rf $(MINILIBX_DIR)
+	@[ -d $(MINILIBX_DIR) ] && rm -rf $(MINILIBX_DIR) || true
 	@echo "fclean OK"
 
 re	: fclean all
