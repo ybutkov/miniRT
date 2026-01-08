@@ -6,13 +6,15 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 21:05:58 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 00:25:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTANTS_H
 
 # define CONSTANTS_H
+
+# include <math.h>
 
 # define OK 1
 # define NO 0
@@ -21,5 +23,8 @@
 
 # define DEFAULT_BRIGHTNESS 1
 # define EPSILON 1e-4
+# define DEGREE_TO_RAD (2.0 * M_PI / 360.0)
+# define ROTATE_CAMERA_STEP 5
+# define MOVE_CAMERA_STEP 5
 
 #endif

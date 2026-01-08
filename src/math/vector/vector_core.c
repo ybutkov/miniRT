@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/06 22:33:46 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 15:39:51 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,20 @@ t_vec3	create_vector(double x, double y, double z)
 	vector.y = y;
 	vector.z = z;
 	return (vector);
+}
+
+t_vec3	vector_rotate_axis(t_vec3 v, t_vec3 axis, double angle)
+{
+	t_vec3	res;
+	double	cos_angle;
+	double	sin_angle;
+
+	cos_angle = cos(angle);
+	sin_angle = sin(angle);
+	axis = vector_norm(axis);
+	res = vector_mult(v, cos_angle);
+	res = vector_add(res, vector_mult(vector_cross(axis, v), sin_angle));
+	res = vector_add(res, vector_mult(axis, 
+		vector_dot_product(axis, v) * (1.0 - cos_angle)));
+	return (res);
 }
