@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:35:03 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:24:56 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,25 @@ t_color	parse_color(char *str)
 }
 
 // Check if a vector is normalized (length ~ 1)
-void	check_normalized(t_vec3 v)
+int	is_normalized(t_vec3 v)
 {
 	double	len;
 
 	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	if (fabs(len - 1.0) > 0.001)
-		error_exit("Vector not normalized", NULL);
+		return (NO);
+	return (OK);
+}
+
+/* each component must be a valid real number */
+int	is_valid_vec3_split(char **split)
+{
+	if (!split)
+		return (NO);
+	if (ft_split_len(split) != 3)
+		return (NO);
+	if (is_validate_real(split[0]) == NO || is_validate_real(split[1]) == NO
+		|| is_validate_real(split[2]) == NO)
+		return (NO);
+	return (OK);
 }

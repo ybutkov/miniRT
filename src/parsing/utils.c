@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:35:25 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:23:22 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,26 +123,4 @@ float	ft_atof(const char *str)
 		}
 	}
 	return (res * sign / div);
-}
-
-int	is_normalized(t_vec3 v)
-{
-	double	len;
-
-	len = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-	if (fabs(len - 1.0) > 0.001)
-		return (NO);
-	return (OK);
-}
-
-int	is_valid_vec3_split(char **split)
-{
-	if (!split)
-		return (NO);
-	if (ft_split_len(split) != 3)
-		return (NO);
-	if (is_validate_real(split[0]) == NO || is_validate_real(split[1]) == NO
-		|| is_validate_real(split[2]) == NO)
-		return (NO);
-	return (OK);
 }

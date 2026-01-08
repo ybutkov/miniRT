@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:22:35 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:33:14 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:13:25 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	is_validate_camera(char **tokens)
 	split = ft_split(tokens[2], ',');
 	if (ft_split_len(split) != 3)
 		return (free_split(split), NO);
-	/* each component must be a valid real number */
 	if (is_valid_vec3_split(split) == NO)
 		return (free_split(split), NO);
 	free_split(split);
@@ -34,6 +33,7 @@ int	is_validate_camera(char **tokens)
 t_camera	*parse_camera(char **tokens)
 {
 	t_camera	*result;
+	double		len;
 
 	if (is_validate_camera(tokens) == NO)
 		return (NULL);
@@ -42,10 +42,17 @@ t_camera	*parse_camera(char **tokens)
 		return (NULL);
 	result->pos = parse_vec3(tokens[1]);
 	result->dir = parse_vec3(tokens[2]);
-	if (is_normalized(result->dir) == NO)
 	{
-		free(result);
-		return (NULL);
+		len = sqrt(result->dir.x * result->dir.x + result->dir.y * result->dir.y
+				+ result->dir.z * result->dir.z);
+		if (len == 0.0)
+		{
+			free(result);
+			return (NULL);
+		}
+		result->dir.x /= len;
+		result->dir.y /= len;
+		result->dir.z /= len;
 	}
 	result->fov = (int)ft_atof(tokens[3]);
 	if (result->fov <= 0 || result->fov >= 180)

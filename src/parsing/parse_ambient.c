@@ -6,14 +6,13 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:27:23 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:33:11 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:25:17 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // Ambient A
-
 int	is_valid_color_part(const char *s)
 {
 	int	i;
