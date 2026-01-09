@@ -98,7 +98,7 @@ C_SHELL_FILES += \
 		parsing/parse_triangle.c \
         parsing/parser.c \
         parsing/parser_utils.c \
-        parsing/scene.c \
+        parsing/printer_map.c \
         parsing/utils.c 
 		
 

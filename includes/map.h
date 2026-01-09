@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 16:18:35 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 21:38:16 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_map
 	t_point			*points;
 //
 	t_obj			*objects;
-	t_camera		camera;
-	t_ambient		ambient;
+	t_camera		*camera;
+	t_ambient		*ambient;
 	t_light			*lights;
 //
 	int				width;

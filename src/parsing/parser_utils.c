@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/08 18:24:56 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:08:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "constants.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

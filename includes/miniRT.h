@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 20:03:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:00:29 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WINDOW_WIDTH 1080 //1920
+# define WINDOW_WIDTH 1080 // 1920
 # define WINDOW_HEIGHT 572 // 1080
 # define INFO_PANEL_WIDTH 400
 # define MIN_TIME_FRAMES 16 // calculate time for render and change?
@@ -112,36 +112,10 @@ typedef enum e_obj_type
 	TRIANGLE,
 }								t_obj_type;
 
-typedef struct s_object
-{
-	t_obj_type					type;
-	t_vec3						pos;
-	t_vec3						dir;
-	double						diameter;
-	double						height;
-	t_color						color;
-	struct s_object				*next;
-}								t_object;
-
-// scene
-typedef struct s_scene
-{
-	t_ambient					*ambient;
-	t_camera					*camera;
-	t_light						*light;
-	t_object					*objects;
-}								t_scene;
-
-// Scene helpers
-void							init_scene(t_scene *scene);
-void							print_scene(t_scene *scene);
-void							free_scene(t_scene *scene);
+void							print_map(t_map *map);
 
 // --- Parsing functions
-void							parse_scene(const char *filename,
-									t_scene *scene);
-
-t_parse_error					parse_line(char *line, t_scene *scene);
+void							parse_scene(const char *filename, t_map *map);
 
 // Parsing helpers
 t_vec3							parse_vec3(char *str);
@@ -153,12 +127,11 @@ int								is_validate_real(const char *str);
 float							ft_atof(const char *str);
 
 // Free function
-void							free_object_list(t_object *objects);
+void							free_object_list(t_obj *objects);
 
-void							exit_with_tokens(char **tokens, t_scene *scene,
+void							exit_with_tokens(char **tokens, t_map *map,
 									const char *msg);
-void							error_exit(const char *msg, t_scene *scene);
-// void							error_exit(char *msg, t_scene *scene);
+void							error_exit(const char *msg, t_map *map);
 void							free_split(char **split);
 int								ft_split_len(char **split);
 
@@ -167,15 +140,13 @@ void							ft_mlx_pixel_put(t_img *img, int x, int y,
 									int color);
 t_app							*create_app(t_map *map);
 
-void							parse_file(int fd, t_scene *scene);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
-t_parse_error					parse_line(char *line, t_scene *scene);
 
-void							parse_file(int fd, t_scene *scene);
+void							parse_file(int fd, t_map *map);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
-t_parse_error					parse_line(char *line, t_scene *scene);
+t_parse_error					parse_line(char *line, t_map *map);
 
 t_obj							*select_object_at_screen_pos(t_app *app,
 									int screen_x, int screen_y);

@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 00:29:29 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 21:29:45 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "map.h"
 #include "constants.h"
+#include <stdlib.h>
 #include <math.h>
 
 // (dir, right, up) (w,u,v)
@@ -46,14 +47,15 @@ void	rotate_camera(t_camera *cam, t_vec3	dir, double	delta)
 	cam->dir = vector_norm(cam->dir);
 }
 
-t_camera	create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
+t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 {
-	t_camera	cam;
+	t_camera	*cam;
 
-	cam.pos = pos;
-	cam.fov = fov;
-	cam.dir = vector_norm(dir);
-	cam.aspect_ratio = (double)map->width / (double)map->height;
-	update_camera(&cam);
+	cam = malloc(sizeof(t_camera));
+	cam->pos = pos;
+	cam->fov = fov;
+	cam->dir = vector_norm(dir);
+	cam->aspect_ratio = (double)map->width / (double)map->height;
+	update_camera(cam);
 	return (cam);
 }

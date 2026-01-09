@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 17:15:58 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 21:42:55 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ t_vec3	ray_at_pos(t_ray ray, double pos)
 	return (vector_add(ray.start, vector_mult(ray.direction, pos)));
 }
 
-t_ray	get_ray(t_camera cam, double x_ratio, double y_ratio)
+t_ray	get_ray(t_camera *cam, double x_ratio, double y_ratio)
 {
 	t_vec3 target;
 	t_vec3 direction;
 
-	target = vector_add(cam.lower_left_pos,
-			vector_add(vector_mult(cam.horizontal, x_ratio),
-				vector_mult(cam.vertical, y_ratio)));
-	direction = vector_sub(target, cam.pos);
-	return (create_ray(cam.pos, direction));
+	target = vector_add(cam->lower_left_pos,
+			vector_add(vector_mult(cam->horizontal, x_ratio),
+				vector_mult(cam->vertical, y_ratio)));
+	direction = vector_sub(target, cam->pos);
+	return (create_ray(cam->pos, direction));
 }
 
 int	is_in_shadow(t_map *map, t_vec3 hit_point, t_vec3 light_pos)
@@ -81,10 +81,10 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 	double	spec_dot;
 
 	normal = obj->methods->get_normal(obj, hit_point);
-	view_dir = vector_norm(vector_sub(map->camera.pos, hit_point));
+	view_dir = vector_norm(vector_sub(map->camera->pos, hit_point));
 	if (vector_dot_product(normal, view_dir) < 0)
 		normal = vector_mult(normal, -1);
-	total_intensity = map->ambient.ratio;
+	total_intensity = map->ambient->ratio;
 	curr = map->lights;
 	while (curr)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_triangle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:24:16 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:34:54 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:55:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,20 @@ int	is_validate_triangle(char **tokens)
 	return (OK);
 }
 
-t_object	*parse_triangle(char **tokens)
+t_obj	*parse_triangle(char **tokens)
 {
-	t_object	*result;
+	t_obj	*result;
+	t_vec3	p_1;
+	t_vec3	p_2;
+	t_vec3	p_3;
+	t_color	color;
 
 	if (is_validate_triangle(tokens) == NO)
 		return (NULL);
-	result = malloc(sizeof(t_object));
-	if (result == NULL)
-		return (NULL);
-	result->type = TRIANGLE;
-	result->pos = parse_vec3(tokens[1]);
-	result->dir = parse_vec3(tokens[2]);
-	result->diameter = 0.0;
-	result->height = 0.0;
-	result->color = parse_color(tokens[4]);
-	result->next = NULL;
+	p_1 = parse_vec3(tokens[1]);
+	p_2 = parse_vec3(tokens[2]);
+	p_3 = parse_vec3(tokens[3]);
+	color = parse_color(tokens[4]);
+	result = create_triangle(p_1, p_2, p_3, color, REFLECTION_DEFAULT);
 	return (result);
 }

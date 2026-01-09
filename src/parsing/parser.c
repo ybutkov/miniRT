@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:35:08 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:55:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include <string.h>
 #include <unistd.h>
 
-void	exit_with_tokens(char **tokens, t_scene *scene, const char *msg)
+void	exit_with_tokens(char **tokens, t_map *map, const char *msg)
 {
 	if (tokens)
 		free_split(tokens);
-	error_exit(msg, scene);
+	error_exit(msg, map);
 }
 
 void	parse_error_exit(t_parse_error err, int line_num, char *line)
@@ -44,7 +44,7 @@ void	parse_error_exit(t_parse_error err, int line_num, char *line)
 	exit(EXIT_FAILURE);
 }
 
-void	parse_file(int fd, t_scene *scene)
+void	parse_file(int fd, t_map *map)
 {
 	char			*line;
 	int				line_num;
@@ -54,7 +54,7 @@ void	parse_file(int fd, t_scene *scene)
 	while ((line = get_next_line(fd)))
 	{
 		line_num++;
-		err = parse_line(line, scene);
+		err = parse_line(line, map);
 		printf("%d\n", err);
 		if (!(err == PARSE_OK || err == PARSE_EMPTY_LINE))
 		{
@@ -66,13 +66,13 @@ void	parse_file(int fd, t_scene *scene)
 	}
 }
 
-t_parse_error	parse_line(char *line, t_scene *scene)
+t_parse_error	parse_line(char *line, t_map *map)
 {
 	char		**tokens;
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
-	t_object	*obj;
+	t_obj		*obj;
 	size_t		len;
 
 	if (line)
@@ -91,54 +91,47 @@ t_parse_error	parse_line(char *line, t_scene *scene)
 		ambient = parse_ambient(tokens);
 		if (ambient == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		scene->ambient = ambient;
+		map->ambient = ambient;
 	}
 	else if (!ft_strncmp(tokens[0], "C", 2))
 	{
 		camera = parse_camera(tokens);
 		if (camera == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		scene->camera = camera;
+		map->camera = camera;
 	}
 	else if (!ft_strncmp(tokens[0], "L", 2))
 	{
 		light = parse_light(tokens);
 		if (light == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		scene->light = light;
+		map->add_light(map, light);
 	}
 	else if (!ft_strncmp(tokens[0], "sp", 3))
 	{
 		obj = parse_sphere(tokens);
 		if (obj == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		obj->next = scene->objects;
-		scene->objects = obj;
+		map->add_obj(map, obj);
 	}
 	else if (!ft_strncmp(tokens[0], "pl", 3))
 	{
 		obj = parse_plane(tokens);
 		if (obj == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		obj->next = scene->objects;
-		scene->objects = obj;
-	}
+		map->add_obj(map, obj);	}
 	else if (!ft_strncmp(tokens[0], "cy", 3))
 	{
 		obj = parse_cylinder(tokens);
 		if (obj == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		obj->next = scene->objects;
-		scene->objects = obj;
-	}
+		map->add_obj(map, obj);	}
 	else if (!ft_strncmp(tokens[0], "tr", 3))
 	{
 		obj = parse_triangle(tokens);
 		if (obj == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		obj->next = scene->objects;
-		scene->objects = obj;
-	}
+		map->add_obj(map, obj);	}
 	else
 	{
 		free_split(tokens);
@@ -148,13 +141,13 @@ t_parse_error	parse_line(char *line, t_scene *scene)
 	return (PARSE_OK);
 }
 
-void	parse_scene(const char *filename, t_scene *scene)
+void	parse_scene(const char *filename, t_map *map)
 {
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_exit("Failed to open file", NULL);
-	parse_file(fd, scene);
+	parse_file(fd, map);
 	close(fd);
 }

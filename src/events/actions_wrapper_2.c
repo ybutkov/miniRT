@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:02:33 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 01:36:45 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/08 21:36:02 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ void	key_minus_action(t_app *app)
 
 void	key_w_action(t_app *app)
 {
-	app->map->camera.pos = vector_add(app->map->camera.pos,
-			vector_mult(app->map->camera.dir, MOVE_CAMERA_STEP));
-	update_camera(&app->map->camera);
+	app->map->camera->pos = vector_add(app->map->camera->pos,
+			vector_mult(app->map->camera->dir, MOVE_CAMERA_STEP));
+	update_camera(app->map->camera);
 }
 
 void	key_s_action(t_app *app)
 {
-	app->map->camera.pos = vector_sub(app->map->camera.pos,
-			vector_mult(app->map->camera.dir, MOVE_CAMERA_STEP));
-	update_camera(&app->map->camera);
+	app->map->camera->pos = vector_sub(app->map->camera->pos,
+			vector_mult(app->map->camera->dir, MOVE_CAMERA_STEP));
+	update_camera(app->map->camera);
 }
 
 void	key_a_action(t_app *app)
 {
-	app->map->camera.pos = vector_sub(app->map->camera.pos,
-			vector_mult(app->map->camera.right, MOVE_CAMERA_STEP));
-	update_camera(&app->map->camera);
+	app->map->camera->pos = vector_sub(app->map->camera->pos,
+			vector_mult(app->map->camera->right, MOVE_CAMERA_STEP));
+	update_camera(app->map->camera);
 }
 
 void	key_d_action(t_app *app)
 {
-	app->map->camera.pos = vector_add(app->map->camera.pos,
-			vector_mult(app->map->camera.right, MOVE_CAMERA_STEP));
-	update_camera(&app->map->camera);
+	app->map->camera->pos = vector_add(app->map->camera->pos,
+			vector_mult(app->map->camera->right, MOVE_CAMERA_STEP));
+	update_camera(app->map->camera);
 }

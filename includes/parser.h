@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:35:58 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 22:30:12 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "miniRT.h"
+# include "constants.h"
 
 // ambient A
 int			is_valid_color(char **split);
@@ -30,19 +31,19 @@ t_light		*parse_light(char **tokens);
 int			is_validate_light(char **tokens);
 
 // Sphere sp
-t_object	*parse_sphere(char **tokens);
+t_obj       *parse_sphere(char **tokens);
 int			is_validate_sphere(char **tokens);
 
 // Plane pl
-t_object	*parse_plane(char **tokens);
+t_obj       *parse_plane(char **tokens);
 int			is_validate_plane(char **tokens);
 
 // Cylinder cy
-t_object	*parse_cylinder(char **tokens);
+t_obj       *parse_cylinder(char **tokens);
 int			is_validate_cylinder(char **tokens);
 
 // Triangle tr
-t_object	*parse_triangle(char **tokens);
+t_obj       *parse_triangle(char **tokens);
 int			is_validate_triangle(char **tokens);
 
 int			is_normalized(t_vec3 v);

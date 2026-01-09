@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 20:00:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 13:59:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,9 @@ static t_app	*init_app(t_map *map, char *title)
 	return (app);
 }
 
-// int	main(int argc, char const *argv[])
-// {
-// 	t_map	*map;
-// 	t_scene	scene;
-// 	t_app	*app;
-
-// 	(void)init_app;
-// 	map = NULL;
-// 	if (argc != 2)
-// 		exit_program(NULL, ERROR_MSG_ARGS);
-// 	init_scene(&scene);
-// 	parse_scene(argv[1], &scene);
-// 	print_scene(&scene);
-// 	free_scene(&scene);
-// 	// if (!map)
-// 	// 	exit_program(NULL, "Error reading map from file");
-// 	app = init_app(map, (char *)argv[1]);
-// 	mlx_loop(app->mlx);
-// 	return (0);
-// }
 void	add_test_objs_1(t_map *map)
 {
-	t_camera	camera;
+	t_camera	*camera;
 	t_obj		*obj;
 	t_vec3		pos;
 
@@ -114,7 +94,7 @@ void	add_test_objs_1(t_map *map)
 
 void	add_test_objs_2(t_map *map)
 {
-	t_camera	camera;
+	t_camera	*camera;
 	t_obj		*obj;
 	t_vec3		pos;
 
@@ -163,7 +143,7 @@ void	add_test_objs_2(t_map *map)
 
 void	add_test_objs_3(t_map *map)
 {
-	t_camera	camera;
+	t_camera	*camera;
 	t_obj		*obj;
 	t_vec3		pos;
 
@@ -217,7 +197,6 @@ void	add_test_objs_3(t_map *map)
 int	main(int argc, char const *argv[])
 {
 	t_map	*map;
-	// t_scene	scene;
 	t_app	*app;
 
 	(void)init_app;

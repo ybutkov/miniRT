@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:22:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:30:10 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:04:56 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_obj	*select_object_at_screen_pos(t_app *app, int screen_x, int screen_y)
 void	move_selected_object(t_app *app, int delta_x, int delta_y)
 {
 	t_obj		*obj;
+	t_sphere	*sphere;
 	t_vec3		movement;
 	t_vec3		right;
 	t_vec3		up;
@@ -57,19 +58,18 @@ void	move_selected_object(t_app *app, int delta_x, int delta_y)
 
 	obj = app->selected_obj;
 
-	right = app->map->camera.right;
-	up = app->map->camera.up;
+	right = app->map->camera->right;
+	up = app->map->camera->up;
 	movement = vector_add(
-		vector_mult(right, (double)delta_x * 0.05),
-		vector_mult(up, (double)(-delta_y) * 0.05)
-	);
+			vector_mult(right, (double)delta_x * 0.05),
+			vector_mult(up, (double)(-delta_y) * 0.05));
 	if (obj->data)
 	{
 		if (obj->methods == NULL)
 			return ;
 		if (obj == app->map->objects || obj->methods->intersect == NULL)
 			return ;
-		t_sphere *sphere = (t_sphere *)obj->data;
+		sphere = (t_sphere *)obj->data;
 		sphere->center = vector_add(sphere->center, movement);
 		app->map->is_change = 1;
 	}
