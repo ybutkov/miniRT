@@ -6,13 +6,18 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:13:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:28:15 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "objects.h"
 #include <stdlib.h>
+
+t_obj_type	cylinder_get_type(void)
+{
+	return (CYLINDER);
+}
 
 t_vec3	cylinder_get_normal(t_obj *this, t_vec3 pos)
 {
@@ -147,6 +152,7 @@ t_vtable	*get_cylinder_methods(void)
 	{
 		cylinder_methods.get_normal = cylinder_get_normal;
 		cylinder_methods.intersect = cylinder_intersect;
+		cylinder_methods.get_type = cylinder_get_type;
 		is_init = 1;
 	}
 	return (&cylinder_methods);

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 21:38:32 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:28:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,27 @@
 # include "colors.h"
 # include "vectors.h"
 
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	TRIANGLE
+}						t_obj_type;
+
 // typedef t_vec3			t_color;
 typedef struct s_obj	t_obj;
 typedef struct s_map	t_map;
 
 typedef t_vec3			(*t_get_normal)(t_obj *this, t_vec3 point);
 typedef double			(*t_intersect)(t_obj *this, t_vec3 pos, t_vec3 dir);
+typedef t_obj_type		(*t_get_type)(void);
 
 typedef struct s_vtable
 {
 	t_get_normal		get_normal;
 	t_intersect			intersect;
+	t_get_type			get_type;
 }						t_vtable;
 
 typedef struct s_obj

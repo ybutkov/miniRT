@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:14:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:28:04 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "objects.h"
 #include "vectors.h"
 #include <stdlib.h>
+
+t_obj_type	sphere_get_type(void)
+{
+	return (SPHERE);
+}
 
 t_vec3	sphere_get_normal(t_obj *this, t_vec3 pos)
 {
@@ -55,6 +60,7 @@ t_vtable	*get_sphere_methods(void)
 	{
 		sphere_methods.get_normal = sphere_get_normal;
 		sphere_methods.intersect = sphere_intersect;
+		sphere_methods.get_type = sphere_get_type;
 		is_init = 1;
 	}
 	return (&sphere_methods);

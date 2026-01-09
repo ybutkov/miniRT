@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 13:55:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 19:01:18 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parse_file(int fd, t_map *map)
 	{
 		line_num++;
 		err = parse_line(line, map);
-		printf("%d\n", err);
+		// printf("%d\n", err);
 		if (!(err == PARSE_OK || err == PARSE_EMPTY_LINE))
 		{
 			free(line);
@@ -95,7 +95,7 @@ t_parse_error	parse_line(char *line, t_map *map)
 	}
 	else if (!ft_strncmp(tokens[0], "C", 2))
 	{
-		camera = parse_camera(tokens);
+		camera = parse_camera(tokens, map);
 		if (camera == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
 		map->camera = camera;
@@ -131,7 +131,10 @@ t_parse_error	parse_line(char *line, t_map *map)
 		obj = parse_triangle(tokens);
 		if (obj == NULL)
 			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_obj(map, obj);	}
+		map->add_obj(map, obj);	
+	}
+	else if (!ft_strncmp(tokens[0], "#", 2))
+	{}
 	else
 	{
 		free_split(tokens);

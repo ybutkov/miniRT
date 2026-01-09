@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/08 22:30:12 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:14:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_ambient	*parse_ambient(char **tokens);
 
 // camera C
 int			is_validate_camera(char **tokens);
-t_camera	*parse_camera(char **tokens);
+t_camera	*parse_camera(char **tokens, t_map *map);
 
 // Light L
 t_light		*parse_light(char **tokens);

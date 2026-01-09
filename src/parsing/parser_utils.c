@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/08 20:08:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 16:50:23 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ t_color	parse_color(char *str)
 	t_color	c;
 
 	split = ft_split(str, ',');
-	c.r = ft_atoi(split[0]);
-	c.g = ft_atoi(split[1]);
-	c.b = ft_atoi(split[2]);
+	// c.r = ft_atoi(split[0]);
+	// c.g = ft_atoi(split[1]);
+	// c.b = ft_atoi(split[2]);
+	c = create_color(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
 	free_split(split);
 	return (c);
 }

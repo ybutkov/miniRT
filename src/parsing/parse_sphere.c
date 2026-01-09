@@ -6,14 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:13:37 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 14:00:55 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 18:59:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "parser.h"
 
-// Sphere sp
+
 int	is_validate_sphere(char **tokens)
 {
 	char	**split;
@@ -43,7 +43,7 @@ t_obj	*parse_sphere(char **tokens)
 	t_color	color;
 
 	if (is_validate_sphere(tokens) == NO)
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	pos = parse_vec3(tokens[1]);
 	diametr = (double)ft_atof(tokens[2]);
 	color = parse_color(tokens[3]);
@@ -51,7 +51,7 @@ t_obj	*parse_sphere(char **tokens)
 	if (diametr <= 0)
 	{
 		free(result);
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	}
 	return (result);
 }

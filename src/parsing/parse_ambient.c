@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:27:23 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/08 20:07:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:17:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ int	is_valid_ambient(char **tokens)
 t_ambient	*parse_ambient(char **tokens)
 {
 	t_ambient	*result;
+	double		ratio;
+	t_color		color;
 
 	if (is_valid_ambient(tokens) == NO)
-		return (NULL);
-	result = malloc(sizeof(t_ambient));
+		return (HANDLE_ERROR_NULL);
+	ratio = ft_atof(tokens[1]);
+	color = parse_color(tokens[2]);
+	result = create_ambient(ratio, color);
 	if (!result)
-		return (NULL);
-	result->ratio = ft_atof(tokens[1]);
-	result->color = parse_color(tokens[2]);
+		return (HANDLE_ERROR_NULL);
 	return (result);
 }

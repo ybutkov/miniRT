@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:00:29 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 18:57:28 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,44 +73,6 @@ typedef struct s_app
 	void						(*render)(struct s_app *app);
 	void						(*clear_image)(t_img *img);
 }								t_app;
-
-// Vector and Color
-// typedef struct s_vec3
-// {
-// 	double						x;
-// 	double						y;
-// 	double						z;
-// }								t_vec3;
-
-// elements
-// typedef struct s_ambient
-// {
-// 	double						ratio;
-// 	t_color						color;
-// }								t_ambient;
-
-// typedef struct s_camera
-// {
-// 	t_vec3						pos;
-// 	t_vec3						dir;
-// 	int							fov;
-// }								t_camera;
-
-// typedef struct s_light
-// {
-// 	t_vec3						pos;
-// 	double						ratio;
-// 	t_color						color;
-// }								t_light;
-
-// objs
-typedef enum e_obj_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	TRIANGLE,
-}								t_obj_type;
 
 void							print_map(t_map *map);
 

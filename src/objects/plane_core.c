@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:12:54 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:28:31 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "objects.h"
 #include <stdlib.h>
 #include <math.h>
+
+t_obj_type	plane_get_type(void)
+{
+	return (PLANE);
+}
 
 double	plane_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 {
@@ -52,6 +57,7 @@ t_vtable	*get_plane_methods(void)
 	{
 		plane_methods.get_normal = plane_get_normal;
 		plane_methods.intersect = plane_intersect;
+		plane_methods.get_type = plane_get_type;
 		is_init = 1;
 	}
 	return (&plane_methods);

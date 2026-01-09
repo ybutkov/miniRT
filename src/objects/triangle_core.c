@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:14:31 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 14:28:43 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "objects.h"
 #include <math.h>
 #include <stdlib.h>
+
+t_obj_type	triangle_get_type(void)
+{
+	return (TRIANGLE);
+}
 
 double	triangle_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 {
@@ -67,6 +72,7 @@ t_vtable	*get_triangle_methods(void)
 	{
 		triangle_methods.get_normal = triangle_get_normal;
 		triangle_methods.intersect = triangle_intersect;
+		triangle_methods.get_type = triangle_get_type;
 		is_init = 1;
 	}
 	return (&triangle_methods);
