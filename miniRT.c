@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 18:57:05 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/09 19:17:55 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int	main(int argc, char const *argv[])
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
 	// add_test_objs_2(map);
 	parse_scene(argv[1], map);
+	printf("finish parsing\n");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
 	return (0);
