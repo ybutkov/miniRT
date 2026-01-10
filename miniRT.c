@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 19:17:55 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/10 21:51:02 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,37 @@ void	add_test_objs_3(t_map *map)
 
 }
 
+
+void	add_test_box(t_map *map)
+{
+	t_obj		*obj;
+	t_camera	*camera;
+	t_vec3		pos;
+
+	map->ambient = create_ambient(0.1, create_color(255, 255, 255));
+
+	obj = create_plane(create_vector(0, -10, 0), create_vector(0, 1, 0),
+			create_color(200, 200, 200), REFLECTION_DEFAULT);
+	map->objects = obj;
+
+	obj = create_box(create_vector(10, 0, 5), create_vector(1, 0, 0),
+			create_vector(5, 2, 4), create_color(255, 0, 155), 0.3);
+	map->add_obj(map, obj);
+
+	map->add_light(map, create_light(create_vector(10, 20, -10),
+			0.6, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(-10, 20, -10),
+			0.6, create_color(255, 255, 255)));
+
+	camera = create_camera(create_vector(0, 0, -20),
+			create_vector(0, 0, 1), 70.0, map);
+	map->camera = camera;
+
+	pos = create_vector(10, 0, 5);
+	obj = create_sphere(pos, 4, create_color(0, 255, 255), 0.3);
+	map->add_obj(map, obj);
+}
+
 int	main(int argc, char const *argv[])
 {
 	t_map	*map;
@@ -203,8 +234,8 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
-	// add_test_objs_2(map);
-	parse_scene(argv[1], map);
+	add_test_box(map);
+	// parse_scene(argv[1], map);
 	printf("finish parsing\n");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);

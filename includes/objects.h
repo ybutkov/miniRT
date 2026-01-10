@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:28:00 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/10 21:07:11 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef enum e_obj_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	TRIANGLE
+	TRIANGLE,
+	BOX
 }						t_obj_type;
 
 // typedef t_vec3			t_color;
@@ -72,6 +73,13 @@ typedef struct s_triangle
 	t_vec3				normal;
 }						t_triangle;
 
+typedef struct s_box
+{
+	t_vec3				center;
+	t_vec3				axis[3];
+	t_vec3				half_size;
+}						t_box;
+
 typedef struct s_light
 {
 	t_vec3				pos;
@@ -118,6 +126,8 @@ t_obj					*create_cylinder(t_vec3 pos, t_vec3 normal,
 							double reflection);
 t_obj					*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 							t_color color, double reflection);
+t_obj					*create_box(t_vec3 center, t_vec3 orientation,
+							t_vec3 size, t_color color, double reflection);
 
 t_camera				*create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);
