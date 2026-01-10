@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 21:29:45 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/10 21:46:33 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	update_camera(t_camera	*cam)
 	v_up = create_vector(0, 1, 0);
 	if (fabs(cam->dir.y) > 0.99)
 		v_up = create_vector(0, 0, 1);
-	cam->right = vector_norm(vector_cross(cam->dir, v_up));
-	cam->up = vector_cross(cam->right, cam->dir);
+	cam->right = vector_norm(vector_cross(v_up, cam->dir));
+	cam->up = vector_cross(cam->dir, cam->right);
 	cam->horizontal = vector_mult(cam->right, viewport_width);
 	cam->vertical = vector_mult(cam->up, viewport_height);
 	h_half = vector_mult(cam->horizontal, 0.5);
