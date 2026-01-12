@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 16:33:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 22:16:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,24 +182,101 @@ void	generate_bvh_node(t_bvh_node *node, t_obj **obj, int amount)
 		generate_bvh_node(node->right, obj + left_count, right_count);
 }
 
+t_obj	*find_and_move_planes(t_obj **obj)
+{
+	t_obj	*current;
+	t_obj	*prev;
+	t_obj	*next;
+	t_obj	*planes_head;
+	t_obj	*planes_tail;
+
+	current = *obj;
+	prev = NULL;
+	planes_head = NULL;
+	planes_tail = NULL;
+	while (current)
+	{
+		next = current->next;
+		if (current->methods->get_type() == PLANE)
+		{
+			if (prev)
+				prev->next = next;
+			else
+				*obj = next;
+			current->next = NULL;
+			if (!planes_head)
+				planes_head = current;
+			else
+				planes_tail->next = current;
+			planes_tail = current;
+			current = next;
+		}
+		else
+		{
+			prev = current;
+			current = next;
+		}
+	}
+	if (planes_tail)
+	{
+		planes_tail->next = *obj;
+		*obj = planes_head;
+		return (planes_tail->next);
+	}
+	return (*obj);
+}
+
 int	generate_bvh(t_bvh *bvh, t_obj *obj)
 {
 	t_obj	**obj_array;
+	t_obj	*first_non_plane;
+	t_obj	*planes_head;
+	int		plane_count;
 	int		amount;
+	t_aabb	infinite_aabb;
 
-	amount = get_obj_count(obj);
+	first_non_plane = find_and_move_planes(&obj);
+	planes_head = obj;
+	plane_count = 0;
+	while (planes_head != first_non_plane)
+	{
+		plane_count++;
+		planes_head = planes_head->next;
+	}
+	planes_head = obj;
+	if (!first_non_plane)
+	{
+		if (plane_count > 0)
+		{
+			infinite_aabb.min = create_vector(-INFINITY, -INFINITY, -INFINITY);
+			infinite_aabb.max = create_vector(INFINITY, INFINITY, INFINITY);
+			bvh->root = create_bvh_node(infinite_aabb, obj, plane_count);
+			if (bvh->root)
+				bvh->root->is_leaf = OK;
+		}
+		return (OK);
+	}
+	amount = get_obj_count(first_non_plane);
 	if (amount == 0)
-		return (NO);
-	obj_array = convert_list_to_array(obj, amount);
+		return (OK);
+	obj_array = convert_list_to_array(first_non_plane, amount);
 	if (obj_array == NULL)
 		return (NO);
-	bvh->root = create_bvh_node(calculate_aabb_array(obj_array, amount), obj_array[0], amount);
+	infinite_aabb.min = create_vector(-INFINITY, -INFINITY, -INFINITY);
+	infinite_aabb.max = create_vector(INFINITY, INFINITY, INFINITY);
+	bvh->root = create_bvh_node(infinite_aabb, obj, plane_count + amount);
 	if (bvh->root == NULL)
 	{
 		free(obj_array);
 		return (NO);
 	}
-	generate_bvh_node(bvh->root, obj_array, amount);
+	if (plane_count > 0)
+		bvh->root->left = create_bvh_node(infinite_aabb, planes_head, plane_count);
+	bvh->root->right = create_bvh_node(calculate_aabb_array(obj_array, amount), obj_array[0], amount);
+	if (plane_count > 0 && bvh->root->left)
+		bvh->root->left->is_leaf = OK;
+	if (bvh->root->right)
+		generate_bvh_node(bvh->root->right, obj_array, amount);
 	free(obj_array);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 21:00:29 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 23:17:10 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,25 +162,36 @@ t_obj	*get_closest_obj_from_bvh(t_ray ray, t_bvh_node *node,
 	t_obj	*right;
 	t_obj	*result;
 	double	t;
-	double	left_t;
 
 	if (!node)
 		return (NULL);
 	t = intersect_aabb(node->aabb, ray.start, ray.direction);
-	if (t == -1.0 || t > *min_t)
+	if (t == -1.0)
 		return (NULL);
 	if (node->is_leaf == OK)
 		return (get_closest_obj(ray, node->obj, node->amount_obj, min_t));
 	result = NULL;
+	
+	// Old buggy version:
+	// left = get_closest_obj_from_bvh(ray, node->left, min_t);
+	// left_t = *min_t;
+	// if (left)
+	// 	result = left;
+	// right = get_closest_obj_from_bvh(ray, node->right, min_t);
+	// if (right && *min_t<left_t)
+	// 	result = right;
+	// else
+	// 	*min_t = left_t;  // BUG: This was reverting the min_t!
+	// return (result);
+	
+	// Fixed version: Always check both children if AABB intersects
+	// Don't prune based on min_t at internal nodes - only at leaves
 	left = get_closest_obj_from_bvh(ray, node->left, min_t);
-	left_t = *min_t;
 	if (left)
 		result = left;
 	right = get_closest_obj_from_bvh(ray, node->right, min_t);
-	if (right && *min_t<left_t)
+	if (right)  // If right found closer object, min_t was updated
 		result = right;
-	else
-		*min_t = left_t;
 	return (result);
 }
 

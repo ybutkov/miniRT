@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:28:31 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 21:07:24 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ t_vec3	plane_get_normal(t_obj *this, t_vec3 pos)
 	return (vector_norm(plane->normal));
 }
 
+t_aabb	plane_get_aabb(t_obj *this)
+{
+	t_aabb	aabb;
+
+	(void)this;
+	aabb.min = create_vector(-INFINITY, -INFINITY, -INFINITY);
+	aabb.max = create_vector(INFINITY, INFINITY, INFINITY);
+	return (aabb);
+}
+
 t_vtable	*get_plane_methods(void)
 {
 	static t_vtable	plane_methods;
@@ -57,6 +67,7 @@ t_vtable	*get_plane_methods(void)
 	{
 		plane_methods.get_normal = plane_get_normal;
 		plane_methods.intersect = plane_intersect;
+		plane_methods.get_aabb = plane_get_aabb;
 		plane_methods.get_type = plane_get_type;
 		is_init = 1;
 	}

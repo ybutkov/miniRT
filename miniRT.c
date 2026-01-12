@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 20:51:21 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 23:25:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,6 @@ static t_app	*init_app(t_map *map, char *title)
 	return (app);
 }
 
-void	add_test_objs_1(t_map *map)
-{
-	t_camera	*camera;
-	t_obj		*obj;
-	t_vec3		pos;
-
-	map->ambient = create_ambient(0.2, create_color(255, 255, 255));
-	pos = create_vector(40, 50, 5);
-	obj = create_sphere(pos, 10, create_color(255, 0, 0), REFLECTION_DEFAULT);
-	map->objects = obj;
-	pos = create_vector(20, 25, 2115);
-	obj = create_sphere(pos, 2225, create_color(0, 0, 255), REFLECTION_DEFAULT);
-	map->objects->next = obj;
-	pos = create_vector(50, 45, 5);
-	obj = create_sphere(pos, 15, create_color(0, 255, 0), REFLECTION_DEFAULT);
-	map->objects->next->next = obj;
-
-	map->lights = create_light(create_vector(-50, -100, -50),
-			0.7, create_color(255, 255, 255));
-	map->lights->next = create_light(create_vector(50, 100, -30),
-			1.0, create_color(255, 255, 255));
-
-	pos = create_vector(35, 35, -50);
-	camera = create_camera(pos, create_vector(0.0, 0.0, 1.0), 70.0, map);
-	map->camera = camera;
-}
-
 void	add_test_objs_2(t_map *map)
 {
 	t_camera	*camera;
@@ -117,83 +90,24 @@ void	add_test_objs_2(t_map *map)
 	map->add_obj(map, obj);
 
 
-	// obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
-	// 	create_vector(0, 20, 20), create_color(255, 255, 255), 0.8);
-	// map->add_obj(map, obj);
-
-	// pos = create_vector(20, 15, 60);
-	// obj = create_sphere(pos, 35, create_color(0, 0, 255));
-	// obj1->next = obj;
-	// obj1 = obj;
+	obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
+		create_vector(0, 20, 20), create_color(255, 255, 255), 0.8);
+	map->add_obj(map, obj);
 
 	map->add_light(map, create_light(create_vector(10, 20, -10),
 			0.6, create_color(255, 255, 255)));
-	// map->add_light(map, create_light(create_vector(-15, 10, 5),
-	// 		0.2, create_color(255, 255, 255)));
-	// map->add_light(map, create_light(create_vector(-35, -5, 5),
-	// 		0.5, create_color(255, 255, 255)));
-	// map->add_light(map, create_light(create_vector(0, 20, 35),
-	// 		0.8, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(-15, 10, 5),
+			0.2, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(-35, -5, 5),
+			0.5, create_color(255, 255, 255)));
+	map->add_light(map, create_light(create_vector(0, 20, 35),
+			0.8, create_color(255, 255, 255)));
 
 	pos = create_vector(0, 5, -15);
 	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);
 	map->camera = camera;
 
 }
-
-void	add_test_objs_3(t_map *map)
-{
-	t_camera	*camera;
-	t_obj		*obj;
-	t_vec3		pos;
-
-	map->ambient = create_ambient(0.1, create_color(255, 255, 255));
-
-	obj = create_plane(create_vector(0, 20, 0), create_vector(-10, -10, 0),
-			create_color(200, 200, 200), REFLECTION_DEFAULT);
-	map->objects = obj;
-
-	pos = create_vector(-10, 0, 50);
-	obj = create_sphere(pos, 15, create_color(255, 0, 0), REFLECTION_DEFAULT);
-	map->objects->next = obj;
-
-	pos = create_vector(-20, 15, 50);
-	obj = create_sphere(pos, 15, create_color(0, 255, 0), REFLECTION_DEFAULT);
-	map->objects->next->next = obj;
-
-	pos = create_vector(20, 15, 60);
-	obj = create_sphere(pos, 35, create_color(0, 0, 255), REFLECTION_DEFAULT);
-	map->objects->next->next->next = obj;
-
-	pos = create_vector(0, 0, 0);
-	obj = create_cylinder(pos, create_vector(0, 1, 0), 30, 50, 
-		create_color(255, 0, 255), REFLECTION_DEFAULT);
-	map->objects->next->next->next->next = obj;
-
-	pos = create_vector(-150, 10, 20);
-	obj = create_cylinder(pos, create_vector(1, 0, 0), 20, 40,
-		create_color(155, 155, 155), REFLECTION_DEFAULT);
-	map->objects->next->next->next->next->next = obj;
-
-	pos = create_vector(-50, 45, 30);
-	obj = create_sphere(pos, 20, create_color(200, 200, 0), REFLECTION_DEFAULT);
-	map->objects->next->next->next->next->next->next = obj;
-
-	obj = create_triangle(create_vector(-50, 30, 0), create_vector(-30, 30, -20),
-		create_vector(-40, 40, 0), create_color(255, 155, 155), REFLECTION_DEFAULT);
-	map->objects->next->next->next->next->next->next->next = obj;
-
-	map->lights = create_light(create_vector(-50, -100, 20),
-			0.8, create_color(255, 255, 255));
-	map->lights->next = create_light(create_vector(-10, -50, -50),
-			0.4, create_color(255, 255, 255));
-
-	pos = create_vector(0, 0, -70);
-	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);
-	map->camera = camera;
-
-}
-
 
 void	add_test_box(t_map *map)
 {
@@ -264,11 +178,12 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
-	add_test_sphere(map);
+	// add_test_box(map);
+	// add_test_objs_2(map);
 	parse_scene(argv[1], map);
 	printf("finish parsing\n");
 	if (map->generate_bvh(map) == NO)
-		exit_program(NULL, "PROBLEMS!!!");;
+		exit_program(NULL, "PROBLEMS!!!");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
 	return (0);
