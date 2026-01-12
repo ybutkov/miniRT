@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:28:04 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:28:30 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@ double	sphere_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	return (-1.0);
 }
 
+t_aabb	sphere_get_aabb(t_obj *this)
+{
+	t_aabb		aabb;
+	t_sphere	*sphere;
+
+	sphere = (t_sphere *)this->data;
+	aabb.min = vector_sub_scalar(sphere->center, sphere->radius);
+	aabb.max = vector_add_scalar(sphere->center, sphere->radius);
+	return (aabb);
+}
+
 t_vtable	*get_sphere_methods(void)
 {
 	static t_vtable	sphere_methods;
@@ -60,6 +71,7 @@ t_vtable	*get_sphere_methods(void)
 	{
 		sphere_methods.get_normal = sphere_get_normal;
 		sphere_methods.intersect = sphere_intersect;
+		sphere_methods.get_aabb = sphere_get_aabb;
 		sphere_methods.get_type = sphere_get_type;
 		is_init = 1;
 	}

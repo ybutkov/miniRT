@@ -84,6 +84,10 @@ C_SHELL_FILES += \
 		objects/ambient_core.c
 
 C_SHELL_FILES += \
+		bvh/bvh_core.c \
+		bvh/bvh_node_core.c
+
+C_SHELL_FILES += \
 		math/color/color_core.c \
 		math/ray/ray_core.c \
 		math/vector/vector_core.c \

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 15:39:51 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:35:39 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ t_vec3	vector_mult(t_vec3 v1, double scalar)
 	vector.y = v1.y * scalar;
 	vector.z = v1.z * scalar;
 	return (vector);
+}
+
+t_vec3	vector_add_scalar(t_vec3 v1, double sc)
+{
+	return (create_vector(v1.x + sc, v1.y + sc, v1.z + sc));
+}
+
+
+t_vec3	vector_sub_scalar(t_vec3 v1, double sc)
+{
+	return (vector_add_scalar(v1, -sc));
 }
 
 double	vector_dot_product(t_vec3 v1, t_vec3 v2)
@@ -110,4 +121,24 @@ t_vec3	vector_rotate_axis(t_vec3 v, t_vec3 axis, double angle)
 	res = vector_add(res, vector_mult(axis, 
 		vector_dot_product(axis, v) * (1.0 - cos_angle)));
 	return (res);
+}
+
+t_vec3	vector_min(t_vec3 v1, t_vec3 v2)
+{
+	t_vec3	vector;
+
+	vector.x = fmin(v1.x, v2.x);
+	vector.y = fmin(v1.y, v2.y);
+	vector.z = fmin(v1.z, v2.z);
+	return (vector);
+}
+
+t_vec3	vector_max(t_vec3 v1, t_vec3 v2)
+{
+	t_vec3	vector;
+
+	vector.x = fmax(v1.x, v2.x);
+	vector.y = fmax(v1.y, v2.y);
+	vector.z = fmax(v1.z, v2.z);
+	return (vector);
 }

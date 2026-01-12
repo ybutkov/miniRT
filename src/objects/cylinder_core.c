@@ -12,6 +12,7 @@
 
 #include "constants.h"
 #include "objects.h"
+#include <math.h>
 #include <stdlib.h>
 
 t_obj_type	cylinder_get_type(void)
@@ -143,6 +144,29 @@ double	cylinder_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	return (res);
 }
 
+t_aabb	cylinder_get_aabb(t_obj *this)
+{
+	t_aabb		aabb;
+	t_cylinder	*cy;
+	t_vec3		half_h;
+	t_vec3		top;
+	t_vec3		bot;
+	double		radius;
+
+	cy = (t_cylinder *)this->data;
+	radius = cy->radius;
+	half_h = vector_mult(cy->normal, cy->height / 2.0);
+	top = vector_add(cy->center, half_h);
+	bot = vector_sub(cy->center, half_h);
+	aabb.min.x = fmin(top.x, bot.x) - radius;
+	aabb.min.y = fmin(top.y, bot.y) - radius;
+	aabb.min.z = fmin(top.z, bot.z) - radius;
+	aabb.max.x = fmax(top.x, bot.x) + radius;
+	aabb.max.y = fmax(top.y, bot.y) + radius;
+	aabb.max.z = fmax(top.z, bot.z) + radius;
+	return (aabb);
+}
+
 t_vtable	*get_cylinder_methods(void)
 {
 	static t_vtable	cylinder_methods;
@@ -152,6 +176,7 @@ t_vtable	*get_cylinder_methods(void)
 	{
 		cylinder_methods.get_normal = cylinder_get_normal;
 		cylinder_methods.intersect = cylinder_intersect;
+		cylinder_methods.get_aabb = cylinder_get_aabb;
 		cylinder_methods.get_type = cylinder_get_type;
 		is_init = 1;
 	}

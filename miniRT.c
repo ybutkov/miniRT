@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 18:35:43 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 20:51:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	add_test_objs_2(t_map *map)
 
 	map->ambient = create_ambient(0.0, create_color(255, 255, 255));
 
-	obj = create_plane(create_vector(0, 0, 0), create_vector(0, 1, 0),
-			create_color(150, 150, 150), 0.4);
-	map->add_obj(map, obj);
+	// obj = create_plane(create_vector(0, 0, 0), create_vector(0, 1, 0),
+	// 		create_color(150, 150, 150), 0.4);
+	// map->add_obj(map, obj);
 
 	pos = create_vector(-5, 6, 10);
 	obj = create_sphere(pos, 4, create_color(255, 255, 255), 1.0);
@@ -117,9 +117,9 @@ void	add_test_objs_2(t_map *map)
 	map->add_obj(map, obj);
 
 
-	obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
-		create_vector(0, 20, 20), create_color(255, 255, 255), 0.8);
-	map->add_obj(map, obj);
+	// obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
+	// 	create_vector(0, 20, 20), create_color(255, 255, 255), 0.8);
+	// map->add_obj(map, obj);
 
 	// pos = create_vector(20, 15, 60);
 	// obj = create_sphere(pos, 35, create_color(0, 0, 255));
@@ -128,12 +128,12 @@ void	add_test_objs_2(t_map *map)
 
 	map->add_light(map, create_light(create_vector(10, 20, -10),
 			0.6, create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(-15, 10, 5),
-			0.2, create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(-35, -5, 5),
-			0.5, create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(0, 20, 35),
-			0.8, create_color(255, 255, 255)));
+	// map->add_light(map, create_light(create_vector(-15, 10, 5),
+	// 		0.2, create_color(255, 255, 255)));
+	// map->add_light(map, create_light(create_vector(-35, -5, 5),
+	// 		0.5, create_color(255, 255, 255)));
+	// map->add_light(map, create_light(create_vector(0, 20, 35),
+	// 		0.8, create_color(255, 255, 255)));
 
 	pos = create_vector(0, 5, -15);
 	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);
@@ -225,6 +225,36 @@ void	add_test_box(t_map *map)
 	map->add_obj(map, obj);
 }
 
+void	add_test_sphere(t_map *map)
+{
+	t_obj		*obj;
+	t_vec3		pos;
+
+	pos = create_vector(-4, 0, 0);
+	obj = create_sphere(pos, 5, create_color(255, 0, 0), 0.3);
+	map->add_obj(map, obj);
+
+	obj = create_triangle(create_vector(-10, -5, -10), create_vector(10, -5, -10),
+		create_vector(0, 10, -10), create_color(0, 255, 0), 0.2);
+	map->add_obj(map, obj);
+
+	pos = create_vector(5, 2, -2);
+	obj = create_cylinder(pos, create_vector(0, 1, 0), 3, 4,
+		create_color(55, 55, 1000), 0.3);
+	map->add_obj(map, obj);
+
+	obj = create_box(create_vector(-4, 0, 3), create_vector(1, 1, 0),
+		create_vector(3, 3, 3), create_color(255, 0, 255), 0.4);
+	map->add_obj(map, obj);
+
+	map->add_light(map, create_light(create_vector(10, 20, -10),
+			0.6, create_color(255, 255, 255)));
+
+	// obj = create_triangle(create_vector(-8, 0, 15), create_vector(8, 0, 15),
+	// 	create_vector(0, 8, 5), create_color(0, 0, 255), 0.4);
+	// map->add_obj(map, obj);
+}
+
 int	main(int argc, char const *argv[])
 {
 	t_map	*map;
@@ -234,9 +264,11 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
-	// add_test_box(map);
+	add_test_sphere(map);
 	parse_scene(argv[1], map);
 	printf("finish parsing\n");
+	if (map->generate_bvh(map) == NO)
+		exit_program(NULL, "PROBLEMS!!!");;
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
 	return (0);

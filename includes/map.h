@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 21:38:16 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 23:09:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "point.h"
 # include "objects.h"
+# include "bvh.h"
 # include <stddef.h>
 
 typedef enum e_projection
@@ -32,6 +33,7 @@ typedef struct s_map
 	t_camera		*camera;
 	t_ambient		*ambient;
 	t_light			*lights;
+	t_bvh			*bvh;
 //
 	int				width;
 	int				height;
@@ -59,6 +61,7 @@ typedef struct s_map
 	void			(*shift)(struct s_map *map, int x, int y);
 	void			(*zoom_in)(struct s_map *map, int delta);
 	void			(*add_obj)(struct s_map *map, t_obj *object);
+	int				(*generate_bvh)(t_map *map);
 	void			(*add_light)(struct s_map *map, t_light *light);
 }					t_map;
 

@@ -6,12 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 23:29:38 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 23:15:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_internal.h"
 #include "miniRT.h"
+#include "bvh.h"
+#include "constants.h"
 #include <math.h>
 
 static void	free_map(t_map *map)
@@ -53,6 +55,19 @@ void	add_new_object(t_map *map, t_obj *new_obj)
 		map->objects = new_obj;
 }
 
+static int	generate_bvh(t_map *map)
+{
+	t_bvh	*bvh;
+
+	bvh = create_bvh();
+	if (bvh == NULL)
+		return (NO);
+	if (bvh->build(bvh, map->objects) == NO)
+		return (NO);
+	map->bvh = bvh;
+	return (OK);
+}
+
 t_map	*create_map(size_t width, size_t height)
 {
 	t_map	*map;
@@ -83,5 +98,6 @@ t_map	*create_map(size_t width, size_t height)
 	map->zoom_in = zoom_in;
 	map->add_light = add_new_light;
 	map->add_obj = add_new_object;
+	map->generate_bvh = generate_bvh;
 	return (map);
 }

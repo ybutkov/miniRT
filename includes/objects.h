@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/10 21:07:11 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:17:34 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,26 @@ typedef enum e_obj_type
 	BOX
 }						t_obj_type;
 
+typedef struct			s_aabb
+{
+	t_vec3				min;
+	t_vec3				max;
+}						t_aabb;
+
 // typedef t_vec3			t_color;
 typedef struct s_obj	t_obj;
 typedef struct s_map	t_map;
 
 typedef t_vec3			(*t_get_normal)(t_obj *this, t_vec3 point);
 typedef double			(*t_intersect)(t_obj *this, t_vec3 pos, t_vec3 dir);
+typedef t_aabb			(*t_get_aabb)(t_obj *this);
 typedef t_obj_type		(*t_get_type)(void);
 
 typedef struct s_vtable
 {
 	t_get_normal		get_normal;
 	t_intersect			intersect;
+	t_get_aabb			get_aabb;
 	t_get_type			get_type;
 }						t_vtable;
 

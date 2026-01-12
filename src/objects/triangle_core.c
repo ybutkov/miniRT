@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:28:43 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 20:40:17 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,21 @@ t_vec3	triangle_get_normal(t_obj *this, t_vec3 pos)
 	return (triangle->normal);
 }
 
+t_aabb	triangle_get_aabb(t_obj *this)
+{
+	t_aabb		aabb;
+	t_triangle	*triangle;
+
+	triangle = (t_triangle *)this->data;
+	aabb.min.x = fmin(fmin(triangle->p_1.x, triangle->p_2.x), triangle->p_3.x);
+	aabb.min.y = fmin(fmin(triangle->p_1.y, triangle->p_2.y), triangle->p_3.y);
+	aabb.min.z = fmin(fmin(triangle->p_1.z, triangle->p_2.z), triangle->p_3.z);
+	aabb.max.x = fmax(fmax(triangle->p_1.x, triangle->p_2.x), triangle->p_3.x);
+	aabb.max.y = fmax(fmax(triangle->p_1.y, triangle->p_2.y), triangle->p_3.y);
+	aabb.max.z = fmax(fmax(triangle->p_1.z, triangle->p_2.z), triangle->p_3.z);
+	return (aabb);
+}
+
 t_vtable	*get_triangle_methods(void)
 {
 	static t_vtable	triangle_methods;
@@ -72,6 +87,7 @@ t_vtable	*get_triangle_methods(void)
 	{
 		triangle_methods.get_normal = triangle_get_normal;
 		triangle_methods.intersect = triangle_intersect;
+		triangle_methods.get_aabb = triangle_get_aabb;
 		triangle_methods.get_type = triangle_get_type;
 		is_init = 1;
 	}

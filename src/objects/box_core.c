@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/10 21:02:25 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/11 22:26:48 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	box_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	t[5] = (b->half_size.z - local_rel.z) * inv_dir.z;
 	res[0] = fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
 	res[1] = fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
-	if (res[1] < 0 || res[0] > res[1])
+	if (res[1] < EPSILON || res[0] > res[1])
 		return (-1.0);
 	if (res[0] > EPSILON)
 		return (res[0]);
@@ -83,6 +83,62 @@ t_vec3	box_get_normal(t_obj *this, t_vec3 pos)
 	return (vector_mult(box->axis[axis], -1));
 }
 
+t_aabb	box_get_aabb(t_obj *this)
+{
+	t_aabb	aabb;
+	t_box	*box;
+	t_vec3	corners[8];
+	int		i;
+
+	box = (t_box *)this->data;
+	corners[0] = vector_add(box->center, vector_add(vector_add(
+			vector_mult(box->axis[0], box->half_size.x),
+			vector_mult(box->axis[1], box->half_size.y)),
+			vector_mult(box->axis[2], box->half_size.z)));
+	corners[1] = vector_add(box->center, vector_add(vector_sub(
+			vector_mult(box->axis[0], -box->half_size.x),
+			vector_mult(box->axis[1], box->half_size.y)),
+			vector_mult(box->axis[2], box->half_size.z)));
+	corners[2] = vector_add(box->center, vector_add(vector_add(
+			vector_mult(box->axis[0], box->half_size.x),
+			vector_mult(box->axis[1], -box->half_size.y)),
+			vector_mult(box->axis[2], box->half_size.z)));
+	corners[3] = vector_add(box->center, vector_add(vector_sub(
+			vector_mult(box->axis[0], -box->half_size.x),
+			vector_mult(box->axis[1], -box->half_size.y)),
+			vector_mult(box->axis[2], box->half_size.z)));
+	corners[4] = vector_add(box->center, vector_add(vector_add(
+			vector_mult(box->axis[0], box->half_size.x),
+			vector_mult(box->axis[1], box->half_size.y)),
+			vector_mult(box->axis[2], -box->half_size.z)));
+	corners[5] = vector_add(box->center, vector_add(vector_sub(
+			vector_mult(box->axis[0], -box->half_size.x),
+			vector_mult(box->axis[1], box->half_size.y)),
+			vector_mult(box->axis[2], -box->half_size.z)));
+	corners[6] = vector_add(box->center, vector_add(vector_add(
+			vector_mult(box->axis[0], box->half_size.x),
+			vector_mult(box->axis[1], -box->half_size.y)),
+			vector_mult(box->axis[2], -box->half_size.z)));
+	corners[7] = vector_add(box->center, vector_sub(vector_sub(
+			vector_mult(box->axis[0], -box->half_size.x),
+			vector_mult(box->axis[1], -box->half_size.y)),
+			vector_mult(box->axis[2], -box->half_size.z)));
+	aabb.min = corners[0];
+	aabb.max = corners[0];
+	i = 1;
+	while (i < 8)
+	{
+		aabb.min.x = fmin(aabb.min.x, corners[i].x);
+		aabb.min.y = fmin(aabb.min.y, corners[i].y);
+		aabb.min.z = fmin(aabb.min.z, corners[i].z);
+		aabb.max.x = fmax(aabb.max.x, corners[i].x);
+		aabb.max.y = fmax(aabb.max.y, corners[i].y);
+		aabb.max.z = fmax(aabb.max.z, corners[i].z);
+		i++;
+	}
+	return (aabb);
+}
+
 t_vtable	*get_box_methods(void)
 {
 	static t_vtable	box_methods;
@@ -92,6 +148,7 @@ t_vtable	*get_box_methods(void)
 	{
 		box_methods.get_normal = box_get_normal;
 		box_methods.intersect = box_intersect;
+		box_methods.get_aabb = box_get_aabb;
 		box_methods.get_type = box_get_type;
 		is_init = 1;
 	}
