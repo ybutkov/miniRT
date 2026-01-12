@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/10 21:51:02 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/12 18:35:43 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,8 +234,8 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
-	add_test_box(map);
-	// parse_scene(argv[1], map);
+	// add_test_box(map);
+	parse_scene(argv[1], map);
 	printf("finish parsing\n");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
