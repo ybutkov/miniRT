@@ -63,6 +63,7 @@ C_SHELL_FILES += \
 		map_op/map_transform.c \
 		map_op/map_basic.c \
 		draw_func/put_pixel.c \
+		draw_func/draw_axes.c \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \

@@ -20,8 +20,10 @@ static void	render_map(t_app *app)
 {
 	app->clear_image(app->img);
 	draw_map(app);
+	draw_axes(app);
 	// draw_info_panel(app);
 	mlx_put_image_to_window(app->mlx, app->win, app->img->img, 0, 0);
+	draw_axes_labels(app);
 	// print_info_panel(app);
 	app->last_frame_time = get_time_in_milliseconds();
 	app->map->is_change = 0;
