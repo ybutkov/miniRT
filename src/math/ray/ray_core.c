@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/13 22:03:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/14 19:09:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	is_in_shadow_bvh(t_bvh_node *node, t_vec3 origin, t_vec3 dir, double max_dis
 	uint16_t	amount;
 	double	aabb_t;
 
+	if (!node)
+		return (NO);
 	aabb_t = intersect_aabb(node->aabb, origin, dir);
-	if (aabb_t == -1.0 || aabb_t > max_dist)
+	if (aabb_t == -1.0)
 		return (NO);
 	if (node->is_leaf == OK)
 	{
