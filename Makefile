@@ -82,7 +82,10 @@ C_SHELL_FILES += \
 		objects/triangle_core.c \
 		objects/box_core.c \
 		objects/light_core.c \
-		objects/ambient_core.c
+		objects/ambient_core.c \
+		objects/get_normals.c \
+		objects/get_types.c \
+		objects/get_vtables.c
 
 C_SHELL_FILES += \
 		bvh/bvh_core.c \
@@ -90,8 +93,11 @@ C_SHELL_FILES += \
 
 C_SHELL_FILES += \
 		math/color/color_core.c \
+		math/color/color_func.c \
 		math/ray/ray_core.c \
 		math/vector/vector_core.c \
+		math/vector/vector_func_1.c \
+		math/vector/vector_func_2.c \
 		math/math_utils.c
 
 C_SHELL_FILES += \

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:24:16 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 13:55:03 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 21:58:18 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ int	is_validate_triangle(char **tokens)
 
 t_obj	*parse_triangle(char **tokens)
 {
-	t_obj	*result;
-	t_vec3	p_1;
-	t_vec3	p_2;
-	t_vec3	p_3;
-	t_color	color;
+	t_obj			*result;
+	t_vec3			p_1;
+	t_vec3			p_2;
+	t_vec3			p_3;
+	t_color_reflect	color_reflection;
 
 	if (is_validate_triangle(tokens) == NO)
 		return (NULL);
 	p_1 = parse_vec3(tokens[1]);
 	p_2 = parse_vec3(tokens[2]);
 	p_3 = parse_vec3(tokens[3]);
-	color = parse_color(tokens[4]);
-	result = create_triangle(p_1, p_2, p_3, color, REFLECTION_DEFAULT);
+	color_reflection.color = parse_color(tokens[4]);
+	color_reflection.reflection = REFLECTION_DEFAULT;
+	result = create_triangle(p_1, p_2, p_3, color_reflection);
 	return (result);
 }

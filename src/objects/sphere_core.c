@@ -6,29 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 00:28:30 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 21:33:06 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
-#include "objects.h"
+#include "obj_internal.h"
 #include "vectors.h"
 #include <stdlib.h>
-
-t_obj_type	sphere_get_type(void)
-{
-	return (SPHERE);
-}
-
-t_vec3	sphere_get_normal(t_obj *this, t_vec3 pos)
-{
-	t_sphere	*sphere;
-	t_vec3		normal;
-
-	sphere = (t_sphere *)this->data;
-	normal = vector_sub(pos, sphere->center);
-	return (vector_norm(normal));
-}
 
 double	sphere_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 {
@@ -62,23 +47,8 @@ t_aabb	sphere_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_vtable	*get_sphere_methods(void)
-{
-	static t_vtable	sphere_methods;
-	static int		is_init;
-
-	if (!is_init)
-	{
-		sphere_methods.get_normal = sphere_get_normal;
-		sphere_methods.intersect = sphere_intersect;
-		sphere_methods.get_aabb = sphere_get_aabb;
-		sphere_methods.get_type = sphere_get_type;
-		is_init = 1;
-	}
-	return (&sphere_methods);
-}
-
-t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color, double reflection)
+t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color,
+		double reflection)
 {
 	t_obj		*obj;
 	t_sphere	*sphere;

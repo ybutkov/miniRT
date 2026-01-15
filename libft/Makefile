@@ -70,7 +70,8 @@ LIBFT_CORE_FILES = ft_isalpha.c \
 UTILS_FILES = compare_util.c \
 		time_func.c \
 		hash_code.c \
-		ptr_list.c
+		ptr_list.c \
+		swap.c
 
 GNL_FILES = get_next_line.c
 

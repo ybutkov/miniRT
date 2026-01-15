@@ -6,37 +6,43 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 22:26:48 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 16:00:52 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
+#include "obj_internal.h"
 #include "objects.h"
-#include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
 
-t_obj_type	box_get_type(void)
+static t_vec3	get_inv_dir(t_box *b, t_vec3 dir)
 {
-	return (BOX);
+	t_vec3	inv_dir;
+	t_vec3	local_dir;
+
+	local_dir = create_vector(vector_dot_product(dir, b->axis[0]),
+			vector_dot_product(dir, b->axis[1]), vector_dot_product(dir,
+				b->axis[2]));
+	inv_dir = create_vector(1.0 / local_dir.x, 1.0 / local_dir.y, 1.0
+			/ local_dir.z);
+	return (inv_dir);
 }
 
 double	box_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 {
 	t_box	*b;
 	t_vec3	local_rel;
-	t_vec3	local_dir;
 	t_vec3	inv_dir;
 	double	t[6];
 	double	res[2];
 
 	b = (t_box *)this->data;
 	local_rel = vector_sub(origin, b->center);
-	local_dir = create_vector(vector_dot_product(dir, b->axis[0]),
-			vector_dot_product(dir, b->axis[1]), vector_dot_product(dir, b->axis[2]));
 	local_rel = create_vector(vector_dot_product(local_rel, b->axis[0]),
 			vector_dot_product(local_rel, b->axis[1]),
 			vector_dot_product(local_rel, b->axis[2]));
-	inv_dir = create_vector(1.0 / local_dir.x, 1.0 / local_dir.y, 1.0 / local_dir.z);
+	inv_dir = get_inv_dir(b, dir);
 	t[0] = (-b->half_size.x - local_rel.x) * inv_dir.x;
 	t[1] = (b->half_size.x - local_rel.x) * inv_dir.x;
 	t[2] = (-b->half_size.y - local_rel.y) * inv_dir.y;
@@ -52,35 +58,32 @@ double	box_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	return (res[1]);
 }
 
-t_vec3	box_get_normal(t_obj *this, t_vec3 pos)
+static void	calculate_corners(t_box *b, t_vec3 corners[8])
 {
-	t_box	*box;
-	t_vec3	d;
-	double	min_dist;
-	double	dist;
-	double	points[3];
-	int		axis;
-	int		i;
+	t_vec3	b_0mx[2][3];
 
-	box = (t_box *)this->data;
-	d = vector_sub(pos, box->center);
-	min_dist = INFINITY;
-	axis = 0;
-	i = 0;
-	while (i < 3)
-	{
-		points[i] = vector_dot_product(d, box->axis[i]);
-		dist = fabs(box->half_size.v[i] - fabs(points[i]));
-		if (dist < min_dist)
-		{
-			min_dist = dist;
-			axis = i;
-		}
-		i++;
-	}
-	if (points[axis] > 0)
-		return (box->axis[axis]);
-	return (vector_mult(box->axis[axis], -1));
+	b_0mx[0][0] = vector_mult(b->axis[0], b->half_size.x);
+	b_0mx[0][1] = vector_mult(b->axis[1], b->half_size.y);
+	b_0mx[0][2] = vector_mult(b->axis[2], b->half_size.z);
+	b_0mx[1][0] = vector_mult(b->axis[0], -b->half_size.x);
+	b_0mx[1][1] = vector_mult(b->axis[1], -b->half_size.y);
+	b_0mx[1][2] = vector_mult(b->axis[2], -b->half_size.z);
+	corners[0] = vector_add(b->center,
+			vector_add(vector_add(b_0mx[0][0], b_0mx[0][1]), b_0mx[0][2]));
+	corners[1] = vector_add(b->center,
+			vector_add(vector_sub(b_0mx[1][0], b_0mx[0][1]), b_0mx[0][2]));
+	corners[2] = vector_add(b->center,
+			vector_add(vector_add(b_0mx[0][0], b_0mx[1][1]), b_0mx[0][2]));
+	corners[3] = vector_add(b->center,
+			vector_add(vector_sub(b_0mx[1][0], b_0mx[1][1]), b_0mx[0][2]));
+	corners[4] = vector_add(b->center,
+			vector_add(vector_add(b_0mx[0][0], b_0mx[0][1]), b_0mx[1][2]));
+	corners[5] = vector_add(b->center,
+			vector_add(vector_sub(b_0mx[1][0], b_0mx[0][1]), b_0mx[1][2]));
+	corners[6] = vector_add(b->center,
+			vector_add(vector_add(b_0mx[0][0], b_0mx[1][1]), b_0mx[1][2]));
+	corners[7] = vector_add(b->center,
+			vector_sub(vector_sub(b_0mx[1][0], b_0mx[1][1]), b_0mx[1][2]));
 }
 
 t_aabb	box_get_aabb(t_obj *this)
@@ -91,38 +94,7 @@ t_aabb	box_get_aabb(t_obj *this)
 	int		i;
 
 	box = (t_box *)this->data;
-	corners[0] = vector_add(box->center, vector_add(vector_add(
-			vector_mult(box->axis[0], box->half_size.x),
-			vector_mult(box->axis[1], box->half_size.y)),
-			vector_mult(box->axis[2], box->half_size.z)));
-	corners[1] = vector_add(box->center, vector_add(vector_sub(
-			vector_mult(box->axis[0], -box->half_size.x),
-			vector_mult(box->axis[1], box->half_size.y)),
-			vector_mult(box->axis[2], box->half_size.z)));
-	corners[2] = vector_add(box->center, vector_add(vector_add(
-			vector_mult(box->axis[0], box->half_size.x),
-			vector_mult(box->axis[1], -box->half_size.y)),
-			vector_mult(box->axis[2], box->half_size.z)));
-	corners[3] = vector_add(box->center, vector_add(vector_sub(
-			vector_mult(box->axis[0], -box->half_size.x),
-			vector_mult(box->axis[1], -box->half_size.y)),
-			vector_mult(box->axis[2], box->half_size.z)));
-	corners[4] = vector_add(box->center, vector_add(vector_add(
-			vector_mult(box->axis[0], box->half_size.x),
-			vector_mult(box->axis[1], box->half_size.y)),
-			vector_mult(box->axis[2], -box->half_size.z)));
-	corners[5] = vector_add(box->center, vector_add(vector_sub(
-			vector_mult(box->axis[0], -box->half_size.x),
-			vector_mult(box->axis[1], box->half_size.y)),
-			vector_mult(box->axis[2], -box->half_size.z)));
-	corners[6] = vector_add(box->center, vector_add(vector_add(
-			vector_mult(box->axis[0], box->half_size.x),
-			vector_mult(box->axis[1], -box->half_size.y)),
-			vector_mult(box->axis[2], -box->half_size.z)));
-	corners[7] = vector_add(box->center, vector_sub(vector_sub(
-			vector_mult(box->axis[0], -box->half_size.x),
-			vector_mult(box->axis[1], -box->half_size.y)),
-			vector_mult(box->axis[2], -box->half_size.z)));
+	calculate_corners(box, corners);
 	aabb.min = corners[0];
 	aabb.max = corners[0];
 	i = 1;
@@ -139,30 +111,15 @@ t_aabb	box_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_vtable	*get_box_methods(void)
-{
-	static t_vtable	box_methods;
-	static int		is_init;
-
-	if (!is_init)
-	{
-		box_methods.get_normal = box_get_normal;
-		box_methods.intersect = box_intersect;
-		box_methods.get_aabb = box_get_aabb;
-		box_methods.get_type = box_get_type;
-		is_init = 1;
-	}
-	return (&box_methods);
-}
-
 t_obj	*create_box(t_vec3 center, t_vec3 orientation, t_vec3 size,
-		t_color color, double reflection)
+		t_color_reflect color_reflection)
 {
 	t_obj	*obj;
 	t_box	*box;
 	t_vec3	up;
 
-	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color_reflection.color, color_reflection.reflection,
+			DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	box = malloc(sizeof(t_box));

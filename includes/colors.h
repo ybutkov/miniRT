@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:34:08 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/13 21:45:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 16:00:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ typedef t_vec3	t_color;
 # define BG_COLOR_BOTTOM create_vector(0.0, 0.0, 0.0)
 # define BG_COLOR_BLACK create_vector(0.0, 0.0, 0.0)
 
-// typedef struct s_color
-// {
-// 	double	r;
-// 	double	g;
-// 	double	b;
-// }			t_color;
+typedef struct s_color_reflect
+{
+	t_color color;
+	double  reflection;
+}			t_color_reflect;
 
 t_color			create_color(int r, int g, int b);
 t_color			color_add(t_color c1, t_color c2);

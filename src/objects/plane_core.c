@@ -6,19 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 21:07:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:04:28 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
-#include "objects.h"
-#include <stdlib.h>
+#include "obj_internal.h"
 #include <math.h>
-
-t_obj_type	plane_get_type(void)
-{
-	return (PLANE);
-}
+#include <stdlib.h>
 
 double	plane_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 {
@@ -39,15 +34,6 @@ double	plane_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	return (-1.0);
 }
 
-t_vec3	plane_get_normal(t_obj *this, t_vec3 pos)
-{
-	t_plane	*plane;
-
-	(void)pos;
-	plane = (t_plane *)this->data;
-	return (vector_norm(plane->normal));
-}
-
 t_aabb	plane_get_aabb(t_obj *this)
 {
 	t_aabb	aabb;
@@ -58,23 +44,8 @@ t_aabb	plane_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_vtable	*get_plane_methods(void)
-{
-	static t_vtable	plane_methods;
-	static int		is_init;
-
-	if (!is_init)
-	{
-		plane_methods.get_normal = plane_get_normal;
-		plane_methods.intersect = plane_intersect;
-		plane_methods.get_aabb = plane_get_aabb;
-		plane_methods.get_type = plane_get_type;
-		is_init = 1;
-	}
-	return (&plane_methods);
-}
-
-t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color, double reflection)
+t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
+		double reflection)
 {
 	t_obj	*obj;
 	t_plane	*plane;

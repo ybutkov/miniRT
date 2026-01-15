@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 00:17:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 21:54:12 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ t_obj					*create_plane(t_vec3 point, t_vec3 normal,
 t_obj					*create_sphere(t_vec3 pos, double diametr,
 							t_color color, double reflection);
 t_obj					*create_cylinder(t_vec3 pos, t_vec3 normal,
-							double diametr, double height, t_color color,
-							double reflection);
+							double diametr_height[2],
+							t_color_reflect color_reflection);
 t_obj					*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
-							t_color color, double reflection);
+							t_color_reflect color_reflection);
 t_obj					*create_box(t_vec3 center, t_vec3 orientation,
-							t_vec3 size, t_color color, double reflection);
+							t_vec3 size, t_color_reflect color_reflection);
 
 t_camera				*create_camera(t_vec3 pos, t_vec3 dir, double fov,
 							t_map *map);

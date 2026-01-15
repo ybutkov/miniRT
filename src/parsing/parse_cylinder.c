@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:28:49 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 13:47:08 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 21:02:10 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,21 @@ t_obj	*parse_cylinder(char **tokens)
 	t_obj	*result;
 	t_vec3	direction;
 	t_vec3	pos;
-	double	diameter;
-	double	height;
-	t_color	color;
+	double	diametr_height[2];
+	t_color_reflect color_reflection;
 
 	if (is_validate_cylinder(tokens) == NO)
 		return (HANDLE_ERROR_NULL);
 	direction = parse_vec3(tokens[2]);
 	if (is_normalized(direction) == NO)
 		return (HANDLE_ERROR_NULL);
-	diameter = ft_atof(tokens[3]);
-	height = ft_atof(tokens[4]);
-	if (diameter <= 0 || height <= 0)
+	diametr_height[0] = ft_atof(tokens[3]);
+	diametr_height[1] = ft_atof(tokens[4]);
+	if (diametr_height[0] <= 0 || diametr_height[1] <= 0)
 		return (HANDLE_ERROR_NULL);
 	pos = parse_vec3(tokens[1]);
-	color = parse_color(tokens[5]);
-	result = create_cylinder(pos, direction, diameter, height, color,
-			REFLECTION_DEFAULT);
+	color_reflection.color = parse_color(tokens[5]);
+	color_reflection.reflection = REFLECTION_DEFAULT;
+	result = create_cylinder(pos, direction, diametr_height, color_reflection);
 	return (result);
 }

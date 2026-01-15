@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/12 22:16:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:13:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bvh.h"
 #include "constants.h"
+#include "utils.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -68,15 +69,6 @@ double	get_best_split_pos(t_bvh_node *node, int *axis, t_obj **obj, int amount)
 	}
 	splitPos = (centroid_bounds_min.v[*axis] + centroid_bounds_max.v[*axis]) * 0.5f;
 	return(splitPos);
-}
-
-void	swap(void **a, void **b)
-{
-	void	*tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
 
 t_aabb	calculate_aabb(t_obj *obj, int amount)

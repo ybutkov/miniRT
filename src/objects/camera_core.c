@@ -6,18 +6,18 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/10 21:46:33 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:04:10 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
-#include "map.h"
 #include "constants.h"
-#include <stdlib.h>
+#include "map.h"
+#include "objects.h"
 #include <math.h>
+#include <stdlib.h>
 
 // (dir, right, up) (w,u,v)
-void	update_camera(t_camera	*cam)
+void	update_camera(t_camera *cam)
 {
 	t_vec3	v_up;
 	t_vec3	h_half;
@@ -41,7 +41,7 @@ void	update_camera(t_camera	*cam)
 	cam->lower_left_pos = vector_sub(cam->lower_left_pos, v_half);
 }
 
-void	rotate_camera(t_camera *cam, t_vec3	dir, double	delta)
+void	rotate_camera(t_camera *cam, t_vec3 dir, double delta)
 {
 	cam->dir = vector_rotate_axis(cam->dir, dir, delta);
 	cam->dir = vector_norm(cam->dir);

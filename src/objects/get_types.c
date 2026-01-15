@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   get_types.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 13:59:35 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 13:03:13 by ybutkov          ###   ########.fr       */
+/*   Created: 2026/01/15 15:52:26 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/15 21:52:51 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "obj_internal.h"
 
-# include <stdlib.h>
+t_obj_type	box_get_type(void)
+{
+	return (BOX);
+}
 
-long int		get_time_in_milliseconds(void);
-int				between(long long value, long long left, long long right);
-int				in_set(char ch, char *set);
-unsigned int	hash(char *key);
-int				ptr_list_length(void *list);
-void			swap(void **a, void **b);
+t_obj_type	cylinder_get_type(void)
+{
+	return (CYLINDER);
+}
 
-#endif
+t_obj_type	plane_get_type(void)
+{
+	return (PLANE);
+}
+
+t_obj_type	sphere_get_type(void)
+{
+	return (SPHERE);
+}
+
+t_obj_type	triangle_get_type(void)
+{
+	return (TRIANGLE);
+}
