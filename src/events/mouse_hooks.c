@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 19:24:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:32:17 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_mouse_press(int button, int x, int y, t_app *app)
 	app->mouse.y = y;
 	app->mouse.click_x = x;
 	app->mouse.click_y = y;
-	
 	if (button == MOUSE_LEFT_BUTTON)
 	{
 		// Try to select an object at this position

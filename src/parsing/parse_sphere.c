@@ -6,13 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:13:37 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 18:59:38 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:30:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 #include "parser.h"
-
 
 int	is_validate_sphere(char **tokens)
 {

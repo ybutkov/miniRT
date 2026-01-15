@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:28:49 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/15 21:02:10 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:30:55 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	is_validate_cylinder(char **tokens)
 
 t_obj	*parse_cylinder(char **tokens)
 {
-	t_obj	*result;
-	t_vec3	direction;
-	t_vec3	pos;
-	double	diametr_height[2];
-	t_color_reflect color_reflection;
+	t_obj			*result;
+	t_vec3			direction;
+	t_vec3			pos;
+	double			diametr_height[2];
+	t_color_reflect	color_reflection;
 
 	if (is_validate_cylinder(tokens) == NO)
 		return (HANDLE_ERROR_NULL);

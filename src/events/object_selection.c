@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:22:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 14:04:56 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:32:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void	move_selected_object(t_app *app, int delta_x, int delta_y)
 
 	if (!app->selected_obj)
 		return ;
-
 	obj = app->selected_obj;
-
 	right = app->map->camera->right;
 	up = app->map->camera->up;
 	movement = vector_add(

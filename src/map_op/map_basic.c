@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:53:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/08 21:33:58 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:28:24 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	set_point(t_map *map, int x, int y, t_point point)
 	*target = point;
 }
 
-#include <stdio.h>
 void	shift(t_map *map, int x, int y)
 {
 	rotate_camera(map->camera, create_vector(1, 0, 0), (double)y * 0.01);
@@ -40,7 +39,7 @@ void	shift(t_map *map, int x, int y)
 
 void	zoom_in(t_map *map, int delta)
 {
-	map->camera->fov = map->camera->fov  + delta;
+	map->camera->fov = map->camera->fov + delta;
 	update_camera(map->camera);
 }
 

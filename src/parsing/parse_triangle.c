@@ -6,13 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 22:24:16 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/15 21:58:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:30:37 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// Triangle tr
 int	is_validate_triangle(char **tokens)
 {
 	char	**split;

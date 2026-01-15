@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   app_core.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 21:24:59 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 21:49:20 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:31:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void	render_map(t_app *app)
 	app->clear_image(app->img);
 	draw_map(app);
 	draw_axes(app);
-	// draw_info_panel(app);
 	mlx_put_image_to_window(app->mlx, app->win, app->img->img, 0, 0);
 	draw_axes_labels(app);
-	// print_info_panel(app);
 	app->last_frame_time = get_time_in_milliseconds();
 	app->map->is_change = 0;
 }

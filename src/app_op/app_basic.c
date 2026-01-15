@@ -6,13 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 21:08:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:11:42 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:31:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "app_internal.h"
-#include "rays.h"
 #include "colors.h"
+#include "rays.h"
 
 void	draw_map(t_app *app)
 {
@@ -21,6 +21,7 @@ void	draw_map(t_app *app)
 	t_color	color_trace;
 	double	x_ratio;
 	double	y_ratio;
+	t_ray	ray;
 
 	y = 0;
 	while (y < app->map->height)
@@ -30,8 +31,9 @@ void	draw_map(t_app *app)
 		while (x < app->map->width)
 		{
 			x_ratio = (double)x / (app->map->width - 1);
-			t_ray ray = get_ray(app->map->camera, x_ratio, y_ratio);
-			color_trace = trace_ray(ray, app->map->bvh, app->map, REFLECTION_AMOUNT);
+			ray = get_ray(app->map->camera, x_ratio, y_ratio);
+			color_trace = trace_ray(ray, app->map->bvh, app->map,
+					REFLECTION_AMOUNT);
 			ft_mlx_pixel_put(app->img, x, y, color_to_int(color_trace));
 			x++;
 		}

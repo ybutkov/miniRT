@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:34:08 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 16:00:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/15 22:26:51 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@
 # define COLOR_DEEP_INDIGO 0x191940
 
 typedef t_vec3	t_color;
-
-# define BG_COLOR_TOP create_vector(0.1, 0.1, 0.2)
-# define BG_COLOR_BOTTOM create_vector(0.0, 0.0, 0.0)
-# define BG_COLOR_BLACK create_vector(0.0, 0.0, 0.0)
 
 typedef struct s_color_reflect
 {
