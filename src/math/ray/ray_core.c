@@ -6,19 +6,18 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:11:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/16 16:11:44 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bvh.h"
+#include "constants.h"
 #include "map.h"
 #include "objects.h"
 #include "rays.h"
 #include "vectors.h"
-#include "constants.h"
-#include "bvh.h"
 #include <math.h>
 #include <stdlib.h>
-
 #include <unistd.h>
 
 t_ray	create_ray(t_vec3 start, t_vec3 direction)
@@ -37,8 +36,8 @@ t_vec3	ray_at_pos(t_ray ray, double pos)
 
 t_ray	get_ray(t_camera *cam, double x_ratio, double y_ratio)
 {
-	t_vec3 target;
-	t_vec3 direction;
+	t_vec3	target;
+	t_vec3	direction;
 
 	target = vector_add(cam->lower_left_pos,
 			vector_add(vector_mult(cam->horizontal, x_ratio),
@@ -47,17 +46,14 @@ t_ray	get_ray(t_camera *cam, double x_ratio, double y_ratio)
 	return (create_ray(cam->pos, direction));
 }
 
-int	is_in_shadow_bvh(t_bvh_node *node, t_vec3 origin, t_vec3 dir, double max_dist)
+int	is_in_shadow_bvh(t_bvh_node *node, t_vec3 origin, t_vec3 dir,
+		double max_dist)
 {
-	t_obj	*obj;
-	double	t;
+	t_obj		*obj;
+	double		t;
 	uint16_t	amount;
-	double	aabb_t;
 
-	if (!node)
-		return (NO);
-	aabb_t = intersect_aabb(node->aabb, origin, dir);
-	if (aabb_t == -1.0)
+	if (!node || intersect_aabb(node->aabb, origin, dir) == -1.0)
 		return (NO);
 	if (node->is_leaf == OK)
 	{
@@ -93,51 +89,74 @@ int	is_in_shadow(t_map *map, t_vec3 hit_point, t_vec3 light_pos)
 	return (NO);
 }
 
-t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
+static t_color	add_specular(t_vec3 light_dir, t_vec3 normal, t_vec3 view_dir,
+		t_light *light)
 {
-	t_light	*curr;
+	t_vec3	reflect_v;
+	double	spec_dot;
+	double	specular;
+	t_color	color;
+
+	color = create_color(0, 0, 0);
+	reflect_v = vector_reflect(vector_mult(light_dir, -1), normal);
+	spec_dot = vector_dot_product(reflect_v, view_dir);
+	if (spec_dot > 0)
+	{
+		specular = pow(spec_dot, 50) * light->ratio;
+		color = color_mult(light->color, specular);
+	}
+	return (color);
+}
+
+static t_color	add_diffuse_light(t_obj *obj, t_light *light, double dot)
+{
+	t_color	diff_color;
+
+	diff_color = color_product(obj->color, light->color);
+	return (color_mult(diff_color, dot * light->ratio));
+}
+
+static t_color	process_light(t_map *map, t_obj *obj, t_vec3 hit_point,
+		t_light *light)
+{
+	t_vec3	light_dir;
+	t_vec3	sh_hit_point;
 	t_vec3	normal;
 	t_vec3	view_dir;
-	t_vec3	light_direct;
-	t_vec3	sh_hit_point;
-	t_vec3	reflect_v;
-	t_color	final_color;
-	t_color	diff_color;
 	double	dot;
-	double	spec_dot;
-	double s;
-
-	final_color = color_mult(color_product(obj->color, map->ambient->color), map->ambient->ratio);
 
 	normal = obj->methods->get_normal(obj, hit_point);
 	view_dir = vector_norm(vector_sub(map->camera->pos, hit_point));
 	if (vector_dot_product(normal, view_dir) < 0)
 		normal = vector_mult(normal, -1);
+	light_dir = vector_norm(vector_sub(light->pos, hit_point));
+	dot = vector_dot_product(normal, light_dir);
+	sh_hit_point = vector_add(hit_point, vector_mult(normal, 0.01));
+	if (dot > 0 && is_in_shadow(map, sh_hit_point, light->pos) == NO)
+		return (color_add(add_diffuse_light(obj, light, dot),
+				add_specular(light_dir, normal, view_dir, light)));
+	return (create_color(0, 0, 0));
+}
+
+t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
+{
+	t_light	*curr;
+	t_color	final_color;
+
+	final_color = color_mult(color_product(obj->color, map->ambient->color),
+			map->ambient->ratio);
 	curr = map->lights;
 	while (curr)
 	{
-		light_direct = vector_norm(vector_sub(curr->pos, hit_point));
-		dot = vector_dot_product(normal, light_direct);
-		sh_hit_point = vector_add(hit_point, vector_mult(normal, 0.01));
-		if (dot > 0 && is_in_shadow(map, sh_hit_point, curr->pos) == NO)
-		{
-			diff_color = color_product(obj->color, curr->color);
-			final_color = color_add(final_color, color_mult(diff_color, dot * curr->ratio));
-			reflect_v = vector_reflect(vector_mult(light_direct, -1), normal);
-			spec_dot = vector_dot_product(reflect_v, view_dir);
-			if (spec_dot > 0)
-			{	
-				s = pow(spec_dot, 50) * curr->ratio;
-				final_color = color_add(final_color, color_mult(curr->color, s));
-			}
-		}
+		final_color = color_add(final_color, process_light(map, obj, hit_point,
+					curr));
 		curr = curr->next;
 	}
 	return (final_color);
 }
 
 t_obj	*get_closest_obj(t_ray ray, t_obj *obj, uint16_t amount_obj,
-		double	*min_t)
+		double *min_t)
 {
 	t_obj	*closest_obj;
 	double	t;
@@ -161,8 +180,7 @@ t_obj	*get_closest_obj(t_ray ray, t_obj *obj, uint16_t amount_obj,
 	return (closest_obj);
 }
 
-t_obj	*get_closest_obj_from_bvh(t_ray ray, t_bvh_node *node,
-		double *min_t)
+t_obj	*get_closest_obj_from_bvh(t_ray ray, t_bvh_node *node, double *min_t)
 {
 	t_obj	*left;
 	t_obj	*right;
@@ -183,7 +201,7 @@ t_obj	*get_closest_obj_from_bvh(t_ray ray, t_bvh_node *node,
 	if (left)
 		result = left;
 	right = get_closest_obj_from_bvh(ray, node->right, min_t);
-	if (right && *min_t<left_t)
+	if (right && *min_t < left_t)
 		result = right;
 	else
 		*min_t = left_t;
@@ -196,7 +214,7 @@ t_color	trace_ray(t_ray ray, t_bvh *bvh, t_map *map, int depth)
 	t_vec3	hit_point;
 	t_vec3	normal;
 	t_color	local_color;
-	t_color reflect_color;
+	t_color	reflect_color;
 	t_ray	reflect_ray;
 	double	min_t;
 
@@ -215,7 +233,8 @@ t_color	trace_ray(t_ray ray, t_bvh *bvh, t_map *map, int depth)
 	if (closest_obj->reflection > 0)
 	{
 		reflect_ray.direction = vector_reflect(ray.direction, normal);
-		reflect_ray.start = vector_add(hit_point, vector_mult(normal, 100 * EPSILON));
+		reflect_ray.start = vector_add(hit_point, vector_mult(normal, 100
+					* EPSILON));
 		reflect_color = trace_ray(reflect_ray, bvh, map, depth - 1);
 		return (color_mix(local_color, reflect_color, closest_obj->reflection));
 	}
