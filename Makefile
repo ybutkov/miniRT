@@ -95,6 +95,8 @@ C_SHELL_FILES += \
 		math/color/color_core.c \
 		math/color/color_func.c \
 		math/ray/ray_core.c \
+		math/ray/ray_func_1.c \
+		math/ray/ray_func_2.c \
 		math/vector/vector_core.c \
 		math/vector/vector_func_1.c \
 		math/vector/vector_func_2.c \
