@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 23:09:03 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:18:52 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef enum e_projection
 
 typedef struct s_map
 {
-	t_point			*points;
 //
 	t_obj			*objects;
 	t_camera		*camera;
@@ -51,13 +50,6 @@ typedef struct s_map
 
 	void			(*free)(struct s_map *map);
 	void			(*reset)(struct s_map *map);
-	t_point			*(*get_point)(struct s_map *map, int x, int y);
-	void			(*set_point)(struct s_map *map, int x, int y,
-			t_point point);
-	t_point_2d		(*transform_point)(struct s_map *map, int x, int y);
-	void			(*set_rotation)(struct s_map *map, double x, double y,
-			double z);
-	void			(*rotate)(struct s_map *map, double x, double y, double z);
 	void			(*shift)(struct s_map *map, int x, int y);
 	void			(*zoom_in)(struct s_map *map, int delta);
 	void			(*add_obj)(struct s_map *map, t_obj *object);

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 00:00:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:13:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/17 17:24:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,58 @@ double	get_best_split_pos(t_bvh_node *node, int *axis, t_obj **obj, int amount)
 	}
 	splitPos = (centroid_bounds_min.v[*axis] + centroid_bounds_max.v[*axis]) * 0.5f;
 	return(splitPos);
+}
+
+static void	sort_centroids(double *centroids, int amount)
+{
+	int		i;
+	int		j;
+	double	temp;
+
+	i = 0;
+	while (i < amount - 1)
+	{
+		j = i + 1;
+		while (j < amount)
+		{
+			if (centroids[j] < centroids[i])
+			{
+				temp = centroids[i];
+				centroids[i] = centroids[j];
+				centroids[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+double	get_median_split_pos(t_bvh_node *node, int *axis, t_obj **obj, int amount)
+{
+	double	*centroids;
+	double	splitPos;
+	t_vec3	extent;
+	int		i;
+
+	extent = vector_sub(node->aabb.max, node->aabb.min);
+	*axis = 0;
+	if (extent.y > extent.x)
+		*axis = 1;
+	if (extent.z > extent.v[*axis])
+		*axis = 2;
+	centroids = malloc(amount * sizeof(double));
+	if (!centroids)
+		return ((node->aabb.min.v[*axis] + node->aabb.max.v[*axis]) * 0.5);
+	i = 0;
+	while (i < amount)
+	{
+		centroids[i] = get_centroid(obj[i]).v[*axis];
+		i++;
+	}
+	sort_centroids(centroids, amount);
+	splitPos = centroids[amount / 2];
+	free(centroids);
+	return (splitPos);
 }
 
 t_aabb	calculate_aabb(t_obj *obj, int amount)
@@ -140,6 +192,20 @@ int	get_obj_count(t_obj *obj)
 	return (amount);
 }
 
+static void	link_objects_in_array(t_obj **obj, int amount)
+{
+	int	i;
+
+	i = 0;
+	while (i < amount - 1)
+	{
+		obj[i]->next = obj[i + 1];
+		i++;
+	}
+	if (amount > 0)
+		obj[amount - 1]->next = NULL;
+}
+
 void	generate_bvh_node(t_bvh_node *node, t_obj **obj, int amount)
 {
 	double	split_pos;
@@ -149,7 +215,7 @@ void	generate_bvh_node(t_bvh_node *node, t_obj **obj, int amount)
 	int		left_count;
 	int		right_count;
 
-	split_pos = get_best_split_pos(node, &axis, obj, amount);
+	split_pos = get_median_split_pos(node, &axis, obj, amount);
 	i = 0;
 	j = amount - 1;
 	while (i <= j)
@@ -165,6 +231,8 @@ void	generate_bvh_node(t_bvh_node *node, t_obj **obj, int amount)
 		node->is_leaf = OK;
 		return ;
 	}
+	link_objects_in_array(obj, left_count);
+	link_objects_in_array(obj + left_count, amount - left_count);
 	node->left = create_bvh_node(calculate_aabb_array(obj, left_count), obj[0], left_count);
 	right_count = amount - left_count;
 	node->right = create_bvh_node(calculate_aabb_array(obj + left_count, right_count), obj[left_count], right_count);

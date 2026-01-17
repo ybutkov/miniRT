@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:32:17 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:21:58 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int	ft_mouse_move(int x, int y, t_app *app)
 	}
 	else if (mouse->left_button)
 		app->map->shift(app->map, delta_x, delta_y);
-	else if (mouse->middle_button)
-		app->map->rotate(app->map, copysign(0.01, delta_x), 0, 0);
-	else if (mouse->right_button)
-		app->map->rotate(app->map, 0, copysign(0.01, delta_y), 0);
+	// else if (mouse->middle_button)
+	// 	app->map->rotate(app->map, copysign(0.01, delta_x), 0, 0);
+	// else if (mouse->right_button)
+	// 	app->map->rotate(app->map, 0, copysign(0.01, delta_y), 0);
 	else
 		return (0);
 	app->map->is_change = 1;

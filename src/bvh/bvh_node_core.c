@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 19:12:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 22:31:48 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/17 17:12:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 double	intersect_aabb(t_aabb aabb, t_vec3 origin, t_vec3 dir)
 {
 	t_vec3	inv_dir;
-	double	t[8];
+	double	t[6];
 	double	res[2];
 
 	inv_dir = create_vector(1.0 / dir.x, 1.0 / dir.y, 1.0 / dir.z);
@@ -39,7 +39,7 @@ double	intersect_aabb(t_aabb aabb, t_vec3 origin, t_vec3 dir)
 
 t_bvh_node	*create_bvh_node(t_aabb aabb, t_obj *obj, uint16_t amount_obj)
 {
-	t_bvh_node *bvh_node;
+	t_bvh_node	*bvh_node;
 
 	bvh_node = malloc(sizeof(t_bvh_node));
 	if (bvh_node == NULL)

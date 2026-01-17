@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/16 15:53:30 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/17 17:36:31 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,37 +73,67 @@ void	add_test_objs_2(t_map *map)
 	t_obj			*obj;
 	t_vec3			pos;
 
-	map->ambient = create_ambient(0.0, create_color(255, 255, 255));
+	map->ambient = create_ambient(0.2, create_color(255, 255, 255));
 	obj = create_plane(create_vector(0, 0, 0), create_vector(0, 1, 0),
-			create_color(150, 150, 150), 0.4);
-	map->add_obj(map, obj);
-	pos = create_vector(-5, 6, 10);
-	obj = create_sphere(pos, 4, create_color(255, 255, 255), 1.0);
-	map->add_obj(map, obj);
-	pos = create_vector(5, 5, 5);
-	obj = create_sphere(pos, 3, create_color(255, 0, 0), 0.4);
-	map->add_obj(map, obj);
-	pos = create_vector(0, 20, -50);
-	obj = create_sphere(pos, 30, create_color(0, 255, 0), 0.0);
+			create_color(150, 150, 150), 0.3);
 	map->add_obj(map, obj);
 	
-	color_ref.color = create_color(255, 255, 255);
-	color_ref.reflection = 0.8;
-	obj = create_triangle(create_vector(-20, 0, 20), create_vector(20, 0, 20),
-			create_vector(0, 20, 20), color_ref);
+	// 3 Spheres
+	pos = create_vector(-6, 3, 8);
+	obj = create_sphere(pos, 3, create_color(255, 50, 50), 0.4);
+	map->add_obj(map, obj);
+	pos = create_vector(0, 2, 5);
+	obj = create_sphere(pos, 2, create_color(50, 255, 50), 0.5);
+	map->add_obj(map, obj);
+	pos = create_vector(6, 2.5, 6);
+	obj = create_sphere(pos, 2.5, create_color(50, 50, 255), 0.6);
 	map->add_obj(map, obj);
 	
-	map->add_light(map, create_light(create_vector(10, 20, -10), 0.6,
+	// 1 Box
+	color_ref.color = create_color(255, 200, 50);
+	color_ref.reflection = 0.4;
+	obj = create_box(create_vector(2, 4, -2), create_vector(0, 1, 1),
+			create_vector(3, 4, 3), color_ref);
+	map->add_obj(map, obj);
+	
+	// Pyramid (6 triangles) - upside down with bigger base
+	color_ref.color = create_color(200, 100, 255);
+	color_ref.reflection = 0.3;
+	pos = create_vector(8, 5, -3);
+	// Base (now at top, bigger)
+	obj = create_triangle(vector_add(pos, create_vector(-3, 0, -3)),
+			vector_add(pos, create_vector(3, 0, -3)),
+			vector_add(pos, create_vector(3, 0, 3)), color_ref);
+	map->add_obj(map, obj);
+	obj = create_triangle(vector_add(pos, create_vector(-3, 0, -3)),
+			vector_add(pos, create_vector(3, 0, 3)),
+			vector_add(pos, create_vector(-3, 0, 3)), color_ref);
+	map->add_obj(map, obj);
+	// Sides (pointing down)
+	obj = create_triangle(vector_add(pos, create_vector(-3, 0, -3)),
+			vector_add(pos, create_vector(3, 0, -3)),
+			vector_add(pos, create_vector(0, -5, 0)), color_ref);
+	map->add_obj(map, obj);
+	obj = create_triangle(vector_add(pos, create_vector(3, 0, -3)),
+			vector_add(pos, create_vector(3, 0, 3)),
+			vector_add(pos, create_vector(0, -5, 0)), color_ref);
+	map->add_obj(map, obj);
+	obj = create_triangle(vector_add(pos, create_vector(3, 0, 3)),
+			vector_add(pos, create_vector(-3, 0, 3)),
+			vector_add(pos, create_vector(0, -5, 0)), color_ref);
+	map->add_obj(map, obj);
+	obj = create_triangle(vector_add(pos, create_vector(-3, 0, 3)),
+			vector_add(pos, create_vector(-3, 0, -3)),
+			vector_add(pos, create_vector(0, -5, 0)), color_ref);
+	map->add_obj(map, obj);
+	
+	map->add_light(map, create_light(create_vector(10, 15, 0), 0.7,
 				create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(-15, 10, 5), 0.2,
-				create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(-35, -5, 5), 0.5,
-				create_color(255, 255, 255)));
-	map->add_light(map, create_light(create_vector(0, 20, 35), 0.8,
+	map->add_light(map, create_light(create_vector(-10, 10, 5), 0.4,
 				create_color(255, 255, 255)));
 	
-	pos = create_vector(0, 5, -15);
-	camera = create_camera(pos, create_vector(0, 0, 1), 70.0, map);
+	pos = create_vector(12, 8, 18);
+	camera = create_camera(pos, create_vector(-0.5, 0, -1), 70.0, map);
 	map->camera = camera;
 }
 
@@ -189,9 +219,9 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
-	add_test_box(map);
-	// add_test_objs_2(map);
-	parse_scene(argv[1], map);
+	// add_test_box(map);
+	add_test_objs_2(map);
+	// parse_scene(argv[1], map);
 	// add_test_box(map);
 	printf("finish parsing\n");
 	if (map->generate_bvh(map) == NO)

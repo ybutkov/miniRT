@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/11 23:15:00 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:19:08 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 static void	free_map(t_map *map)
 {
-	free(map->points);
 	free(map);
 }
 
@@ -80,20 +79,12 @@ t_map	*create_map(size_t width, size_t height)
 	map->width = width;
 	map->height = height;
 	map->objects = NULL;
-	map->points = (t_point *)malloc(sizeof(t_point) * width * height);
-	if (!map->points)
-		return (free(map), NULL);
 	map->projection = PROJ_ISO;
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
 	map->is_change = 1;
 	map->free = free_map;
 	map->reset = reset_map_transformations;
-	map->get_point = get_point;
-	map->set_point = set_point;
-	map->transform_point = transform_point;
-	map->set_rotation = set_rotation;
-	map->rotate = rotate_map;
 	map->shift = shift;
 	map->zoom_in = zoom_in;
 	map->add_light = add_new_light;

@@ -60,7 +60,6 @@ C_SHELL_FILES += \
 		app_op/app_basic.c \
 		map_op/map_core.c \
 		map_op/map_core_2.c \
-		map_op/map_transform.c \
 		map_op/map_basic.c \
 		draw_func/put_pixel.c \
 		draw_func/draw_axes.c \
@@ -184,6 +183,9 @@ v: re
 	valgrind --leak-check=full  --show-leak-kinds=all --track-fds=yes \
 		--suppressions=tools/sub.sub  ./miniRT
 # 		--track-origins=yes --trace-children=yes --suppressions=tools/sub.sub  ./minishell
+
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
+  --error-exitcode=1 ./program
 
 #valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all -s ./minishell
 

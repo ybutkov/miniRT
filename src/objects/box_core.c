@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 16:00:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/17 17:14:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ static void	calculate_corners(t_box *b, t_vec3 corners[8])
 	corners[0] = vector_add(b->center,
 			vector_add(vector_add(b_0mx[0][0], b_0mx[0][1]), b_0mx[0][2]));
 	corners[1] = vector_add(b->center,
-			vector_add(vector_sub(b_0mx[1][0], b_0mx[0][1]), b_0mx[0][2]));
+			vector_add(vector_add(b_0mx[1][0], b_0mx[0][1]), b_0mx[0][2]));
 	corners[2] = vector_add(b->center,
 			vector_add(vector_add(b_0mx[0][0], b_0mx[1][1]), b_0mx[0][2]));
 	corners[3] = vector_add(b->center,
-			vector_add(vector_sub(b_0mx[1][0], b_0mx[1][1]), b_0mx[0][2]));
+			vector_add(vector_add(b_0mx[1][0], b_0mx[1][1]), b_0mx[0][2]));
 	corners[4] = vector_add(b->center,
 			vector_add(vector_add(b_0mx[0][0], b_0mx[0][1]), b_0mx[1][2]));
 	corners[5] = vector_add(b->center,
-			vector_add(vector_sub(b_0mx[1][0], b_0mx[0][1]), b_0mx[1][2]));
+			vector_add(vector_add(b_0mx[1][0], b_0mx[0][1]), b_0mx[1][2]));
 	corners[6] = vector_add(b->center,
 			vector_add(vector_add(b_0mx[0][0], b_0mx[1][1]), b_0mx[1][2]));
 	corners[7] = vector_add(b->center,
-			vector_sub(vector_sub(b_0mx[1][0], b_0mx[1][1]), b_0mx[1][2]));
+			vector_add(vector_add(b_0mx[1][0], b_0mx[1][1]), b_0mx[1][2]));
 }
 
 t_aabb	box_get_aabb(t_obj *this)

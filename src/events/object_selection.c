@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:22:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:32:05 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:26:24 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "rays.h"
 #include "vectors.h"
 #include "constants.h"
+#include "point.h"
 #include <math.h>
 
 t_obj	*select_object_at_screen_pos(t_app *app, int screen_x, int screen_y)
@@ -23,12 +24,11 @@ t_obj	*select_object_at_screen_pos(t_app *app, int screen_x, int screen_y)
 	t_obj	*closest_obj;
 	double	t;
 	double	min_t;
-	double	x_ratio;
-	double	y_ratio;
+	t_ratio	ratio;
 
-	x_ratio = (double)screen_x / (double)app->width;
-	y_ratio = (double)screen_y / (double)app->height;
-	ray = get_ray(app->map->camera, x_ratio, y_ratio);
+	ratio.x = (double)screen_x / (double)app->width;
+	ratio.y = (double)screen_y / (double)app->height;
+	ray = get_ray(app->map->camera, ratio.x, ratio.y);
 	closest_obj = NULL;
 	min_t = INFINITY;
 	obj = app->map->objects;
