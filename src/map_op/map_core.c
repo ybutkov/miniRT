@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:19:08 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:36:06 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_map	*create_map(size_t width, size_t height)
 	map->width = width;
 	map->height = height;
 	map->objects = NULL;
-	map->projection = PROJ_ISO;
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
 	map->is_change = 1;

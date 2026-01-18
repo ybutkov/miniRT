@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:18:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:36:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include "objects.h"
 # include "bvh.h"
 # include <stddef.h>
-
-typedef enum e_projection
-{
-	PROJ_ISO,
-	PROJ_PARALLEL
-}					t_projection;
 
 typedef struct s_map
 {
@@ -46,7 +40,6 @@ typedef struct s_map
 	int				shift_size;
 	int				zoom_size;
 	int				is_change;
-	t_projection	projection;
 
 	void			(*free)(struct s_map *map);
 	void			(*reset)(struct s_map *map);
