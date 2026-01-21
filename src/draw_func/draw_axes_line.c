@@ -6,24 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:03:43 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:04:12 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:27:14 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw_internal.h"
 #include "miniRT.h"
 #include "vectors.h"
-
-typedef struct s_line_algo
-{
-	int		x0;
-	int		y0;
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-}			t_line_algo;
 
 static void	init_algo(t_line_draw *line, t_line_algo *algo)
 {

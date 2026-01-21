@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:03:57 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:04:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:27:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,16 @@ typedef struct s_coord_info
 	int		y;
 	int		decimals;
 }			t_coord_info;
+
+typedef struct s_line_algo
+{
+	int		x0;
+	int		y0;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+}			t_line_algo;
 
 #endif
