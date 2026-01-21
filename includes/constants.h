@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/13 22:16:47 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 19:49:13 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@
 # define DEGREE_TO_RAD (2.0 * M_PI / 360.0)
 # define ROTATE_CAMERA_STEP 2
 # define MOVE_CAMERA_STEP 1
+
+# define AXIS_LENGTH 40
+# define AXIS_OFFSET_X 80
+# define AXIS_OFFSET_Y 80
 
 #endif

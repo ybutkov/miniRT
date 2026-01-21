@@ -62,7 +62,10 @@ C_SHELL_FILES += \
 		map_op/map_core_2.c \
 		map_op/map_basic.c \
 		draw_func/put_pixel.c \
+		draw_func/draw_axes_line.c \
 		draw_func/draw_axes.c \
+		draw_func/draw_axes_labels.c \
+		draw_func/draw_axes_info.c \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \
