@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/09 18:57:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 19:09:13 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ int								ft_split_len(char **split);
 
 // draw
 void							ft_mlx_pixel_put(t_img *img, int x, int y,
-									int color);
-t_app							*create_app(t_map *map);
-
-void							parse_error_exit(t_parse_error err,
+								int color);
+void							ft_mlx_pixel_put_safe(t_img *img, int x, int y,
+								int color);
+t_app							*create_app(t_map *map);void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
 
 void							parse_file(int fd, t_map *map);

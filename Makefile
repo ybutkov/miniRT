@@ -88,6 +88,10 @@ C_SHELL_FILES += \
 
 C_SHELL_FILES += \
 		bvh/bvh_core.c \
+		bvh/bvh_generate_1.c \
+		bvh/bvh_generate_2.c \
+		bvh/bvh_generate_3.c \
+		bvh/bvh_generate_4.c \
 		bvh/bvh_node_core.c
 
 C_SHELL_FILES += \

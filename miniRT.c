@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/17 17:36:31 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 15:15:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,8 +220,8 @@ int	main(int argc, char const *argv[])
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
 	// add_test_box(map);
-	add_test_objs_2(map);
-	// parse_scene(argv[1], map);
+	// add_test_objs_2(map);
+	parse_scene(argv[1], map);
 	// add_test_box(map);
 	printf("finish parsing\n");
 	if (map->generate_bvh(map) == NO)
