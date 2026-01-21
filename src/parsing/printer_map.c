@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 18:22:08 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 13:59:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:35:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// for delete
 void	print_map(t_map *map)
 {
 	int		index;

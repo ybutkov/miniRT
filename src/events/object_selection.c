@@ -6,15 +6,15 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:22:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:26:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:37:59 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "constants.h"
 #include "miniRT.h"
+#include "point.h"
 #include "rays.h"
 #include "vectors.h"
-#include "constants.h"
-#include "point.h"
 #include <math.h>
 
 t_obj	*select_object_at_screen_pos(t_app *app, int screen_x, int screen_y)
@@ -58,8 +58,7 @@ void	move_selected_object(t_app *app, int delta_x, int delta_y)
 	obj = app->selected_obj;
 	right = app->map->camera->right;
 	up = app->map->camera->up;
-	movement = vector_add(
-			vector_mult(right, (double)delta_x * 0.05),
+	movement = vector_add(vector_mult(right, (double)delta_x * 0.05),
 			vector_mult(up, (double)(-delta_y) * 0.05));
 	if (obj->data)
 	{

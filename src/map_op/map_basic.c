@@ -25,13 +25,3 @@ void	zoom_in(t_map *map, int delta)
 	map->camera->fov = map->camera->fov + delta;
 	update_camera(map->camera);
 }
-
-double	normalize_angle(double angle)
-{
-	angle = fmod(angle, 2 * M_PI);
-	if (angle > M_PI)
-		angle -= 2 * M_PI;
-	else if (angle < -M_PI)
-		angle += 2 * M_PI;
-	return (angle);
-}

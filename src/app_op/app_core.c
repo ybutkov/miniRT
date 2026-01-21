@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 21:24:59 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:31:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:53:11 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,10 @@ static void	render_map(t_app *app)
 
 static void	clear_image(t_img *img)
 {
-	int	bytes_per_pixel;
 	int	image_size;
-	int	i;
 
-	bytes_per_pixel = img->bits_per_pixel / 8;
 	image_size = img->line_length * WINDOW_HEIGHT;
-	i = 0;
-	// Do we need this ???
-	while (i < image_size)
-	{
-		img->addr[i] = 0;
-		img->addr[i + 1] = 0;
-		img->addr[i + 2] = 0;
-		if (bytes_per_pixel == 4)
-			img->addr[i + 3] = 0;
-		i += bytes_per_pixel;
-	}
+	ft_memset(img->addr, 0, image_size);
 }
 
 static void	free_app(t_app *app)

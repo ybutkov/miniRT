@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:21:58 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:36:47 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "mouse.h"
 #include <math.h>
 
+// Try to select an object at this position 
+// at app->selected_obj = select_object_at_screen_pos(app, x, y)
 int	ft_mouse_press(int button, int x, int y, t_app *app)
 {
 	app->mouse.x = x;
@@ -22,7 +24,6 @@ int	ft_mouse_press(int button, int x, int y, t_app *app)
 	app->mouse.click_y = y;
 	if (button == MOUSE_LEFT_BUTTON)
 	{
-		// Try to select an object at this position
 		app->selected_obj = select_object_at_screen_pos(app, x, y);
 		app->mouse.left_button = 1;
 	}
@@ -54,6 +55,7 @@ int	ft_mouse_release(int button, int x, int y, t_app *app)
 	return (0);
 }
 
+// Moving obj. Fix it
 int	ft_mouse_move(int x, int y, t_app *app)
 {
 	t_mouse_state	*mouse;

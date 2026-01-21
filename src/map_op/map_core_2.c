@@ -6,19 +6,18 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:58:17 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:18:00 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:34:30 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
 #include "map_internal.h"
+#include "miniRT.h"
 #include <math.h>
 
 static void	init_map_transformations(t_map *map)
 {
 	(void)map;
 }
-
 
 void	reset_map_transformations(t_map *map)
 {
