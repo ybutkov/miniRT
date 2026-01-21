@@ -1,6 +1,22 @@
+# macOS
 .DS*
-.vscode
+# VS Code workspace settings
+.vscode/
+# macOS debug bundles
 *.dSYM/
-*/build/*
-c_formatter_42/
-miniRT_formatted.c
+
+# Build output (root and any nested build/ dirs)
+build/
+**/build/
+
+# Object and archive files
+*.o
+*.a
+*.so
+
+# Binary
+miniRT
+
+# Third-party libs / local deps
+MinilibX/
+libft/libft.a

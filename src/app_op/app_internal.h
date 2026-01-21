@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   app_internal.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/01 21:25:15 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/05 21:49:17 by skomyshe         ###   ########.fr       */
+/*   Created: 2026/01/14 00:18:45 by ybutkov           #+#    #+#             */
+/*   Updated: 2026/01/14 00:18:47 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # endif
 
 void	draw_map(t_app *app);
+void	draw_axes(t_app *app);
+void	draw_axes_labels(t_app *app);
 void	ft_mlx_destroy_display(void *mlx);
 
 #endif

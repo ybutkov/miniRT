@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:28:49 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:33:16 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:30:55 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,26 @@ int	is_validate_cylinder(char **tokens)
 	return (OK);
 }
 
-t_object	*parse_cylinder(char **tokens)
+t_obj	*parse_cylinder(char **tokens)
 {
-	t_object	*result;
-	t_vec3		direction;
-	double		diameter;
-	double		height;
+	t_obj			*result;
+	t_vec3			direction;
+	t_vec3			pos;
+	double			diametr_height[2];
+	t_color_reflect	color_reflection;
 
 	if (is_validate_cylinder(tokens) == NO)
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	direction = parse_vec3(tokens[2]);
 	if (is_normalized(direction) == NO)
-		return (NULL);
-	diameter = ft_atof(tokens[3]);
-	height = ft_atof(tokens[4]);
-	if (diameter <= 0 || height <= 0)
-		return (NULL);
-	result = malloc(sizeof(t_object));
-	if (result == NULL)
-		return (NULL);
-	result->type = CYLINDER;
-	result->pos = parse_vec3(tokens[1]);
-	result->dir = direction;
-	result->diameter = diameter;
-	result->height = height;
-	result->color = parse_color(tokens[5]);
-	result->next = NULL;
+		return (HANDLE_ERROR_NULL);
+	diametr_height[0] = ft_atof(tokens[3]);
+	diametr_height[1] = ft_atof(tokens[4]);
+	if (diametr_height[0] <= 0 || diametr_height[1] <= 0)
+		return (HANDLE_ERROR_NULL);
+	pos = parse_vec3(tokens[1]);
+	color_reflection.color = parse_color(tokens[5]);
+	color_reflection.reflection = REFLECTION_DEFAULT;
+	result = create_cylinder(pos, direction, diametr_height, color_reflection);
 	return (result);
 }

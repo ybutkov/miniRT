@@ -6,14 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:34 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 18:03:35 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:35:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRAPPER_INTERNAL_H
 # define WRAPPER_INTERNAL_H
 
-#include "miniRT.h"
+# include "miniRT.h"
 
 void	key_up_action(t_app *app);
 void	key_down_action(t_app *app);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:03:20 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:33:21 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/09 16:14:48 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_validate_light(char **tokens)
 {
 	char	**split;
 
-	if (ft_split_len(tokens) != 4)
+	if (ft_split_len(tokens) < 3 || ft_split_len(tokens) > 4)
 		return (NO);
 	split = ft_split(tokens[1], ',');
 	if (ft_split_len(split) != 3)
@@ -27,6 +27,8 @@ int	is_validate_light(char **tokens)
 	free_split(split);
 	if (is_validate_real(tokens[2]) == NO)
 		return (NO);
+	if (ft_split_len(tokens) == 3)
+		return (OK);
 	split = ft_split(tokens[3], ',');
 	if (is_valid_color(split) == NO)
 		return (free_split(split), NO);
@@ -37,19 +39,25 @@ int	is_validate_light(char **tokens)
 t_light	*parse_light(char **tokens)
 {
 	t_light	*result;
+	t_vec3	pos;
+	double	ratio;
+	t_color	color;
 
 	if (is_validate_light(tokens) == NO)
-		return (NULL);
-	result = malloc(sizeof(t_light));
+		return (HANDLE_ERROR_NULL);
+	pos = parse_vec3(tokens[1]);
+	ratio = ft_atof(tokens[2]);
+	if (ft_split_len(tokens) == 4)
+		color = parse_color(tokens[3]);
+	else
+		color = create_color(255, 255, 255);
+	result = create_light(pos, ratio, color);
 	if (result == NULL)
-		return (NULL);
-	result->pos = parse_vec3(tokens[1]);
-	result->ratio = ft_atof(tokens[2]);
-	result->color = parse_color(tokens[3]);
+		return (HANDLE_ERROR_NULL);
 	if (result->ratio < 0.0 || result->ratio > 1.0)
 	{
 		free(result);
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	}
 	return (result);
 }

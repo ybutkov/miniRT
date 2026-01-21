@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:02:48 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 18:02:50 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:03:23 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 void	key_p_action(t_app *app)
 {
-	app->map->projection = PROJ_PARALLEL;
+	(void)app;
 }
 
 void	key_i_action(t_app *app)
 {
-	app->map->projection = PROJ_ISO;
+	(void)app;
 }
 
 void	key_esc_action(t_app *app)

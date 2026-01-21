@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:19:32 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:34:34 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/08 22:52:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ int	is_validate_plane(char **tokens)
 	return (OK);
 }
 
-t_object	*parse_plane(char **tokens)
+t_obj	*parse_plane(char **tokens)
 {
-	t_object	*result;
-	t_vec3		direction;
+	t_obj	*result;
+	t_vec3	direction;
+	t_vec3	pos;
+	t_color	color;
 
 	if (is_validate_plane(tokens) == NO)
 		return (NULL);
 	direction = parse_vec3(tokens[2]);
 	if (is_normalized(direction) == NO)
 		return (NULL);
-	result = malloc(sizeof(t_object));
+	pos = parse_vec3(tokens[1]);
+	color = parse_color(tokens[3]);
+	result = create_plane(pos, direction, color, REFLECTION_DEFAULT);
 	if (result == NULL)
-		return (NULL);
-	result->type = PLANE;
-	result->pos = parse_vec3(tokens[1]);
-	result->dir = direction;
-	result->color = parse_color(tokens[3]);
-	result->next = NULL;
+		return (HANDLE_ERROR_NULL);
 	return (result);
 }

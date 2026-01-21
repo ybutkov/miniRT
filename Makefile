@@ -58,13 +58,55 @@ C_SHELL_FILES += \
 		app_op/app_core.c \
 		app_op/app_core_2.c \
 		app_op/app_basic.c \
+		map_op/map_core.c \
+		map_op/map_core_2.c \
+		map_op/map_basic.c \
+		draw_func/put_pixel.c \
+		draw_func/draw_axes_line.c \
+		draw_func/draw_axes.c \
+		draw_func/draw_axes_labels.c \
+		draw_func/draw_axes_info.c \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \
+		events/object_selection.c \
 		events/actions_wrapper_1.c \
 		events/actions_wrapper_2.c \
 		events/actions_wrapper_3.c \
-		events/actions_wrapper_4.c 
+		events/actions_wrapper_4.c
+
+C_SHELL_FILES += \
+		objects/obj_core.c \
+		objects/camera_core.c \
+		objects/sphere_core.c \
+		objects/cylinder_core.c \
+		objects/plane_core.c \
+		objects/triangle_core.c \
+		objects/box_core.c \
+		objects/light_core.c \
+		objects/ambient_core.c \
+		objects/get_normals.c \
+		objects/get_types.c \
+		objects/get_vtables.c
+
+C_SHELL_FILES += \
+		bvh/bvh_core.c \
+		bvh/bvh_generate_1.c \
+		bvh/bvh_generate_2.c \
+		bvh/bvh_generate_3.c \
+		bvh/bvh_generate_4.c \
+		bvh/bvh_node_core.c
+
+C_SHELL_FILES += \
+		math/color/color_core.c \
+		math/color/color_func.c \
+		math/ray/ray_core.c \
+		math/ray/ray_func_1.c \
+		math/ray/ray_func_2.c \
+		math/vector/vector_core.c \
+		math/vector/vector_func_1.c \
+		math/vector/vector_func_2.c \
+		math/math_utils.c
 
 C_SHELL_FILES += \
 		parsing/parse_ambient.c \
@@ -76,7 +118,7 @@ C_SHELL_FILES += \
 		parsing/parse_triangle.c \
         parsing/parser.c \
         parsing/parser_utils.c \
-        parsing/scene.c \
+        parsing/printer_map.c \
         parsing/utils.c 
 		
 
@@ -148,6 +190,9 @@ v: re
 	valgrind --leak-check=full  --show-leak-kinds=all --track-fds=yes \
 		--suppressions=tools/sub.sub  ./miniRT
 # 		--track-origins=yes --trace-children=yes --suppressions=tools/sub.sub  ./minishell
+
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
+  --error-exitcode=1 ./program
 
 #valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all -s ./minishell
 

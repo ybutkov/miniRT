@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 16:38:04 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/18 00:36:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 # define MAP_H
 
 # include "point.h"
+# include "objects.h"
+# include "bvh.h"
 # include <stddef.h>
-
-typedef enum e_projection
-{
-	PROJ_ISO,
-	PROJ_PARALLEL
-}					t_projection;
 
 typedef struct s_map
 {
-	t_point			*points;
+//
+	t_obj			*objects;
+	t_camera		*camera;
+	t_ambient		*ambient;
+	t_light			*lights;
+	t_bvh			*bvh;
+//
 	int				width;
 	int				height;
 	double			zoom;
@@ -38,20 +40,14 @@ typedef struct s_map
 	int				shift_size;
 	int				zoom_size;
 	int				is_change;
-	t_projection	projection;
 
 	void			(*free)(struct s_map *map);
 	void			(*reset)(struct s_map *map);
-	t_point			*(*get_point)(struct s_map *map, int x, int y);
-	void			(*set_point)(struct s_map *map, int x, int y,
-			t_point point);
-	t_point_2d		(*transform_point)(struct s_map *map, int x, int y);
-	void			(*set_rotation)(struct s_map *map, double x, double y,
-			double z);
-	void			(*rotate)(struct s_map *map, double x, double y, double z);
 	void			(*shift)(struct s_map *map, int x, int y);
-	void			(*zoom_in)(struct s_map *map, int percent);
-
+	void			(*zoom_in)(struct s_map *map, int delta);
+	void			(*add_obj)(struct s_map *map, t_obj *object);
+	int				(*generate_bvh)(t_map *map);
+	void			(*add_light)(struct s_map *map, t_light *light);
 }					t_map;
 
 typedef struct s_img

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 19:13:37 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/07 23:34:41 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:30:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "objects.h"
 #include "parser.h"
 
-// Sphere sp
 int	is_validate_sphere(char **tokens)
 {
 	char	**split;
@@ -34,24 +34,23 @@ int	is_validate_sphere(char **tokens)
 	return (OK);
 }
 
-t_object	*parse_sphere(char **tokens)
+t_obj	*parse_sphere(char **tokens)
 {
-	t_object	*result;
+	t_obj	*result;
+	t_vec3	pos;
+	double	diametr;
+	t_color	color;
 
 	if (is_validate_sphere(tokens) == NO)
-		return (NULL);
-	result = malloc(sizeof(t_object));
-	if (result == NULL)
-		return (NULL);
-	result->type = SPHERE;
-	result->pos = parse_vec3(tokens[1]);
-	result->diameter = ft_atof(tokens[2]);
-	result->color = parse_color(tokens[3]);
-	if (result->diameter <= 0)
+		return (HANDLE_ERROR_NULL);
+	pos = parse_vec3(tokens[1]);
+	diametr = (double)ft_atof(tokens[2]);
+	color = parse_color(tokens[3]);
+	result = create_sphere(pos, diametr, color, REFLECTION_DEFAULT);
+	if (diametr <= 0)
 	{
 		free(result);
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	}
-	result->next = NULL;
 	return (result);
 }
