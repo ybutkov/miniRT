@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/23 15:05:39 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:49:06 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,29 @@ void	parse_file(int fd, t_map *map)
 	}
 }
 
-// t_parse_error	parse_line_new(char *line, t_map *map)
-// {
-// 	size_t		len;
-// 	char		**tokens;
-// 	t_data_rule	data_rule;
+t_parse_error	parse_line_new(char *line, t_map *map)
+{
+	size_t		len;
+	char		**tokens;
+	t_data_rule	data_rule;
 
-// 	if (line)
-// 	{
-// 		len = ft_strlen(line);
-// 		if (len > 0 && line[len - 1] == '\n')
-// 			line[len - 1] = '\0';
-// 	}
-// 	tokens = ft_split(line, ' ');
-// 	if (!tokens)
-// 		return (PARSE_MALLOC_FAIL);
-// 	if (!tokens[0])
-// 		return (free_split(tokens), PARSE_EMPTY_LINE);
-// 	data_rule = get_data_rule(tokens[0]);
-	
-// }
+	if (line)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+	}
+	tokens = ft_split(line, ' ');
+	if (!tokens)
+		return (PARSE_MALLOC_FAIL);
+	if (!tokens[0])
+		return (free_split(tokens), PARSE_EMPTY_LINE);
+	data_rule = get_data_rule(tokens[0]);
+	if (data_rule.create(data_rule, tokens, map) == NO)
+		return (free_split(tokens), PARSE_INVALID_FORMAT);
+	free_split(tokens);
+	return (PARSE_OK);
+}
 
 t_parse_error	parse_line(char *line, t_map *map)
 {

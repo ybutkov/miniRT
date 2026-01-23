@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:04:10 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:30:54 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "map.h"
 #include "objects.h"
+#include "parser.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -58,4 +59,22 @@ t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 	cam->aspect_ratio = (double)map->width / (double)map->height;
 	update_camera(cam);
 	return (cam);
+}
+
+int	create_c(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3	pos;
+	t_vec3	dir;
+	float	fov;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &pos) == NO ||
+		parser_vec3(tokens[2], &dir) == NO ||
+		get_valid_float(tokens[3], &fov) == NO)
+		return (NO);
+	map->camera = create_camera(pos, dir, fov, map);
+	if (map->camera == NULL)
+		return (NO);
+	return (OK);
 }

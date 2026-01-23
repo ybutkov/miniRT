@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:25:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/22 22:31:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:33:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ static t_data_rule	*get_data_rules(void)
 
 	if (!init)
 	{
-		data_rules[0] = (t_data_rule){"UNKHOWN", {}, 0, 0};
-		data_rules[1] = (t_data_rule){"A", {FLOAT, COLOR}, 2, 2};
-		data_rules[2] = (t_data_rule){"C", {VEC3, VEC3, INT}, 3, 3};
-		data_rules[3] = (t_data_rule){"L", {VEC3, FLOAT, COLOR}, 3, 3};
-		data_rules[4] = (t_data_rule){"sp", {VEC3, FLOAT, COLOR, FLOAT}, 4, 3};
-		data_rules[5] = (t_data_rule){"pl", {VEC3, VEC3, COLOR, FLOAT}, 4, 3};
+		data_rules[0] = (t_data_rule){"UNKHOWN", {}, 0, 0, NULL};
+		data_rules[1] = (t_data_rule){"A", {FLOAT, COLOR}, 2, 2, create_a};
+		data_rules[2] = (t_data_rule){"C", {VEC3, VEC3, INT}, 3, 3, create_c};
+		data_rules[3] = (t_data_rule){"L", {VEC3, FLOAT, COLOR}, 3, 3, NULL};
+		data_rules[4] = (t_data_rule){"sp", {VEC3, FLOAT, COLOR, FLOAT}, 4, 3,
+			NULL};
+		data_rules[5] = (t_data_rule){"pl", {VEC3, VEC3, COLOR, FLOAT}, 4, 3,
+			NULL};
 		data_rules[6] = (t_data_rule){"cy", {VEC3, VEC3, FLOAT, FLOAT, COLOR,
-			FLOAT}, 6, 5};
+			FLOAT}, 6, 5, NULL};
 		data_rules[7] = (t_data_rule){"tr", {VEC3, VEC3, VEC3, COLOR, FLOAT},
-			5, 4};
+			5, 4, NULL};
 		init = 1;
 	}
 	return (data_rules);
