@@ -119,7 +119,8 @@ C_SHELL_FILES += \
         parsing/parser.c \
         parsing/parser_utils.c \
         parsing/printer_map.c \
-        parsing/utils.c 
+        parsing/utils.c \
+		parsing/data_rules.c
 		
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))

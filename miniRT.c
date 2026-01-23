@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 15:15:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/22 23:26:01 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static t_app	*init_app(t_map *map, char *title)
 	return (app);
 }
 
+#include "parser.h"
+
 void	add_test_objs_2(t_map *map)
 {
 	t_camera		*camera;
@@ -79,8 +81,13 @@ void	add_test_objs_2(t_map *map)
 	map->add_obj(map, obj);
 	
 	// 3 Spheres
-	pos = create_vector(-6, 3, 8);
-	obj = create_sphere(pos, 3, create_color(255, 50, 50), 0.4);
+	if (parser_vec3("-6,4,8", &pos) == 0)
+		pos = create_vector(-6, 3, 8);
+	t_color color;
+	if (parser_color("-0,0,0", &color) == 1)
+		obj = create_sphere(pos, 3, color, 0.4);
+	else
+		obj = create_sphere(pos, 3, create_color(255, 50, 50), 0.4);
 	map->add_obj(map, obj);
 	pos = create_vector(0, 2, 5);
 	obj = create_sphere(pos, 2, create_color(50, 255, 50), 0.5);
@@ -220,8 +227,8 @@ int	main(int argc, char const *argv[])
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
 	// add_test_box(map);
-	// add_test_objs_2(map);
-	parse_scene(argv[1], map);
+	add_test_objs_2(map);
+	// parse_scene(argv[1], map);
 	// add_test_box(map);
 	printf("finish parsing\n");
 	if (map->generate_bvh(map) == NO)
