@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:59:22 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 23:33:36 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 23:36:24 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ double	cone_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	ococ = vector_dot_product(oc, oc);
 	dvoc = vector_dot_product(dir, oc);
 	k = cone->slope_sq;
-	double m2_plus_1 = 1.0 + k;
-	abc.x = dv * dv * m2_plus_1 - dvdv;
-	abc.y = 2.0 * (dv * ov * m2_plus_1 - dvoc);
-	abc.z = ov * ov * m2_plus_1 - ococ;
+	abc.x = dv * dv * cone->m_const - dvdv;
+	abc.y = 2.0 * (dv * ov * cone->m_const - dvoc);
+	abc.z = ov * ov * cone->m_const - ococ;
 	t[2] = -1.0;
 	if (solve_quadratic(abc, &t[0], &t[1]) == OK)
 	{
