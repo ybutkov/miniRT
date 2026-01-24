@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/17 17:14:42 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:49:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
 #include "objects.h"
+#include "parser.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -137,4 +138,27 @@ t_obj	*create_box(t_vec3 center, t_vec3 orientation, t_vec3 size,
 	box->axis[1] = vector_cross(box->axis[2], box->axis[0]);
 	obj->data = box;
 	return (obj);
+}
+
+int	create_b(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3			center;
+	t_vec3			orientation;
+	t_vec3			size;
+	t_color_reflect	color_reflection;
+	t_obj			*box;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &center) == NO ||
+		parser_vec3(tokens[2], &orientation) == NO ||
+		parser_vec3(tokens[3], &size) == NO ||
+		parser_color(tokens[4], &color_reflection.color) == NO ||
+		get_valid_float(tokens[5], (float *)&color_reflection.reflection) == NO)
+		return (NO);
+	box = create_box(center, orientation, size, color_reflection);
+	if (box == NULL)
+		return (NO);
+	map->add_obj(map, box);
+	return (OK);
 }

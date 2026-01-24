@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/23 17:31:47 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:42:11 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,12 @@ void	add_test_objs_2(t_map *map)
 			vector_add(pos, create_vector(0, -5, 0)), color_ref);
 	map->add_obj(map, obj);
 	
-	map->add_light(map, create_light(create_vector(10, 15, 0), 0.7,
-				create_color(255, 255, 255)));
+	// map->add_light(map, create_light(create_vector(10, 15, 0), 0.7,
+	// 			create_color(255, 255, 255)));
 	map->add_light(map, create_light(create_vector(-10, 10, 5), 0.4,
 				create_color(255, 255, 255)));
-	
+	create_l(get_data_rule("L"), ft_split("L 10,15,0 0.7 0,0,255", ' '), map);
+
 	create_c(get_data_rule("C"), ft_split("C 2,8,18 -0.5,0,-1 70.0", ' '), map);
 	// pos = create_vector(12, 8, 18);
 	// camera = create_camera(pos, create_vector(-0.5, 0, -1), 70.0, map);

@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 21:33:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:00:49 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
 #include "vectors.h"
+#include "parser.h"
 #include <stdlib.h>
 
 double	sphere_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
@@ -65,4 +66,26 @@ t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color,
 	sphere->radius_sq = diametr * diametr / 4.0;
 	obj->data = sphere;
 	return (obj);
+}
+
+int	create_sp(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3			pos;
+	float			diametr;
+	t_color_reflect	color_reflection;
+	t_obj			*sphere;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &pos) == NO ||
+		get_valid_float(tokens[2], &diametr) == NO ||
+		parser_color(tokens[3], &color_reflection.color) == NO ||
+		get_valid_float(tokens[4], (float *)&color_reflection.reflection) == NO)
+		return (NO);
+	sphere = create_sphere(pos, diametr, color_reflection.color,
+			color_reflection.reflection);
+	if (sphere == NULL)
+		return (NO);
+	map->add_obj(map, sphere);
+	return (OK);
 }

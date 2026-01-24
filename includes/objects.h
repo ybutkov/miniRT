@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/23 17:29:17 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:05:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,25 @@ t_obj						*create_obj(t_color color, double reflection,
 								double brightness);
 t_obj						*create_plane(t_vec3 point, t_vec3 normal,
 								t_color color, double reflection);
+int							create_pl(t_data_rule rule, char **tokens,
+								t_map *map);
 t_obj						*create_sphere(t_vec3 pos, double diametr,
 								t_color color, double reflection);
+int							create_sp(t_data_rule rule, char **tokens,
+								t_map *map);
 t_obj						*create_cylinder(t_vec3 pos, t_vec3 normal,
 								double diametr_height[2],
 								t_color_reflect color_reflection);
+int							create_cy(t_data_rule rule, char **tokens,
+								t_map *map);
 t_obj						*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 								t_color_reflect color_reflection);
+int							create_tr(t_data_rule rule, char **tokens,
+								t_map *map);
 t_obj						*create_box(t_vec3 center, t_vec3 orientation,
 								t_vec3 size, t_color_reflect color_reflection);
+int							create_b(t_data_rule rule, char **tokens,
+								t_map *map);
 
 t_camera					*create_camera(t_vec3 pos, t_vec3 dir, double fov,
 								t_map *map);
@@ -149,6 +159,8 @@ void						rotate_camera(t_camera *cam, t_vec3 dir,
 int							solve_quadratic(t_vec3 abc, double *t1, double *t2);
 t_light						*create_light(t_vec3 pos, double ratio,
 								t_color color);
+int							create_l(t_data_rule rule, char **tokens,
+								t_map *map);
 t_ambient					*create_ambient(double ratio, t_color color);
 int							create_a(t_data_rule rule, char **tokens,
 								t_map *map);

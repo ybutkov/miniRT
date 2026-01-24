@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/23 17:20:08 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:37:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "constants.h"
+# include "objects.h"
 # include "miniRT.h"
 
 # define MAX_AMOUNT_DATA_TYPE 10

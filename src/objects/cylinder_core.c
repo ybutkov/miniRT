@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 21:25:04 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 17:55:33 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
+#include "parser.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -128,4 +129,28 @@ t_obj	*create_cylinder(t_vec3 pos, t_vec3 normal, double diametr_height[2],
 	cylinder->radius_sq = diametr_height[0] * diametr_height[0] / 4.0;
 	obj->data = cylinder;
 	return (obj);
+}
+
+int	create_cy(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3			pos;
+	t_vec3			normal;
+	double			diametr_height[2];
+	t_color_reflect	color_reflection;
+	t_obj			*cylinder;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &pos) == NO ||
+		parser_vec3(tokens[2], &normal) == NO ||
+		get_valid_float(tokens[3], (float *)&diametr_height[0]) == NO ||
+		get_valid_float(tokens[4], (float *)&diametr_height[1]) == NO ||
+		parser_color(tokens[5], &color_reflection.color) == NO ||
+		get_valid_float(tokens[6], (float *)&color_reflection.reflection) == NO)
+		return (NO);
+	cylinder = create_cylinder(pos, normal, diametr_height, color_reflection);
+	if (cylinder == NULL)
+		return (NO);
+	map->add_obj(map, cylinder);
+	return (OK);
 }
