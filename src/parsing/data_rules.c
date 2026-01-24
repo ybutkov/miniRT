@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:25:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 19:56:17 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 20:55:16 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	create_mock(t_data_rule rule, char **tokens, t_map *map)
 
 static t_data_rule	*get_data_rules(void)
 {
-	static t_data_rule	data_rules[AMOUNT_DATA_TYPE + 1];
+	static t_data_rule	data_rules[AMOUNT_DATA_RULE + 2];
 	static int			init;
 
 	if (!init)
@@ -44,6 +44,8 @@ static t_data_rule	*get_data_rules(void)
 			4, create_tr};
 		data_rules[9] = (t_data_rule){"box", {VEC3, VEC3, VEC3, COLOR, FLOAT},
 			5, 4, create_b};
+		data_rules[10] = (t_data_rule){"co", {VEC3, VEC3, FLOAT, FLOAT, COLOR, FLOAT},
+			6, 5, create_co};
 		init = 1;
 	}
 	return (data_rules);
@@ -54,7 +56,7 @@ t_data_rule	get_data_rule(char *obj_type)
 	int	i;
 
 	i = 1;
-	while (i < AMOUNT_DATA_TYPE)
+	while (i < AMOUNT_DATA_RULE + 2)
 	{
 		if (ft_strcmp(obj_type, get_data_rules()[i].data_type) == 0)
 			return (get_data_rules()[i]);

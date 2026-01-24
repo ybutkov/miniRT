@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:05:53 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 21:16:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_obj_type
 	PLANE,
 	CYLINDER,
 	TRIANGLE,
-	BOX
+	BOX,
+	CONE
 }							t_obj_type;
 
 typedef struct s_aabb
@@ -111,6 +112,17 @@ typedef struct s_plane
 	t_color					color;
 }							t_plane;
 
+typedef struct s_cone
+{
+	t_vec3					center;
+	t_vec3					axis;
+	double					radius;
+	double					height;
+	double					slope;
+	double					slope_sq;
+	double					m_const;
+}							t_cone;
+
 // dir, right, up (w,u,v)
 typedef struct s_camera
 {
@@ -147,6 +159,8 @@ int							create_tr(t_data_rule rule, char **tokens,
 t_obj						*create_box(t_vec3 center, t_vec3 orientation,
 								t_vec3 size, t_color_reflect color_reflection);
 int							create_b(t_data_rule rule, char **tokens,
+								t_map *map);
+int							create_co(t_data_rule rule, char **tokens,
 								t_map *map);
 
 t_camera					*create_camera(t_vec3 pos, t_vec3 dir, double fov,

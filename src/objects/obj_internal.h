@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:41:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 21:52:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 22:21:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ t_vtable	*get_triangle_methods(void);
 t_obj_type	triangle_get_type(void);
 t_aabb		triangle_get_aabb(t_obj *this);
 double		triangle_intersect(t_obj *this, t_vec3 origin, t_vec3 dir);
+
+// CONE
+t_vtable	*get_cone_methods(void);
 
 #endif
