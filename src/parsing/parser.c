@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 19:01:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:44:41 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ void	parse_error_exit(t_parse_error err, int line_num, char *line)
 	exit(EXIT_FAILURE);
 }
 
+t_parse_error	parse_line_new(char *line, t_map *map)
+{
+	size_t		len;
+	char		**tokens;
+	t_data_rule	data_rule;
+
+	if (line)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+	}
+	tokens = ft_split(line, ' ');
+	if (!tokens)
+		return (PARSE_MALLOC_FAIL);
+	if (!tokens[0])
+		return (free_split(tokens), PARSE_EMPTY_LINE);
+	data_rule = get_data_rule(tokens[0]);
+	if (data_rule.create(data_rule, tokens, map) == NO)
+		return (free_split(tokens), PARSE_INVALID_FORMAT);
+	free_split(tokens);
+	return (PARSE_OK);
+}
+
 void	parse_file(int fd, t_map *map)
 {
 	char			*line;
@@ -54,8 +78,7 @@ void	parse_file(int fd, t_map *map)
 	while ((line = get_next_line(fd)))
 	{
 		line_num++;
-		err = parse_line(line, map);
-		// printf("%d\n", err);
+		err = parse_line_new(line, map);
 		if (!(err == PARSE_OK || err == PARSE_EMPTY_LINE))
 		{
 			free(line);
@@ -64,84 +87,6 @@ void	parse_file(int fd, t_map *map)
 		}
 		free(line);
 	}
-}
-
-t_parse_error	parse_line(char *line, t_map *map)
-{
-	char		**tokens;
-	t_ambient	*ambient;
-	t_camera	*camera;
-	t_light		*light;
-	t_obj		*obj;
-	size_t		len;
-
-	if (line)
-	{
-		len = strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-	}
-	tokens = ft_split(line, ' ');
-	if (!tokens)
-		return (PARSE_MALLOC_FAIL);
-	if (!tokens[0])
-		return (free_split(tokens), PARSE_EMPTY_LINE);
-	if (!ft_strncmp(tokens[0], "A", 2))
-	{
-		ambient = parse_ambient(tokens);
-		if (ambient == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->ambient = ambient;
-	}
-	else if (!ft_strncmp(tokens[0], "C", 2))
-	{
-		camera = parse_camera(tokens, map);
-		if (camera == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->camera = camera;
-	}
-	else if (!ft_strncmp(tokens[0], "L", 2))
-	{
-		light = parse_light(tokens);
-		if (light == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_light(map, light);
-	}
-	else if (!ft_strncmp(tokens[0], "sp", 3))
-	{
-		obj = parse_sphere(tokens);
-		if (obj == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_obj(map, obj);
-	}
-	else if (!ft_strncmp(tokens[0], "pl", 3))
-	{
-		obj = parse_plane(tokens);
-		if (obj == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_obj(map, obj);	}
-	else if (!ft_strncmp(tokens[0], "cy", 3))
-	{
-		obj = parse_cylinder(tokens);
-		if (obj == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_obj(map, obj);	}
-	else if (!ft_strncmp(tokens[0], "tr", 3))
-	{
-		obj = parse_triangle(tokens);
-		if (obj == NULL)
-			return (free_split(tokens), PARSE_INVALID_FORMAT);
-		map->add_obj(map, obj);	
-	}
-	else if (!ft_strncmp(tokens[0], "#", 2))
-	{}
-	else
-	{
-		free_split(tokens);
-		return (PARSE_UNKNOWN_ID);
-	}
-	free_split(tokens);
-	return (PARSE_OK);
 }
 
 void	parse_scene(const char *filename, t_map *map)

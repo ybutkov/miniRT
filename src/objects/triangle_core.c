@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:06:23 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:37:10 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
+#include "parser.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -91,4 +92,34 @@ t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 	triangle->normal = normal;
 	obj->data = triangle;
 	return (obj);
+}
+
+int	create_tr(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3			p_1;
+	t_vec3			p_2;
+	t_vec3			p_3;
+	t_color_reflect	color_reflection;
+	t_obj			*triangle;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &p_1) == NO ||
+		parser_vec3(tokens[2], &p_2) == NO ||
+		parser_vec3(tokens[3], &p_3) == NO ||
+		parser_color(tokens[4], &color_reflection.color) == NO)
+		return (NO);
+	if (tokens[5])
+	{
+		if (get_valid_float(tokens[5],
+				(float *)&color_reflection.reflection) == NO)
+			return (NO);
+	}
+	else
+		color_reflection.reflection = DEFAULT_REFLECTION;
+	triangle = create_triangle(p_1, p_2, p_3, color_reflection);
+	if (triangle == NULL)
+		return (NO);
+	map->add_obj(map, triangle);
+	return (OK);
 }

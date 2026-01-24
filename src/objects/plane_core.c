@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:04:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:37:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
+#include "parser.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -61,4 +62,33 @@ t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
 	plane->normal = normal;
 	obj->data = plane;
 	return (obj);
+}
+
+int	create_pl(t_data_rule rule, char **tokens, t_map *map)
+{
+	t_vec3			point;
+	t_vec3			normal;
+	t_color_reflect	color_reflection;
+	t_obj			*plane;
+
+	(void)rule;
+	// check amount of tokens
+	if (parser_vec3(tokens[1], &point) == NO ||
+		parser_vec3(tokens[2], &normal) == NO ||
+		parser_color(tokens[3], &color_reflection.color) == NO)
+		return (NO);
+	if (tokens[4])
+	{
+		if (get_valid_float(tokens[4],
+				(float *)&color_reflection.reflection) == NO)
+			return (NO);
+	}
+	else
+		color_reflection.reflection = DEFAULT_REFLECTION;
+	plane = create_plane(point, normal, color_reflection.color,
+			color_reflection.reflection);
+	if (plane == NULL)
+		return (NO);
+	map->add_obj(map, plane);
+	return (OK);
 }

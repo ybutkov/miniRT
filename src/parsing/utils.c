@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/09 13:57:10 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/22 22:50:08 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,27 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+
+int	get_valid_color_part(const char *s)
+{
+	int	i;
+	int	n;
+
+	if (!s || s[0] == '\0')
+		return (-1);
+	i = 0;
+	n = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (-1);
+		n = n * 10 + (s[i] - '0');
+		if (n > 255)
+			return (-1);
+		i++;
+	}
+	return (n);
+}
 
 void	error_exit(const char *msg, t_map *map)
 {
