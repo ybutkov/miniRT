@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 17:55:33 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:36:52 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,16 @@ int	create_cy(t_data_rule rule, char **tokens, t_map *map)
 		parser_vec3(tokens[2], &normal) == NO ||
 		get_valid_float(tokens[3], (float *)&diametr_height[0]) == NO ||
 		get_valid_float(tokens[4], (float *)&diametr_height[1]) == NO ||
-		parser_color(tokens[5], &color_reflection.color) == NO ||
-		get_valid_float(tokens[6], (float *)&color_reflection.reflection) == NO)
+		parser_color(tokens[5], &color_reflection.color) == NO)
 		return (NO);
+	if (tokens[6])
+	{
+		if (get_valid_float(tokens[6],
+				(float *)&color_reflection.reflection) == NO)
+			return (NO);
+	}
+	else
+		color_reflection.reflection = DEFAULT_REFLECTION;
 	cylinder = create_cylinder(pos, normal, diametr_height, color_reflection);
 	if (cylinder == NULL)
 		return (NO);

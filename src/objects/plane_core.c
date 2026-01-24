@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:07:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:37:00 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,16 @@ int	create_pl(t_data_rule rule, char **tokens, t_map *map)
 	// check amount of tokens
 	if (parser_vec3(tokens[1], &point) == NO ||
 		parser_vec3(tokens[2], &normal) == NO ||
-		parser_color(tokens[3], &color_reflection.color) == NO ||
-		get_valid_float(tokens[4], (float *)&color_reflection.reflection) == NO)
+		parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
+	if (tokens[4])
+	{
+		if (get_valid_float(tokens[4],
+				(float *)&color_reflection.reflection) == NO)
+			return (NO);
+	}
+	else
+		color_reflection.reflection = DEFAULT_REFLECTION;
 	plane = create_plane(point, normal, color_reflection.color,
 			color_reflection.reflection);
 	if (plane == NULL)

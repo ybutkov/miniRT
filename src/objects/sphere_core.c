@@ -6,14 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:00:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:37:06 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "obj_internal.h"
-#include "vectors.h"
 #include "parser.h"
+#include "vectors.h"
 #include <stdlib.h>
 
 double	sphere_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
@@ -79,9 +79,16 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 	// check amount of tokens
 	if (parser_vec3(tokens[1], &pos) == NO ||
 		get_valid_float(tokens[2], &diametr) == NO ||
-		parser_color(tokens[3], &color_reflection.color) == NO ||
-		get_valid_float(tokens[4], (float *)&color_reflection.reflection) == NO)
+		parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
+	if (tokens[4])
+	{
+		if (get_valid_float(tokens[4],
+				(float *)&color_reflection.reflection) == NO)
+			return (NO);
+	}
+	else
+		color_reflection.reflection = DEFAULT_REFLECTION;
 	sphere = create_sphere(pos, diametr, color_reflection.color,
 			color_reflection.reflection);
 	if (sphere == NULL)

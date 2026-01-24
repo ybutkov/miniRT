@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/22 23:26:25 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:46:43 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vec3	parse_vec3(char *str)
 	free_split(split);
 	return (v);
 }
-
+// ************************************************************************/
 int	get_valid_float(const char *str, float *res)
 {
 	if (is_validate_real(str) == NO)
@@ -59,18 +59,6 @@ int	parser_vec3(char *str, t_vec3 *vector)
 	return (OK);
 }
 
-// Parse a string like "255,0,0" into t_color
-t_color	parse_color(char *str)
-{
-	char	**split;
-	t_color	c;
-
-	split = ft_split(str, ',');
-	c = create_color(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
-	free_split(split);
-	return (c);
-}
-
 int	parser_color(char *str, t_color *color)
 {
 	char	**split;
@@ -87,6 +75,18 @@ int	parser_color(char *str, t_color *color)
 	*color = create_color(rgb[0], rgb[1], rgb[2]);
 	free_split(split);
 	return (1);
+}
+// ************************************************************************/
+// Parse a string like "255,0,0" into t_color
+t_color	parse_color(char *str)
+{
+	char	**split;
+	t_color	c;
+
+	split = ft_split(str, ',');
+	c = create_color(ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2]));
+	free_split(split);
+	return (c);
 }
 
 // Check if a vector is normalized (length ~ 1)

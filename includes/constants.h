@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 19:49:13 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:47:17 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ERROR_MSG_ARGS "Error. There should be one argument - file name *.rt"
 
 # define DEFAULT_BRIGHTNESS 1
+# define DEFAULT_REFLECTION 0.1
 # define EPSILON 1e-4
 # define DEGREE_TO_RAD (2.0 * M_PI / 360.0)
 # define ROTATE_CAMERA_STEP 2
