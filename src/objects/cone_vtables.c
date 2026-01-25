@@ -38,6 +38,15 @@ t_vec3	cone_get_normal(t_obj *this, t_vec3 pos)
 	return (vector_norm(normal));
 }
 
+static double	get_cone_height_at_t(t_cone *cone, t_vec3 origin,
+	t_vec3 dir, double t)
+{
+	t_vec3	hit;
+
+	hit = vector_add(origin, vector_mult(dir, t));
+	return (vector_dot_product(vector_sub(hit, cone->center), cone->axis));
+}
+
 static double	check_cone_cap(t_cone *cone, t_vec3 origin, t_vec3 dir)
 {
 	t_vec3	cap_center;
@@ -68,10 +77,6 @@ double	cone_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	t_vec3	abc;
 	double	dv;
 	double	ov;
-	double	dvdv;
-	double	ococ;
-	double	dvoc;
-	double	k;
 	double	t[3];
 	double	h;
 
@@ -79,27 +84,21 @@ double	cone_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	oc = vector_sub(origin, cone->center);
 	dv = vector_dot_product(dir, cone->axis);
 	ov = vector_dot_product(oc, cone->axis);
-	dvdv = vector_dot_product(dir, dir);
-	ococ = vector_dot_product(oc, oc);
-	dvoc = vector_dot_product(dir, oc);
-	k = cone->slope_sq;
-	abc.x = dv * dv * cone->m_const - dvdv;
-	abc.y = 2.0 * (dv * ov * cone->m_const - dvoc);
-	abc.z = ov * ov * cone->m_const - ococ;
+	abc.x = dv * dv * cone->m_const - vector_dot_product(dir, dir);
+	abc.y = 2.0 * (dv * ov * cone->m_const - vector_dot_product(dir, oc));
+	abc.z = ov * ov * cone->m_const - vector_dot_product(oc, oc);
 	t[2] = -1.0;
 	if (solve_quadratic(abc, &t[0], &t[1]) == OK)
 	{
 		if (t[0] > EPSILON)
 		{
-			h = vector_dot_product(vector_sub(vector_add(origin,
-							vector_mult(dir, t[0])), cone->center), cone->axis);
+			h = get_cone_height_at_t(cone, origin, dir, t[0]);
 			if (h >= -EPSILON && h <= cone->height + EPSILON)
 				t[2] = t[0];
 		}
 		if (t[1] > EPSILON)
 		{
-			h = vector_dot_product(vector_sub(vector_add(origin,
-							vector_mult(dir, t[1])), cone->center), cone->axis);
+			h = get_cone_height_at_t(cone, origin, dir, t[1]);
 			if (h >= -EPSILON && h <= cone->height + EPSILON && (t[2] < 0
 					|| t[1] < t[2]))
 				t[2] = t[1];
