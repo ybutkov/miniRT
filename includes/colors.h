@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:34:08 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:26:51 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:15:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_color			color_mix(t_color c1, t_color c2, double intensity);
 t_color			color_mult(t_color c1, double scalar);
 t_color			color_product(t_color c1, t_color c2);
 int				color_to_int(t_color color);
-t_color			get_background_color(t_ray ray);
+t_color			get_background_color(t_ray ray, struct s_map *map);
 
 #endif
