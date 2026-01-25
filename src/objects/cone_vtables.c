@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:59:22 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 23:36:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 15:27:43 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ t_vtable	*get_cone_methods(void)
 		cone_methods.intersect = cone_intersect;
 		cone_methods.get_aabb = cone_get_aabb;
 		cone_methods.get_type = cone_get_type;
+		cone_methods.get_color = default_get_color;
 		is_init = 1;
 	}
 	return (&cone_methods);

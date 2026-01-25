@@ -87,6 +87,7 @@ C_SHELL_FILES += \
 		objects/ambient_core.c \
 		objects/cone_core.c \
 		objects/cone_vtables.c \
+		objects/texture.c \
 		objects/get_normals.c \
 		objects/get_types.c \
 		objects/get_vtables.c

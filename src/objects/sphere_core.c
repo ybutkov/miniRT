@@ -74,6 +74,7 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 	float			diametr;
 	t_color_reflect	color_reflection;
 	t_obj			*sphere;
+	float			tex_intensity;
 
 	(void)rule;
 	// check amount of tokens
@@ -93,6 +94,13 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 			color_reflection.reflection);
 	if (sphere == NULL)
 		return (NO);
+	if (tokens[5] && tokens[6])
+	{
+		if (get_valid_float(tokens[6], &tex_intensity) == NO)
+			return (NO);
+		sphere->texture = load_texture(map->mlx, tokens[5]);
+		sphere->texture_intensity = tex_intensity;
+	}
 	map->add_obj(map, sphere);
 	return (OK);
 }

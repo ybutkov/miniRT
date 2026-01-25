@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 21:16:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 00:18:02 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 # include "vectors.h"
 
 typedef struct s_data_rule	t_data_rule;
+
+typedef struct s_texture
+{
+	void					*img;
+	char					*addr;
+	int						width;
+	int						height;
+	int						bpp;
+	int						line_len;
+	int						endian;
+}							t_texture;
 
 typedef enum e_obj_type
 {
@@ -42,6 +53,7 @@ typedef t_vec3				(*t_get_normal)(t_obj *this, t_vec3 point);
 typedef double				(*t_intersect)(t_obj *this, t_vec3 pos, t_vec3 dir);
 typedef t_aabb				(*t_get_aabb)(t_obj *this);
 typedef t_obj_type			(*t_get_type)(void);
+typedef t_color				(*t_get_color)(t_obj *this, t_vec3 hit_point);
 
 typedef struct s_vtable
 {
@@ -49,6 +61,7 @@ typedef struct s_vtable
 	t_intersect				intersect;
 	t_get_aabb				get_aabb;
 	t_get_type				get_type;
+	t_get_color				get_color;
 }							t_vtable;
 
 typedef struct s_obj
@@ -57,6 +70,8 @@ typedef struct s_obj
 	t_color					color;
 	double					brightness;
 	double					reflection;
+	void					*texture;
+	double					texture_intensity;
 	void					*data;
 	struct s_obj			*next;
 }							t_obj;
@@ -171,6 +186,17 @@ void						update_camera(t_camera *cam);
 void						rotate_camera(t_camera *cam, t_vec3 dir,
 								double delta);
 int							solve_quadratic(t_vec3 abc, double *t1, double *t2);
+
+t_texture					*load_texture(void *mlx, char *path);
+void						free_texture(void *mlx, t_texture *texture);
+t_color						get_texture_color(t_texture *tex, double u,
+								double v);
+void						get_sphere_uv(t_vec3 point, t_vec3 center,
+								double *u, double *v);
+t_color						get_object_color(t_obj *obj, t_vec3 hit_point);
+t_color						sphere_get_color(t_obj *obj, t_vec3 hit_point);
+t_color						default_get_color(t_obj *obj, t_vec3 hit_point);
+
 t_light						*create_light(t_vec3 pos, double ratio,
 								t_color color);
 int							create_l(t_data_rule rule, char **tokens,

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:34:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 00:26:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_app	*init_app(t_map *map, char *title)
 	app->key_actions = init_key_actions();
 	if (!app->key_actions)
 		exit_program(map, "Error initializing key actions");
-	app->mlx = mlx_init();
+	app->mlx = map->mlx;
 	app->win = mlx_new_window(app->mlx, app->width, app->height, title);
 	app->img->img = mlx_new_image(app->mlx, app->width, app->height);
 	app->img->addr = mlx_get_data_addr(app->img->img,
@@ -226,11 +226,16 @@ int	main(int argc, char const *argv[])
 {
 	t_map *map;
 	t_app *app;
+	void *mlx;
 
 	(void)argv;
 	if (argc != 2)
 		exit_program(NULL, "Error. There should be one argument - file name *.rt");
+	mlx = mlx_init();
+	if (!mlx)
+		exit_program(NULL, "Error initializing MLX");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
+	map->mlx = mlx;
 	// add_test_box(map);
 	// add_test_objs_2(map);
 	parse_scene(argv[1], map);

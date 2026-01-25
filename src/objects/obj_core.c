@@ -24,6 +24,8 @@ t_obj	*create_obj(t_color color, double reflection, double brightness)
 	obj->brightness = brightness;
 	obj->color = color;
 	obj->reflection = reflection;
+	obj->texture = NULL;
+	obj->texture_intensity = 0.0;
 	obj->methods = NULL;
 	obj->data = NULL;
 	obj->next = NULL;
