@@ -67,12 +67,12 @@ t_color	trace_ray(t_ray ray, t_map *map, int depth)
 	double		min_t;
 
 	if (depth <= 0)
-		return (get_background_color(ray));
+		return (get_background_color(ray, map));
 	closest_obj = NULL;
 	min_t = INFINITY;
 	closest_obj = get_closest_obj_from_bvh(ray, map->bvh->root, &min_t);
 	if (!closest_obj)
-		return (get_background_color(ray));
+		return (get_background_color(ray, map));
 	hit_info.hit_point = ray_at_pos(ray, min_t);
 	hit_info.normal = closest_obj->methods->get_normal(closest_obj,
 			hit_info.hit_point);

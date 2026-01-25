@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 18:34:25 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:29:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ typedef struct s_camera
 }							t_camera;
 
 t_obj						*create_obj(t_color color, float reflection,
-							double brightness);
+								double brightness);
 t_obj						*create_plane(t_vec3 point, t_vec3 normal,
-							t_color color, float reflection);
+								t_color color, float reflection);
 int							create_pl(t_data_rule rule, char **tokens,
 								t_map *map);
 t_obj						*create_sphere(t_vec3 pos, double diametr,
@@ -206,5 +206,8 @@ int							create_a(t_data_rule rule, char **tokens,
 //
 double						plane_intersect(t_obj *this, t_vec3 origin,
 								t_vec3 dir);
+
+int							create_sky(t_data_rule rule, char **tokens,
+								t_map *map);
 
 #endif

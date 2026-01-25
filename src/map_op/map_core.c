@@ -77,6 +77,7 @@ t_map	*create_map(size_t width, size_t height)
 	map->ambient = NULL;
 	map->lights = NULL;
 	map->bvh = NULL;
+	map->background_texture = NULL;
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
 	map->is_change = 1;

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:25:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 20:55:16 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:30:18 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static t_data_rule	*get_data_rules(void)
 			5, 4, create_b};
 		data_rules[10] = (t_data_rule){"co", {VEC3, VEC3, FLOAT, FLOAT, COLOR, FLOAT},
 			6, 5, create_co};
+		data_rules[11] = (t_data_rule){"sky", {FILEPATH}, 1, 1, create_sky};
 		init = 1;
 	}
 	return (data_rules);
