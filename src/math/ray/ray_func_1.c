@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/16 16:58:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 01:08:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static t_color	add_diffuse_light(t_obj *obj, t_light *light, double dot)
+static t_color	add_diffuse_light(t_obj *obj, t_light *light, double dot,
+		t_vec3 hit_point)
 {
 	t_color	diff_color;
+	t_color	obj_color;
 
-	diff_color = color_product(obj->color, light->color);
+	obj_color = obj->methods->get_color(obj, hit_point);
+	diff_color = color_product(obj_color, light->color);
 	return (color_mult(diff_color, dot * light->ratio));
 }
 
@@ -45,7 +48,7 @@ static t_color	process_light(t_map *map, t_obj *obj, t_vec3 hit_point,
 	dot = vector_dot_product(normal, light_dir);
 	sh_hit_point = vector_add(hit_point, vector_mult(normal, 0.01));
 	if (dot > 0 && is_in_shadow(map, sh_hit_point, light->pos) == NO)
-		return (color_add(add_diffuse_light(obj, light, dot),
+		return (color_add(add_diffuse_light(obj, light, dot, hit_point),
 				add_specular(light_dir, normal, view_dir, light)));
 	return (create_color(0, 0, 0));
 }
@@ -54,8 +57,10 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 {
 	t_light	*curr;
 	t_color	final_color;
+	t_color	obj_color;
 
-	final_color = color_mult(color_product(obj->color, map->ambient->color),
+	obj_color = obj->methods->get_color(obj, hit_point);
+	final_color = color_mult(color_product(obj_color, map->ambient->color),
 			map->ambient->ratio);
 	curr = map->lights;
 	while (curr)

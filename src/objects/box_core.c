@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:36:24 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,7 @@ int	create_b(t_data_rule rule, char **tokens, t_map *map)
 		parser_vec3(tokens[3], &size) == NO ||
 		parser_color(tokens[4], &color_reflection.color) == NO)
 		return (NO);
-	if (tokens[5])
-	{
-		if (get_valid_float(tokens[5],
-				(float *)&color_reflection.reflection) == NO)
-			return (NO);
-	}
-	else
+	if (get_valid_float(tokens[5], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
 	box = create_box(center, orientation, size, color_reflection);
 	if (box == NULL)

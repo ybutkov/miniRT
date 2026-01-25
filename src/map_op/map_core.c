@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:31:21 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 01:00:14 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,14 @@ t_map	*create_map(size_t width, size_t height)
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
+	map->mlx = NULL;
 	map->width = width;
 	map->height = height;
 	map->objects = NULL;
+	map->camera = NULL;
+	map->ambient = NULL;
+	map->lights = NULL;
+	map->bvh = NULL;
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
 	map->is_change = 1;

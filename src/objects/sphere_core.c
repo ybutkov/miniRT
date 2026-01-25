@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:37:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:13:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ t_aabb	sphere_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_obj	*create_sphere(t_vec3 pos, double diametr, t_color color,
-		double reflection)
+t_obj	*create_sphere(t_vec3 pos, double diametr,
+	t_color_reflect color_reflection)
 {
 	t_obj		*obj;
 	t_sphere	*sphere;
 
-	obj = create_obj(color, reflection, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color_reflection.color,
+			color_reflection.reflection, DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	sphere = malloc(sizeof(t_sphere));
@@ -74,6 +75,7 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 	float			diametr;
 	t_color_reflect	color_reflection;
 	t_obj			*sphere;
+	float			tex_intensity;
 
 	(void)rule;
 	// check amount of tokens
@@ -81,18 +83,16 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 		get_valid_float(tokens[2], &diametr) == NO ||
 		parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
-	if (tokens[4])
-	{
-		if (get_valid_float(tokens[4],
-				(float *)&color_reflection.reflection) == NO)
-			return (NO);
-	}
-	else
+	if (get_valid_float(tokens[4], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
-	sphere = create_sphere(pos, diametr, color_reflection.color,
-			color_reflection.reflection);
+	sphere = create_sphere(pos, diametr, color_reflection);
 	if (sphere == NULL)
 		return (NO);
+	if (tokens[4] && tokens[5] && get_valid_float(tokens[6], &tex_intensity) == OK)
+	{
+		sphere->texture = load_texture(map->mlx, tokens[5]);
+		sphere->texture_intensity = tex_intensity;
+	}
 	map->add_obj(map, sphere);
 	return (OK);
 }

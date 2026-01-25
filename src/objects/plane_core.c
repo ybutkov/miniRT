@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:37:00 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_aabb	plane_get_aabb(t_obj *this)
 }
 
 t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
-		double reflection)
+		float reflection)
 {
 	t_obj	*obj;
 	t_plane	*plane;
@@ -77,13 +77,7 @@ int	create_pl(t_data_rule rule, char **tokens, t_map *map)
 		parser_vec3(tokens[2], &normal) == NO ||
 		parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
-	if (tokens[4])
-	{
-		if (get_valid_float(tokens[4],
-				(float *)&color_reflection.reflection) == NO)
-			return (NO);
-	}
-	else
+	if (get_valid_float(tokens[4], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
 	plane = create_plane(point, normal, color_reflection.color,
 			color_reflection.reflection);
