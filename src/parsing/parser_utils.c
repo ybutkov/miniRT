@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/25 18:28:21 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:23:35 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	parser_vec3(char *str, t_vec3 *vector)
 	split = ft_split(str, ',');
 	if (!split || ft_split_len(split) != 3)
 		return (free_split(split), NO);
-	if (get_valid_float(split[0], &xyz[0]) == NO ||
-		get_valid_float(split[1], &xyz[1]) == NO ||
-		get_valid_float(split[2], &xyz[2]) == NO)
+	if (get_valid_float(split[0], &xyz[0]) == NO || get_valid_float(split[1],
+			&xyz[1]) == NO || get_valid_float(split[2], &xyz[2]) == NO)
 		return (free_split(split), NO);
 	free_split(split);
 	*vector = create_vector(xyz[0], xyz[1], xyz[2]);

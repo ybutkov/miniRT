@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/24 18:44:41 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 21:05:11 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	parse_file(int fd, t_map *map)
 	t_parse_error	err;
 
 	line_num = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		line_num++;
 		err = parse_line_new(line, map);
@@ -86,6 +87,7 @@ void	parse_file(int fd, t_map *map)
 			parse_error_exit(err, line_num, line);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 }
 
