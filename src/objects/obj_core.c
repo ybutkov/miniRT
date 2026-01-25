@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:44:57 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/07 15:11:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:08:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "objects.h"
 #include <stdlib.h>
 
-t_obj	*create_obj(t_color color, double reflection, double brightness)
+t_obj	*create_obj(t_color color, float reflection, double brightness)
 {
 	t_obj	*obj;
 

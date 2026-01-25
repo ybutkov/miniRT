@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:44:42 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 23:33:43 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,7 @@ int	create_co(t_data_rule rule, char **tokens, t_map *map)
 		return (NO);
 	radius_height[0] = (double)temp[0];
 	radius_height[1] = (double)temp[1];
-	if (tokens[6])
-	{
-		if (get_valid_float(tokens[6],
-				(float *)&color_reflection.reflection) == NO)
-			return (NO);
-	}
-	else
+	if (get_valid_float(tokens[6], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
 	cone = create_cone(center, axis, radius_height, color_reflection);
 	if (cone == NULL)

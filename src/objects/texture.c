@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 00:00:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 15:58:59 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 16:38:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,6 @@ void	get_sphere_uv(t_vec3 point, t_vec3 center, double *u, double *v)
 	phi = atan2(-p.z, p.x) + M_PI;
 	*u = phi / (2.0 * M_PI);
 	*v = 1.0 - (theta / M_PI);
-}
-
-t_color	get_object_color(t_obj *obj, t_vec3 hit_point)
-{
-	if (obj->methods && obj->methods->get_color)
-		return (obj->methods->get_color(obj, hit_point));
-	return (obj->color);
 }
 
 t_color	sphere_get_color(t_obj *obj, t_vec3 hit_point)

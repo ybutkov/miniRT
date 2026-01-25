@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/24 18:59:33 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 18:28:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 int	get_valid_float(const char *str, float *res)
 {
+	if (!str)
+		return (NO);
 	if (is_validate_real(str) == NO)
 		return (NO);
 	*res = ft_atof(str);

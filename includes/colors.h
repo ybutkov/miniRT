@@ -27,8 +27,8 @@ typedef t_vec3	t_color;
 
 typedef struct s_color_reflect
 {
-	t_color color;
-	double  reflection;
+	t_color	color;
+	float	reflection;
 }			t_color_reflect;
 
 t_color			create_color(int r, int g, int b);

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 00:18:02 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 18:34:25 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_obj
 	t_vtable				*methods;
 	t_color					color;
 	double					brightness;
-	double					reflection;
+	float					reflection;
 	void					*texture;
 	double					texture_intensity;
 	void					*data;
@@ -152,14 +152,14 @@ typedef struct s_camera
 	t_vec3					lower_left_pos;
 }							t_camera;
 
-t_obj						*create_obj(t_color color, double reflection,
-								double brightness);
+t_obj						*create_obj(t_color color, float reflection,
+							double brightness);
 t_obj						*create_plane(t_vec3 point, t_vec3 normal,
-								t_color color, double reflection);
+							t_color color, float reflection);
 int							create_pl(t_data_rule rule, char **tokens,
 								t_map *map);
 t_obj						*create_sphere(t_vec3 pos, double diametr,
-								t_color color, double reflection);
+								t_color_reflect color_reflection);
 int							create_sp(t_data_rule rule, char **tokens,
 								t_map *map);
 t_obj						*create_cylinder(t_vec3 pos, t_vec3 normal,
@@ -193,7 +193,6 @@ t_color						get_texture_color(t_texture *tex, double u,
 								double v);
 void						get_sphere_uv(t_vec3 point, t_vec3 center,
 								double *u, double *v);
-t_color						get_object_color(t_obj *obj, t_vec3 hit_point);
 t_color						sphere_get_color(t_obj *obj, t_vec3 hit_point);
 t_color						default_get_color(t_obj *obj, t_vec3 hit_point);
 

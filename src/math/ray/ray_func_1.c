@@ -26,7 +26,7 @@ static t_color	add_diffuse_light(t_obj *obj, t_light *light, double dot,
 	t_color	diff_color;
 	t_color	obj_color;
 
-	obj_color = get_object_color(obj, hit_point);
+	obj_color = obj->methods->get_color(obj, hit_point);
 	diff_color = color_product(obj_color, light->color);
 	return (color_mult(diff_color, dot * light->ratio));
 }
@@ -59,7 +59,7 @@ t_color	calculate_light(t_map *map, t_obj *obj, t_vec3 hit_point)
 	t_color	final_color;
 	t_color	obj_color;
 
-	obj_color = get_object_color(obj, hit_point);
+	obj_color = obj->methods->get_color(obj, hit_point);
 	final_color = color_mult(color_product(obj_color, map->ambient->color),
 			map->ambient->ratio);
 	curr = map->lights;
