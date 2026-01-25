@@ -90,7 +90,8 @@ C_SHELL_FILES += \
 		objects/texture.c \
 		objects/get_normals.c \
 		objects/get_types.c \
-		objects/get_vtables.c
+		objects/get_vtables.c \
+		objects/sky_core.c
 
 C_SHELL_FILES += \
 		bvh/bvh_core.c \

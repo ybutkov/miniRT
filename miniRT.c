@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 20:18:44 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:34:58 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "parser.h"
+#include "libft.h"
+#include "objects.h"
 
 static void	exit_program(t_map *map, char *message)
 {
@@ -66,10 +69,6 @@ static t_app	*init_app(t_map *map, char *title)
 	return (app);
 }
 
-#include "parser.h"
-#include "libft.h"
-#include "objects.h"
-
 int	main(int argc, char const *argv[])
 {
 	t_map *map;
@@ -86,8 +85,6 @@ int	main(int argc, char const *argv[])
 	map->mlx = mlx;
 	parse_scene(argv[1], map);
 	printf("finish parsing\n");
-	// Load background skybox (optional - comment out if not needed)
-	map->background_texture = load_texture(mlx, "scenes/assets/nebulosa.xpm");
 	if (map->generate_bvh(map) == NO)
 		exit_program(NULL, "PROBLEMS!!!");
 	app = init_app(map, "Wild World");
