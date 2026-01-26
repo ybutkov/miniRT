@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 20:56:41 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/25 21:01:47 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/26 21:29:51 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,11 @@ float	ft_atof(const char *str)
 	}
 	res += parse_fraction(str, &i);
 	return (res * sign);
+}
+
+void	exit_with_tokens(char **tokens, t_map *map, const char *msg)
+{
+	if (tokens)
+		free_split(tokens);
+	error_exit(msg, map);
 }

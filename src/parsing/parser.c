@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/25 21:05:11 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/26 21:29:30 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,35 @@
 #include <string.h>
 #include <unistd.h>
 
-void	exit_with_tokens(char **tokens, t_map *map, const char *msg)
+static void	normalize_line(char *line)
 {
-	if (tokens)
-		free_split(tokens);
-	error_exit(msg, map);
+	size_t	i;
+	size_t	j;
+
+	if (!line)
+		return ;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			line[i] = ' ';
+		if (line[i] == ',')
+		{
+			j = i + 1;
+			while (line[j] == ' ' || line[j] == '\t')
+				++j;
+			if (j > i + 1)
+				memmove(&line[i + 1], &line[j], ft_strlen(&line[j]) + 1);
+		}
+		++i;
+	}
 }
 
-void	parse_error_exit(t_parse_error err, int line_num, char *line)
+static t_parse_error	process_tokens(char *line, t_map *map)
 {
-	if (err == PARSE_UNKNOWN_ID)
-	{
-		ft_putstr_fd("Error\nUnknown identifier at line ", 2);
-		ft_putnbr_fd(line_num, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(line, 2);
-	}
-	else if (err == PARSE_MALLOC_FAIL)
-		ft_putendl_fd("Error\nMemory allocation failed", 2);
-	else if (err == PARSE_INVALID_FORMAT)
-	{
-		ft_putstr_fd("Error\nInvalid format at line ", 2);
-		ft_putnbr_fd(line_num, 2);
-		ft_putchar_fd('\n', 2);
-	}
-	exit(EXIT_FAILURE);
-}
-
-t_parse_error	parse_line_new(char *line, t_map *map)
-{
-	size_t		len;
 	char		**tokens;
 	t_data_rule	data_rule;
 
-	if (line)
-	{
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-	}
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (PARSE_MALLOC_FAIL);
@@ -66,6 +56,30 @@ t_parse_error	parse_line_new(char *line, t_map *map)
 		return (free_split(tokens), PARSE_INVALID_FORMAT);
 	free_split(tokens);
 	return (PARSE_OK);
+}
+
+t_parse_error	parse_line_new(char *line, t_map *map)
+{
+	size_t	len;
+	size_t	i;
+
+	if (line)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		{
+			i = 0;
+			while (line[i])
+			{
+				if (line[i] == '\t')
+					line[i] = ' ';
+				++i;
+			}
+		}
+	}
+	normalize_line(line);
+	return (process_tokens(line, map));
 }
 
 void	parse_file(int fd, t_map *map)
