@@ -6,7 +6,7 @@
 /*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/25 21:05:46 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/26 21:30:34 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,24 @@ int	ft_split_len(char **split)
 	while (split[i])
 		i++;
 	return (i);
+}
+
+void	parse_error_exit(t_parse_error err, int line_num, char *line)
+{
+	if (err == PARSE_UNKNOWN_ID)
+	{
+		ft_putstr_fd("Error\nUnknown identifier at line ", 2);
+		ft_putnbr_fd(line_num, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(line, 2);
+	}
+	else if (err == PARSE_MALLOC_FAIL)
+		ft_putendl_fd("Error\nMemory allocation failed", 2);
+	else if (err == PARSE_INVALID_FORMAT)
+	{
+		ft_putstr_fd("Error\nInvalid format at line ", 2);
+		ft_putnbr_fd(line_num, 2);
+		ft_putchar_fd('\n', 2);
+	}
+	exit(EXIT_FAILURE);
 }
