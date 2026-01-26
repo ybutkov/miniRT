@@ -153,6 +153,9 @@ sudo apt install libx11-dev libxext-dev libbsd-dev
 
 - "Ray Tracing in One Weekend" — Peter Shirley
 - Scratchapixel — ray tracing fundamentals
+- [Ray Tracing and Global Illumination](https://habr.com/en/articles/342510/) — Comprehensive guide on Habr
+- [Ray-Tracing.ru](http://www.ray-tracing.ru/) — Russian ray tracing resources
+- [How to Build a BVH](https://jacco.ompf2.com/2022/04/13/how-to-build-a-bvh-part-1-basics/) — BVH acceleration structure guide by Jacco Bikker
 - MiniLibX documentation / 42 intranet subject page
 - C programming and linear algebra references
 
