@@ -79,18 +79,20 @@ C_SHELL_FILES += \
 		objects/obj_core.c \
 		objects/camera_core.c \
 		objects/sphere_core.c \
+		objects/sphere_vtables.c \
 		objects/cylinder_core.c \
+		objects/cylinder_vtables.c \
 		objects/plane_core.c \
+		objects/plane_vtables.c \
 		objects/triangle_core.c \
+		objects/triangle_vtables.c \
 		objects/box_core.c \
+		objects/box_vtables.c \
 		objects/light_core.c \
 		objects/ambient_core.c \
 		objects/cone_core.c \
 		objects/cone_vtables.c \
 		objects/texture.c \
-		objects/get_normals.c \
-		objects/get_types.c \
-		objects/get_vtables.c \
 		objects/sky_core.c
 
 C_SHELL_FILES += \
@@ -185,7 +187,8 @@ $(MINILIBX):
 
 v: re
 	valgrind --leak-check=full  --show-leak-kinds=all --track-fds=yes \
-		--suppressions=tools/sub.sub  ./miniRT
+		./miniRT scenes/earth2.rt
+#		--suppressions=tools/sub.sub   
 # 		--track-origins=yes --trace-children=yes --suppressions=tools/sub.sub  ./minishell
 
 # valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \

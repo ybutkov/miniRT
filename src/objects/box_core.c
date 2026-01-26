@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 23:19:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,6 @@
 #include "parser.h"
 #include <math.h>
 #include <stdlib.h>
-
-static t_vec3	get_inv_dir(t_box *b, t_vec3 dir)
-{
-	t_vec3	inv_dir;
-	t_vec3	local_dir;
-
-	local_dir = create_vector(vector_dot_product(dir, b->axis[0]),
-			vector_dot_product(dir, b->axis[1]), vector_dot_product(dir,
-				b->axis[2]));
-	inv_dir = create_vector(1.0 / local_dir.x, 1.0 / local_dir.y, 1.0
-			/ local_dir.z);
-	return (inv_dir);
-}
-
-double	box_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
-{
-	t_box	*b;
-	t_vec3	local_rel;
-	t_vec3	inv_dir;
-	double	t[6];
-	double	res[2];
-
-	b = (t_box *)this->data;
-	local_rel = vector_sub(origin, b->center);
-	local_rel = create_vector(vector_dot_product(local_rel, b->axis[0]),
-			vector_dot_product(local_rel, b->axis[1]),
-			vector_dot_product(local_rel, b->axis[2]));
-	inv_dir = get_inv_dir(b, dir);
-	t[0] = (-b->half_size.x - local_rel.x) * inv_dir.x;
-	t[1] = (b->half_size.x - local_rel.x) * inv_dir.x;
-	t[2] = (-b->half_size.y - local_rel.y) * inv_dir.y;
-	t[3] = (b->half_size.y - local_rel.y) * inv_dir.y;
-	t[4] = (-b->half_size.z - local_rel.z) * inv_dir.z;
-	t[5] = (b->half_size.z - local_rel.z) * inv_dir.z;
-	res[0] = fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
-	res[1] = fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
-	if (res[1] < EPSILON || res[0] > res[1])
-		return (-1.0);
-	if (res[0] > EPSILON)
-		return (res[0]);
-	return (res[1]);
-}
 
 static void	calculate_corners(t_box *b, t_vec3 corners[8])
 {
@@ -112,7 +70,34 @@ t_aabb	box_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_obj	*create_box(t_vec3 center, t_vec3 orientation, t_vec3 size,
+t_vec3	box_get_normal(t_obj *this, t_vec3 pos)
+{
+	t_box				*box;
+	t_box_normal_utils	b_vars;
+	int					i;
+
+	box = (t_box *)this->data;
+	b_vars.d = vector_sub(pos, box->center);
+	b_vars.min_dist = INFINITY;
+	b_vars.axis = 0;
+	i = 0;
+	while (i < 3)
+	{
+		b_vars.points[i] = vector_dot_product(b_vars.d, box->axis[i]);
+		b_vars.dist = fabs(box->half_size.v[i] - fabs(b_vars.points[i]));
+		if (b_vars.dist < b_vars.min_dist)
+		{
+			b_vars.min_dist = b_vars.dist;
+			b_vars.axis = i;
+		}
+		i++;
+	}
+	if (b_vars.points[b_vars.axis] > 0)
+		return (box->axis[b_vars.axis]);
+	return (vector_mult(box->axis[b_vars.axis], -1));
+}
+
+static t_obj	*create_box(t_vec3 center, t_vec3 orientation, t_vec3 size,
 		t_color_reflect color_reflection)
 {
 	t_obj	*obj;
@@ -140,6 +125,7 @@ t_obj	*create_box(t_vec3 center, t_vec3 orientation, t_vec3 size,
 	return (obj);
 }
 
+// check amount of tokens
 int	create_b(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3			center;
@@ -149,11 +135,10 @@ int	create_b(t_data_rule rule, char **tokens, t_map *map)
 	t_obj			*box;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &center) == NO ||
-		parser_vec3(tokens[2], &orientation) == NO ||
-		parser_vec3(tokens[3], &size) == NO ||
-		parser_color(tokens[4], &color_reflection.color) == NO)
+	if (parser_vec3(tokens[1], &center) == NO
+		|| parser_vec3(tokens[2], &orientation) == NO
+		|| parser_vec3(tokens[3], &size) == NO
+		|| parser_color(tokens[4], &color_reflection.color) == NO)
 		return (NO);
 	if (get_valid_float(tokens[5], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;

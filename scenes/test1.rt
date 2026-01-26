@@ -23,5 +23,7 @@ tr 11,5,-6 11,5,0 8,0,-3 200,100,255 0.3
 tr 11,5,0 5,5,0 8,0,-3 200,100,255 0.3
 tr 5,5,0 5,5,-6 8,0,-3 200,100,255 0.3
 
+co -5,0,0 1,0,0 1.5 3 10,50,50 0.2
+
 # sky scenes/assets/black_hole.xpm
-sky scenes/assets/nebulosa.xpm
+ sky scenes/assets/nebulosa.xpm

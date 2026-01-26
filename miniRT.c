@@ -6,22 +6,22 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 20:34:58 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 01:07:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "colors.h"
 #include "constants.h"
+#include "libft.h"
 #include "map.h"
 #include "miniRT.h"
+#include "objects.h"
+#include "parser.h"
 #include "utils.h"
 #include "vectors.h"
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "parser.h"
-#include "libft.h"
-#include "objects.h"
 
 static void	exit_program(t_map *map, char *message)
 {
@@ -57,9 +57,8 @@ static t_app	*init_app(t_map *map, char *title)
 	app->win = mlx_new_window(app->mlx, app->width, app->height, title);
 	app->img->img = mlx_new_image(app->mlx, app->width, app->height);
 	app->img->addr = mlx_get_data_addr(app->img->img,
-										&(app->img->bits_per_pixel),
-										&(app->img->line_length),
-										&(app->img->endian));
+			&(app->img->bits_per_pixel), &(app->img->line_length),
+			&(app->img->endian));
 	mlx_hook(app->win, 17, 0, close_window, app);
 	mlx_hook(app->win, 2, 1L << 0, key_pressed_hook, app);
 	mlx_hook(app->win, 4, 1L << 2, ft_mouse_press, app);
@@ -71,13 +70,14 @@ static t_app	*init_app(t_map *map, char *title)
 
 int	main(int argc, char const *argv[])
 {
-	t_map *map;
-	t_app *app;
-	void *mlx;
+	t_map	*map;
+	t_app	*app;
+	void	*mlx;
 
 	(void)argv;
 	if (argc != 2)
-		exit_program(NULL, "Error. There should be one argument - file name *.rt");
+		exit_program(NULL, "Error. There should be one argument\
+			- file name *.rt");
 	mlx = mlx_init();
 	if (!mlx)
 		exit_program(NULL, "Error initializing MLX");
@@ -89,5 +89,6 @@ int	main(int argc, char const *argv[])
 		exit_program(NULL, "PROBLEMS!!!");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
+	app->free(app);
 	return (0);
 }
