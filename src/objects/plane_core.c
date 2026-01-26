@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 23:29:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_aabb	plane_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
+static t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
 		float reflection)
 {
 	t_obj	*obj;
@@ -64,6 +64,7 @@ t_obj	*create_plane(t_vec3 point, t_vec3 normal, t_color color,
 	return (obj);
 }
 
+// check amount of tokens
 int	create_pl(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3			point;
@@ -72,10 +73,9 @@ int	create_pl(t_data_rule rule, char **tokens, t_map *map)
 	t_obj			*plane;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &point) == NO ||
-		parser_vec3(tokens[2], &normal) == NO ||
-		parser_color(tokens[3], &color_reflection.color) == NO)
+	if (parser_vec3(tokens[1], &point) == NO
+		|| parser_vec3(tokens[2], &normal) == NO
+		|| parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
 	if (get_valid_float(tokens[4], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;

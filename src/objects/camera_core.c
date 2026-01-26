@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 19:54:56 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 22:18:18 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 	return (cam);
 }
 
+// check amount of tokens
 int	create_c(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3	pos;
@@ -68,10 +69,9 @@ int	create_c(t_data_rule rule, char **tokens, t_map *map)
 	float	fov;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &pos) == NO ||
-		parser_vec3(tokens[2], &dir) == NO ||
-		get_valid_float(tokens[3], &fov) == NO)
+	if (parser_vec3(tokens[1], &pos) == NO
+		|| parser_vec3(tokens[2], &dir) == NO
+		|| get_valid_float(tokens[3], &fov) == NO)
 		return (NO);
 	map->camera = create_camera(pos, dir, fov, map);
 	if (map->camera == NULL)

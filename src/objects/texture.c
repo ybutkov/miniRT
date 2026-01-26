@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 00:00:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 16:38:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 22:22:10 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,6 @@ void	get_sphere_uv(t_vec3 point, t_vec3 center, double *u, double *v)
 	phi = atan2(-p.z, p.x) + M_PI;
 	*u = phi / (2.0 * M_PI);
 	*v = 1.0 - (theta / M_PI);
-}
-
-t_color	sphere_get_color(t_obj *obj, t_vec3 hit_point)
-{
-	t_texture	*tex;
-	t_sphere	*sphere;
-	double		u;
-	double		v;
-	t_color		tex_color;
-
-	if (!obj->texture || obj->texture_intensity <= 0.0)
-		return (obj->color);
-	tex = (t_texture *)obj->texture;
-	sphere = (t_sphere *)obj->data;
-	get_sphere_uv(hit_point, sphere->center, &u, &v);
-	tex_color = get_texture_color(tex, u, v);
-	return (color_mix(obj->color, tex_color, obj->texture_intensity));
 }
 
 t_color	default_get_color(t_obj *obj, t_vec3 hit_point)

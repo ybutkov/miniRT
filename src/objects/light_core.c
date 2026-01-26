@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:39:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 18:29:33 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 22:18:37 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_light	*create_light(t_vec3 pos, double ratio, t_color color)
 	return (light);
 }
 
+// check amount of tokens
 int	create_l(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3	pos;
@@ -37,9 +38,8 @@ int	create_l(t_data_rule rule, char **tokens, t_map *map)
 	t_light	*light;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &pos) == NO ||
-		get_valid_float(tokens[2], &ratio) == NO)
+	if (parser_vec3(tokens[1], &pos) == NO
+		|| get_valid_float(tokens[2], &ratio) == NO)
 		return (NO);
 	if (tokens[3])
 	{

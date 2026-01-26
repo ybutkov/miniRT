@@ -31,6 +31,7 @@ typedef struct s_bvh_node
 typedef struct s_bvh
 {
 	t_bvh_node			*root;
+	void				*mlx;
 	int					(*build)(struct s_bvh *this, t_obj *obj);
 	void				(*free)(struct s_bvh *this);
 }						t_bvh;

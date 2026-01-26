@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 01:00:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:43:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 #include "miniRT.h"
 #include <math.h>
 
-static void	free_map(t_map *map)
-{
-	free(map);
-}
-
-void	add_new_light(t_map *map, t_light *new_light)
+static void	add_new_light(t_map *map, t_light *new_light)
 {
 	t_light	*cur;
 
@@ -34,7 +29,7 @@ void	add_new_light(t_map *map, t_light *new_light)
 		map->lights = new_light;
 }
 
-void	add_new_object(t_map *map, t_obj *new_obj)
+static void	add_new_object(t_map *map, t_obj *new_obj)
 {
 	t_obj	*cur;
 
@@ -54,24 +49,16 @@ static int	generate_bvh(t_map *map)
 	bvh = create_bvh();
 	if (bvh == NULL)
 		return (NO);
+	bvh->mlx = map->mlx;
 	if (bvh->build(bvh, map->objects) == NO)
 		return (NO);
 	map->bvh = bvh;
 	return (OK);
 }
 
-t_map	*create_map(size_t width, size_t height)
+static void	init_map_values(t_map *map)
 {
-	t_map	*map;
-
-	if (width <= 0 || height <= 0)
-		return (NULL);
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
 	map->mlx = NULL;
-	map->width = width;
-	map->height = height;
 	map->objects = NULL;
 	map->camera = NULL;
 	map->ambient = NULL;
@@ -81,6 +68,20 @@ t_map	*create_map(size_t width, size_t height)
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
 	map->is_change = 1;
+}
+
+t_map	*create_map(size_t width, size_t height)
+{
+	t_map	*map;
+
+	if (width <= 0 || height <= 0)
+		return (HANDLE_ERROR_NULL);
+	map = (t_map *)malloc(sizeof(t_map));
+	if (!map)
+		return (HANDLE_ERROR_NULL);
+	init_map_values(map);
+	map->width = width;
+	map->height = height;
 	map->free = free_map;
 	map->reset = reset_map_transformations;
 	map->shift = shift;

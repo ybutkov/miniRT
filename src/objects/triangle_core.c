@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 19:02:46 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/25 23:39:28 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_aabb	triangle_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
+static t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 		t_color_reflect color_reflection)
 {
 	t_obj		*obj;
@@ -94,6 +94,7 @@ t_obj	*create_triangle(t_vec3 p_1, t_vec3 p_2, t_vec3 p_3,
 	return (obj);
 }
 
+// check amount of tokens
 int	create_tr(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3			p_1;
@@ -103,11 +104,10 @@ int	create_tr(t_data_rule rule, char **tokens, t_map *map)
 	t_obj			*triangle;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &p_1) == NO ||
-		parser_vec3(tokens[2], &p_2) == NO ||
-		parser_vec3(tokens[3], &p_3) == NO ||
-		parser_color(tokens[4], &color_reflection.color) == NO)
+	if (parser_vec3(tokens[1], &p_1) == NO
+		|| parser_vec3(tokens[2], &p_2) == NO
+		|| parser_vec3(tokens[3], &p_3) == NO
+		|| parser_color(tokens[4], &color_reflection.color) == NO)
 		return (NO);
 	if (get_valid_float(tokens[5], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;

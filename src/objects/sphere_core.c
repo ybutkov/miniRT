@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 19:13:46 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:58:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ t_aabb	sphere_get_aabb(t_obj *this)
 	return (aabb);
 }
 
-t_obj	*create_sphere(t_vec3 pos, double diametr,
-	t_color_reflect color_reflection)
+static t_obj	*create_sphere(t_vec3 pos, double diametr,
+		t_color_reflect color_reflection)
 {
 	t_obj		*obj;
 	t_sphere	*sphere;
 
-	obj = create_obj(color_reflection.color,
-			color_reflection.reflection, DEFAULT_BRIGHTNESS);
+	obj = create_obj(color_reflection.color, color_reflection.reflection,
+			DEFAULT_BRIGHTNESS);
 	if (obj == NULL)
 		return (HANDLE_ERROR_NULL);
 	sphere = malloc(sizeof(t_sphere));
@@ -69,6 +69,24 @@ t_obj	*create_sphere(t_vec3 pos, double diametr,
 	return (obj);
 }
 
+t_color	sphere_get_color(t_obj *obj, t_vec3 hit_point)
+{
+	t_texture	*tex;
+	t_sphere	*sphere;
+	double		u;
+	double		v;
+	t_color		tex_color;
+
+	if (!obj->texture || obj->texture_intensity <= 0.0)
+		return (obj->color);
+	tex = (t_texture *)obj->texture;
+	sphere = (t_sphere *)obj->data;
+	get_sphere_uv(hit_point, sphere->center, &u, &v);
+	tex_color = get_texture_color(tex, u, v);
+	return (color_mix(obj->color, tex_color, obj->texture_intensity));
+}
+
+// check amount of tokens
 int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3			pos;
@@ -78,17 +96,17 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 	float			tex_intensity;
 
 	(void)rule;
-	// check amount of tokens
-	if (parser_vec3(tokens[1], &pos) == NO ||
-		get_valid_float(tokens[2], &diametr) == NO ||
-		parser_color(tokens[3], &color_reflection.color) == NO)
+	if (parser_vec3(tokens[1], &pos) == NO
+		|| get_valid_float(tokens[2], &diametr) == NO
+		|| parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
 	if (get_valid_float(tokens[4], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
 	sphere = create_sphere(pos, diametr, color_reflection);
 	if (sphere == NULL)
 		return (NO);
-	if (tokens[4] && tokens[5] && get_valid_float(tokens[6], &tex_intensity) == OK)
+	if (tokens[4] && tokens[5] && get_valid_float(tokens[6],
+			&tex_intensity) == OK)
 	{
 		sphere->texture = load_texture(map->mlx, tokens[5]);
 		sphere->texture_intensity = tex_intensity;
