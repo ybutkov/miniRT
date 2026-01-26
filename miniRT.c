@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 01:07:21 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 20:50:29 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,5 @@ int	main(int argc, char const *argv[])
 		exit_program(NULL, "PROBLEMS!!!");
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
-	app->free(app);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 16:54:58 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 18:56:03 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 21:18:59 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_bvh_data
 	int		plane_count;
 }			t_bvh_data;
 
+void		free_bvh(t_bvh *this);
 t_aabb		create_infinite_aabb(void);
 t_aabb		calculate_aabb_array(t_obj **obj, int amount);
 int			handle_only_planes(t_bvh *bvh, t_obj *obj, int plane_count);

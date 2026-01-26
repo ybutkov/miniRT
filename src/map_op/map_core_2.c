@@ -26,7 +26,12 @@ static void	free_objects(t_obj *obj, void *mlx)
 		if (obj->data)
 			free(obj->data);
 		if (obj->texture)
-			free_texture(mlx, (t_texture *)obj->texture);
+		{
+			if (obj->texture_type == TEXTURE_FILE)
+				free_texture(mlx, (t_texture *)obj->texture);
+			else if (obj->texture_type == TEXTURE_CHESS)
+				free(obj->texture);
+		}
 		free(obj);
 		count++;
 		obj = next;
