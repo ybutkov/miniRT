@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:36:47 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 19:06:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_mouse_press(int button, int x, int y, t_app *app)
 	app->mouse.click_y = y;
 	if (button == MOUSE_LEFT_BUTTON)
 	{
-		app->selected_obj = select_object_at_screen_pos(app, x, y);
 		app->mouse.left_button = 1;
 	}
 	else if (button == MOUSE_RIGHT_BUTTON)
@@ -78,7 +77,7 @@ int	ft_mouse_move(int x, int y, t_app *app)
 		move_selected_object(app, delta_x, delta_y);
 	}
 	else if (mouse->left_button)
-		app->map->shift(app->map, delta_x, delta_y);
+		app->map->shift(app->map, delta_x, -delta_y);
 	// else if (mouse->middle_button)
 	// 	app->map->rotate(app->map, copysign(0.01, delta_x), 0, 0);
 	// else if (mouse->right_button)

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:39:43 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 18:49:06 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ typedef struct s_vtable
 	t_get_color				get_color;
 }							t_vtable;
 
+typedef enum e_texture_type
+{
+	TEXTURE_NONE,
+	TEXTURE_FILE,
+	TEXTURE_CHESS
+}							t_texture_type;
+
+typedef struct s_chess_texture
+{
+	t_color					color2;
+	double					scale;
+}							t_chess_texture;
+
 typedef struct s_obj
 {
 	t_vtable				*methods;
@@ -71,6 +84,7 @@ typedef struct s_obj
 	double					brightness;
 	float					reflection;
 	void					*texture;
+	t_texture_type			texture_type;
 	double					texture_intensity;
 	void					*data;
 	struct s_obj			*next;
@@ -150,6 +164,7 @@ typedef struct s_camera
 	t_vec3					horizontal;
 	t_vec3					vertical;
 	t_vec3					lower_left_pos;
+	void					(*update_fov)(struct s_camera *camera, int delta);
 }							t_camera;
 
 t_obj						*create_obj(t_color color, float reflection,
@@ -184,6 +199,10 @@ void						get_sphere_uv(t_vec3 point, t_vec3 center,
 								double *u, double *v);
 t_color						sphere_get_color(t_obj *obj, t_vec3 hit_point);
 t_color						default_get_color(t_obj *obj, t_vec3 hit_point);
+t_chess_texture				*create_chess_texture(char *color_str,
+								char *scale_str);
+t_color						get_chess_color(t_chess_texture *chess, double u,
+								double v, t_color color1);
 
 t_light						*create_light(t_vec3 pos, double ratio,
 								t_color color);

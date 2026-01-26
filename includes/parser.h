@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/25 20:29:51 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 16:32:35 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "objects.h"
 # include "miniRT.h"
 
-# define MAX_AMOUNT_DATA_TYPE 7
+# define MAX_AMOUNT_DATA_TYPE 10
 # define AMOUNT_DATA_RULE 12
 
 typedef enum e_data_type
@@ -26,7 +26,8 @@ typedef enum e_data_type
 	COLOR,
 	FLOAT,
 	INT,
-	FILEPATH
+	FILEPATH,
+	FLAG_CHESS
 }				t_data_type;
 
 typedef struct s_data_rule

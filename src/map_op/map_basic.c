@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 14:53:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:14:36 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 18:51:04 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	shift(t_map *map, int x, int y)
 
 void	zoom_in(t_map *map, int delta)
 {
-	map->camera->fov = map->camera->fov + delta;
+	map->camera->update_fov(map->camera, delta);
 	update_camera(map->camera);
 }

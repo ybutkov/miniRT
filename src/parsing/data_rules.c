@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:25:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 01:09:01 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 16:32:22 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	init_basic_rules(t_data_rule *data_rules)
 	data_rules[2] = (t_data_rule){"A", {FLOAT, COLOR}, 2, 2, create_a};
 	data_rules[3] = (t_data_rule){"C", {VEC3, VEC3, INT}, 3, 3, create_c};
 	data_rules[4] = (t_data_rule){"L", {VEC3, FLOAT, COLOR}, 3, 2, create_l};
-	data_rules[5] = (t_data_rule){"sp", {VEC3, FLOAT, COLOR, FLOAT}, 4, 3,
-		create_sp};
+	data_rules[5] = (t_data_rule){"sp", {VEC3, FLOAT, COLOR, FLOAT, FILEPATH,
+		FLOAT, FLAG_CHESS, COLOR, FLOAT}, 9, 3, create_sp};
 	data_rules[6] = (t_data_rule){"pl", {VEC3, VEC3, COLOR, FLOAT}, 4, 3,
 		create_pl};
 	data_rules[7] = (t_data_rule){"cy", {VEC3, VEC3, FLOAT, FLOAT, COLOR,

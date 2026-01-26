@@ -16,6 +16,10 @@
 
 # include <math.h>
 
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
 # define OK 1
 # define NO 0
 # define HANDLE_ERROR_NULL NULL

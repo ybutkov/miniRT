@@ -6,12 +6,13 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 00:00:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 22:22:10 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 19:07:32 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "constants.h"
 #include "objects.h"
+#include "parser.h"
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -81,6 +82,42 @@ void	get_sphere_uv(t_vec3 point, t_vec3 center, double *u, double *v)
 	phi = atan2(-p.z, p.x) + M_PI;
 	*u = phi / (2.0 * M_PI);
 	*v = 1.0 - (theta / M_PI);
+}
+
+t_color	get_chess_color(t_chess_texture *chess, double u, double v, t_color color1)
+{
+	int	pattern;
+
+	u = fmod(u * chess->scale, 1.0);
+	v = fmod(v * chess->scale, 1.0);
+	if (u < 0)
+		u += 1.0;
+	if (v < 0)
+		v += 1.0;
+	pattern = ((int)(u * 2.0) + (int)(v * 2.0)) % 2;
+	if (pattern == 0)
+		return (chess->color2);
+	return (color1);
+}
+
+t_chess_texture	*create_chess_texture(char *color_str, char *scale_str)
+{
+	t_chess_texture	*chess;
+	float			scale;
+
+	if (!color_str || !scale_str)
+		return (NULL);
+	chess = malloc(sizeof(t_chess_texture));
+	if (!chess)
+		return (HANDLE_ERROR_NULL);
+	if (parser_color(color_str, &chess->color2) == NO
+		|| get_valid_float(scale_str, &scale) == NO)
+	{
+		free(chess);
+		return (NULL);
+	}
+	chess->scale = (double)scale;
+	return (chess);
 }
 
 t_color	default_get_color(t_obj *obj, t_vec3 hit_point)

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:05:24 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:26:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 19:01:19 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	put_xyz_info(t_app *app, int base_x, int base_y)
 	mlx_string_put(app->mlx, app->win, base_x, base_y + 30, 0xFFFFFF, "X");
 	mlx_string_put(app->mlx, app->win, base_x, base_y + 45, 0xFFFFFF, "Y");
 	mlx_string_put(app->mlx, app->win, base_x, base_y + 60, 0xFFFFFF, "Z");
-	info.x = base_x + 40;
+	info.x = base_x + 45;
 	info.y = base_y + 30;
 	info.decimals = 1;
 	put_coord_str(app, app->map->camera->pos.x, &info);
@@ -52,17 +52,24 @@ static void	put_xyz_info(t_app *app, int base_x, int base_y)
 
 void	draw_camera_info(t_app *app)
 {
-	int	center_x;
-	int	center_y;
-	int	base_x;
-	int	base_y;
+	int				center_x;
+	int				center_y;
+	int				base_x;
+	int				base_y;
+	t_coord_info	info;
 
 	center_x = WINDOW_WIDTH - AXIS_OFFSET_X;
 	center_y = AXIS_OFFSET_Y;
-	base_x = center_x - 60;
+	base_x = center_x - 65;
 	base_y = center_y + 55;
-	mlx_string_put(app->mlx, app->win, base_x, base_y, 0xFFFFFF, "Camera");
-	mlx_string_put(app->mlx, app->win, base_x + 40, base_y + 15, 0xFFFFFF,
+	mlx_string_put(app->mlx, app->win, base_x, base_y - 5, 0xFFFFFF, "Camera");
+	mlx_string_put(app->mlx, app->win, base_x + 45, base_y - 5, 0xFFFFFF,
+		"FOV");
+	info.x = base_x + 100;
+	info.y = base_y - 5;
+	info.decimals = 1;
+	put_coord_str(app, app->map->camera->fov, &info);
+	mlx_string_put(app->mlx, app->win, base_x + 45, base_y + 15, 0xFFFFFF,
 		"Pos");
 	mlx_string_put(app->mlx, app->win, base_x + 100, base_y + 15, 0xFFFFFF,
 		"Dir");

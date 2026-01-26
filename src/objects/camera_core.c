@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 22:18:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 18:46:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,24 @@ void	rotate_camera(t_camera *cam, t_vec3 dir, double delta)
 	cam->dir = vector_norm(cam->dir);
 }
 
+static void	update_fov(t_camera	*camera, int delta)
+{
+	int	new_fov;
+
+	new_fov = camera->fov + delta;
+	if (new_fov < 10 || new_fov > 180)
+		return ;
+	camera->fov = new_fov;
+}
+
 t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 {
 	t_camera	*cam;
 
 	cam = malloc(sizeof(t_camera));
+	if (cam == NULL)
+		return (HANDLE_ERROR_NULL);
+	cam->update_fov = update_fov;
 	cam->pos = pos;
 	cam->fov = fov;
 	cam->dir = vector_norm(dir);
