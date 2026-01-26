@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 19:59:37 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/26 01:03:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 typedef struct s_map
 {
-//
 	void			*mlx;
 	t_obj			*objects;
 	t_camera		*camera;
@@ -29,7 +28,7 @@ typedef struct s_map
 	t_light			*lights;
 	t_bvh			*bvh;
 	void			*background_texture;
-//
+
 	int				width;
 	int				height;
 	double			zoom;
