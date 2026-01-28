@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/24 20:18:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 22:50:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define NO 0
 # define HANDLE_ERROR_NULL NULL
 # define ERROR_MSG_ARGS "Error. There should be one argument - file name *.rt"
+# define ERROR_MSG_BVH "Error building BVH"
+# define ERROR_MSG_PARAMS "Ambient and camera have to be"
 
 # define DEFAULT_BRIGHTNESS 1
 # define DEFAULT_REFLECTION 0.0

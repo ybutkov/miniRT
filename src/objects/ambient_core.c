@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 20:10:10 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 20:14:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 22:13:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int	create_a(t_data_rule rule, char **tokens, t_map *map)
 		return (NO);
 	if (parser_color(tokens[2], &color) == NO)
 		return (NO);
+	printf("2\n");
 	map->ambient = create_ambient(ratio, color);
+	printf("3\n");
 	if (map->ambient == NULL)
 		return (NO);
 	return (OK);

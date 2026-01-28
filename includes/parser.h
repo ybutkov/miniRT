@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 01:53:26 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/26 16:32:35 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 22:19:25 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "miniRT.h"
 
 # define MAX_AMOUNT_DATA_TYPE 10
-# define AMOUNT_DATA_RULE 12
+# define AMOUNT_DATA_RULE 10
 
 typedef enum e_data_type
 {

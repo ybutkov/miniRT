@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 19:01:39 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/26 21:30:34 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/28 22:30:55 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,15 @@ int	get_valid_color_part(const char *s)
 
 void	error_exit(const char *msg, t_map *map)
 {
+	void	*mlx;
+
 	if (map)
+	{
+		mlx = map->mlx;
 		map->free(map);
+		mlx_destroy_display(mlx);
+		free(mlx);
+	}
 	write(2, "Error\n", 6);
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 20:50:29 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 22:51:11 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ static void	exit_program(t_map *map, char *message)
 		map->free(map);
 	perror(message);
 	exit(EXIT_FAILURE);
+}
+
+static int	has_extension(const char *filename, const char *extension)
+{
+	size_t len;
+
+	if (!filename)
+		return (NO);
+	len = ft_strlen(filename);
+	if (len < 3)
+		return (NO);
+	return (ft_strcmp(&filename[len - 3], extension) == 0);
 }
 
 static int	loop_hook(t_app *app)
@@ -75,18 +87,19 @@ int	main(int argc, char const *argv[])
 	void	*mlx;
 
 	(void)argv;
-	if (argc != 2)
-		exit_program(NULL, "Error. There should be one argument\
-			- file name *.rt");
+	if (argc != 2 || !has_extension(argv[1], ".rt"))
+		exit_program(NULL, ERROR_MSG_ARGS);
 	mlx = mlx_init();
 	if (!mlx)
 		exit_program(NULL, "Error initializing MLX");
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
 	map->mlx = mlx;
 	parse_scene(argv[1], map);
+	if (map->ambient == NULL || map->camera == NULL)
+		exit_program(map, ERROR_MSG_PARAMS);
 	printf("finish parsing\n");
 	if (map->generate_bvh(map) == NO)
-		exit_program(NULL, "PROBLEMS!!!");
+		exit_program(map, ERROR_MSG_BVH);
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 17:49:34 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/26 20:28:25 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/28 22:03:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	parser_vec3(char *str, t_vec3 *vector)
 	float	xyz[3];
 	char	**split;
 
+	if (str == NULL)
+		return (NO);
 	split = ft_split(str, ',');
 	if (!split || ft_split_len(split) != 3)
 		return (free_split(split), NO);
@@ -49,6 +51,8 @@ int	parser_color(char *str, t_color *color)
 	char	**split;
 	int		rgb[3];
 
+	if (str == NULL)
+		return (NO);
 	split = ft_split(str, ',');
 	if (!split || ft_split_len(split) != 3)
 		return (free_split(split), NO);
