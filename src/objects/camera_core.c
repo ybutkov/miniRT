@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 18:46:53 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:13:01 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	create_c(t_data_rule rule, char **tokens, t_map *map)
 	if (parser_vec3(tokens[1], &pos) == NO
 		|| parser_vec3(tokens[2], &dir) == NO
 		|| get_valid_float(tokens[3], &fov) == NO)
+		return (NO);
+	if (fov < 0 || fov > 180)
 		return (NO);
 	map->camera = create_camera(pos, dir, fov, map);
 	if (map->camera == NULL)

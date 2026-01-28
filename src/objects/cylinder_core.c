@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 15:54:26 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:02:42 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,13 @@ int	create_cy(t_data_rule rule, char **tokens, t_map *map)
 
 	ft_bzero(diametr_height, sizeof(float) * 2);
 	(void)rule;
-	if (parser_vec3(tokens[1], &pos) == NO || parser_vec3(tokens[2],
-			&normal) == NO || get_valid_float(tokens[3],
-			&diametr_height[0]) == NO || get_valid_float(tokens[4],
-			&diametr_height[1]) == NO || parser_color(tokens[5],
-			&color_reflection.color) == NO)
+	if (parser_vec3(tokens[1], &pos) == NO
+		|| parser_vec3(tokens[2], &normal) == NO
+		|| get_valid_float(tokens[3], &diametr_height[0]) == NO
+		|| get_valid_float(tokens[4], &diametr_height[1]) == NO
+		|| parser_color(tokens[5], &color_reflection.color) == NO)
+		return (NO);
+	if (diametr_height[0] <= 0 || diametr_height[1] <= 0)
 		return (NO);
 	if (get_valid_float(tokens[6], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;

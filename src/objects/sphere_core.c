@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 20:48:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:18:33 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,12 @@ int	create_sp(t_data_rule rule, char **tokens, t_map *map)
 		|| get_valid_float(tokens[2], &diametr) == NO
 		|| parser_color(tokens[3], &color_reflection.color) == NO)
 		return (NO);
+	if (diametr <= 0)
+		return (NO);
 	if (get_valid_float(tokens[4], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
+	if (color_reflection.reflection < 0 || color_reflection.reflection > 1)
+		return (NO);
 	sphere = create_sphere(pos, diametr, color_reflection);
 	if (sphere == NULL)
 		return (NO);

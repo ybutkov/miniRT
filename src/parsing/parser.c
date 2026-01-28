@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/26 21:29:30 by skomyshe         ###   ########.fr       */
+/*   Updated: 2026/01/28 19:58:24 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include <mlx.h>
 
 static void	normalize_line(char *line)
 {
@@ -87,6 +88,7 @@ void	parse_file(int fd, t_map *map)
 	char			*line;
 	int				line_num;
 	t_parse_error	err;
+	void			*mlx;
 
 	line_num = 0;
 	line = get_next_line(fd);
@@ -98,6 +100,10 @@ void	parse_file(int fd, t_map *map)
 		{
 			free(line);
 			close(fd);
+			mlx = map->mlx;
+			map->free(map);
+			mlx_destroy_display(mlx);
+			free(mlx);
 			parse_error_exit(err, line_num, line);
 		}
 		free(line);

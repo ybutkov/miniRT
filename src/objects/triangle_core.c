@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:19:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	create_tr(t_data_rule rule, char **tokens, t_map *map)
 		return (NO);
 	if (get_valid_float(tokens[5], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;
+	if (color_reflection.reflection < 0 || color_reflection.reflection > 1)
+		return (NO);
 	triangle = create_triangle(p_1, p_2, p_3, color_reflection);
 	if (triangle == NULL)
 		return (NO);

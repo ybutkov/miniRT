@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:44:42 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:03:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	create_co(t_data_rule rule, char **tokens, t_map *map)
 		|| get_valid_float(tokens[3], &radius_height[0]) == NO
 		|| get_valid_float(tokens[4], &radius_height[1]) == NO
 		|| parser_color(tokens[5], &color_reflection.color) == NO)
+		return (NO);
+	if (radius_height[0] <= 0 || radius_height[1] <= 0)
 		return (NO);
 	if (get_valid_float(tokens[6], &color_reflection.reflection) != OK)
 		color_reflection.reflection = DEFAULT_REFLECTION;

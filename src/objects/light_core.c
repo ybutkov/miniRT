@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:39:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 22:18:37 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:15:28 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	create_l(t_data_rule rule, char **tokens, t_map *map)
 	(void)rule;
 	if (parser_vec3(tokens[1], &pos) == NO
 		|| get_valid_float(tokens[2], &ratio) == NO)
+		return (NO);
+	if (ratio < 0 || ratio > 1)
 		return (NO);
 	if (tokens[3])
 	{
