@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:33:43 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 20:40:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 13:19:53 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_aabb	sphere_get_aabb(t_obj *this)
 	t_aabb		aabb;
 	t_sphere	*sphere;
 
+	aabb = get_empty_aabb();
 	sphere = (t_sphere *)this->data;
 	aabb.min = vector_sub_scalar(sphere->center, sphere->radius);
 	aabb.max = vector_add_scalar(sphere->center, sphere->radius);

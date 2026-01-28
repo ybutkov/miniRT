@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 19:28:04 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/15 22:14:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:43:08 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ t_vec3	create_vector(double x, double y, double z)
 {
 	t_vec3	vector;
 
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
+	ft_bzero(&vector, sizeof(t_vec3));
+	vector.v[0] = x;
+	vector.v[1] = y;
+	vector.v[2] = z;
 	return (vector);
 }

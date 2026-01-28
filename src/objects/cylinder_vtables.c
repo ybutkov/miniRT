@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:28:02 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_aabb	cylinder_get_aabb(t_obj *this)
 	t_vec3		top;
 	t_vec3		bot;
 
+	aabb = get_empty_aabb();
 	cy = (t_cylinder *)this->data;
 	half_h = vector_mult(cy->normal, cy->height / 2.0);
 	top = vector_add(cy->center, half_h);

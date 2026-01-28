@@ -58,6 +58,8 @@ t_aabb	calculate_aabb(t_obj *obj, int amount)
 	t_aabb	aabb;
 	t_obj	*cur;
 
+	ft_bzero(&aabb, sizeof(t_aabb));
+	ft_bzero(&cur_aabb, sizeof(t_aabb));
 	aabb.min = create_vector(INFINITY, INFINITY, INFINITY);
 	aabb.max = create_vector(-INFINITY, -INFINITY, -INFINITY);
 	cur = obj;
@@ -75,6 +77,7 @@ t_aabb	create_infinite_aabb(void)
 {
 	t_aabb	aabb;
 
+	ft_bzero(&aabb, sizeof(t_aabb));
 	aabb.min = create_vector(-INFINITY, -INFINITY, -INFINITY);
 	aabb.max = create_vector(INFINITY, INFINITY, INFINITY);
 	return (aabb);

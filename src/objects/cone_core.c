@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:44:42 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 22:20:53 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_aabb	cone_get_aabb(t_obj *this)
 	t_vec3	base_center;
 	double	max_radius;
 
+	aabb = get_empty_aabb();
 	cone = (t_cone *)this->data;
 	apex = cone->center;
 	base_center = vector_add(cone->center, vector_mult(cone->axis,
@@ -94,6 +95,7 @@ int	create_co(t_data_rule rule, char **tokens, t_map *map)
 	t_color_reflect	color_reflection;
 	t_obj			*cone;
 
+	ft_bzero(radius_height, sizeof(float) * 2);
 	(void)rule;
 	if (parser_vec3(tokens[1], &center) == NO
 		|| parser_vec3(tokens[2], &axis) == NO

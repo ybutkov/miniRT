@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 21:25:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:39:28 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_aabb	triangle_get_aabb(t_obj *this)
 	t_aabb		aabb;
 	t_triangle	*triangle;
 
+	aabb = get_empty_aabb();
 	triangle = (t_triangle *)this->data;
 	aabb.min.x = fmin(fmin(triangle->p_1.x, triangle->p_2.x), triangle->p_3.x);
 	aabb.min.y = fmin(fmin(triangle->p_1.y, triangle->p_2.y), triangle->p_3.y);

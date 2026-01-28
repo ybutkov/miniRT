@@ -94,7 +94,8 @@ C_SHELL_FILES += \
 		objects/cone_vtables.c \
 		objects/texture_1.c \
 		objects/texture_2.c \
-		objects/sky_core.c
+		objects/sky_core.c \
+		objects/utils.c
 
 C_SHELL_FILES += \
 		bvh/bvh_core.c \
@@ -189,6 +190,7 @@ $(MINILIBX):
 
 v: re
 	valgrind --leak-check=full  --show-leak-kinds=all --track-fds=yes \
+	 		--track-origins=yes \
 		./miniRT scenes/wolf.rt 
 # 		./miniRT scenes/pyramid_sphere.rt 
 # 		./miniRT scenes/earth2.rt

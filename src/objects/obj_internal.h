@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:41:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 22:12:16 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 13:30:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "objects.h"
 # include "vectors.h"
+# include "libft.h"
 
 typedef struct s_box_normal_utils
 {
@@ -67,5 +68,8 @@ t_vtable	*get_cone_methods(void);
 t_obj_type	cone_get_type(void);
 t_aabb		cone_get_aabb(t_obj *this);
 double		cone_intersect(t_obj *this, t_vec3 origin, t_vec3 dir);
+
+// UTILS
+t_aabb		get_empty_aabb(void);
 
 #endif

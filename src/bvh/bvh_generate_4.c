@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:52:15 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 18:53:51 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:46:57 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_vec3	get_centroid(t_obj *obj)
 {
 	t_aabb	aabb;
 
+	ft_bzero(&aabb, sizeof(t_aabb));
 	aabb = obj->methods->get_aabb(obj);
 	return (vector_mult(vector_add(aabb.min, aabb.max), 0.5f));
 }
@@ -31,9 +32,9 @@ int	get_split_axis(t_vec3 extent)
 	int	axis;
 
 	axis = 0;
-	if (extent.y > extent.x)
+	if (extent.v[1] > extent.v[0])
 		axis = 1;
-	if (extent.z > extent.v[axis])
+	if (extent.v[2] > extent.v[axis])
 		axis = 2;
 	return (axis);
 }

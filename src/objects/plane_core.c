@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 21:43:49 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:29:26 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 13:19:45 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_aabb	plane_get_aabb(t_obj *this)
 	t_aabb	aabb;
 
 	(void)this;
+	aabb = get_empty_aabb();
 	aabb.min = create_vector(-INFINITY, -INFINITY, -INFINITY);
 	aabb.max = create_vector(INFINITY, INFINITY, INFINITY);
 	return (aabb);

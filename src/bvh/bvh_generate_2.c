@@ -38,6 +38,8 @@ void	create_child_nodes(t_bvh_node *node, t_obj **obj, int amount,
 	t_aabb	left_aabb;
 	t_aabb	right_aabb;
 
+	ft_bzero(&left_aabb, sizeof(t_aabb));
+	ft_bzero(&right_aabb, sizeof(t_aabb));
 	link_objects_in_array(obj, left_count);
 	link_objects_in_array(obj + left_count, amount - left_count);
 	left_aabb = calculate_aabb_array(obj, left_count);

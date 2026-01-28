@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 14:43:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:42:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/28 15:54:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static double	check_cap(t_cylinder *cy, t_vec3 origin, t_vec3 dir,
 		t_vec3 cap_center)
@@ -74,10 +75,13 @@ double	cylinder_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 	cy = (t_cylinder *)this->data;
 	res = -1.0;
 	t = pipe_intersect(cy, origin, dir);
-	temp_vec = vector_add(origin, vector_mult(dir, t));
-	h = vector_dot_product(vector_sub(temp_vec, cy->center), cy->normal);
-	if (t > 0 && h >= -cy->height / 2.0 && h <= cy->height / 2.0)
-		res = t;
+	if (t > 0)
+	{
+		temp_vec = vector_add(origin, vector_mult(dir, t));
+		h = vector_dot_product(vector_sub(temp_vec, cy->center), cy->normal);
+		if (h >= -cy->height / 2.0 && h <= cy->height / 2.0)
+			res = t;
+	}
 	temp_vec = vector_mult(cy->normal, cy->height / 2.0);
 	t = check_cap(cy, origin, dir, vector_add(cy->center, temp_vec));
 	if (t > 0 && (res < 0 || t < res))
@@ -89,7 +93,7 @@ double	cylinder_intersect(t_obj *this, t_vec3 origin, t_vec3 dir)
 }
 
 static t_obj	*create_cylinder(t_vec3 pos, t_vec3 normal,
-		double diametr_height[2], t_color_reflect color_reflection)
+		float diametr_height[2], t_color_reflect color_reflection)
 {
 	t_obj		*obj;
 	t_cylinder	*cylinder;
@@ -101,6 +105,7 @@ static t_obj	*create_cylinder(t_vec3 pos, t_vec3 normal,
 	cylinder = malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (free(obj), HANDLE_ERROR_NULL);
+	ft_bzero(cylinder, sizeof(t_cylinder));
 	obj->methods = get_cylinder_methods();
 	cylinder->center = pos;
 	cylinder->normal = vector_norm(normal);
@@ -116,15 +121,16 @@ int	create_cy(t_data_rule rule, char **tokens, t_map *map)
 {
 	t_vec3			pos;
 	t_vec3			normal;
-	double			diametr_height[2];
+	float			diametr_height[2];
 	t_color_reflect	color_reflection;
 	t_obj			*cylinder;
 
+	ft_bzero(diametr_height, sizeof(float) * 2);
 	(void)rule;
 	if (parser_vec3(tokens[1], &pos) == NO || parser_vec3(tokens[2],
 			&normal) == NO || get_valid_float(tokens[3],
-			(float *)&diametr_height[0]) == NO || get_valid_float(tokens[4],
-			(float *)&diametr_height[1]) == NO || parser_color(tokens[5],
+			&diametr_height[0]) == NO || get_valid_float(tokens[4],
+			&diametr_height[1]) == NO || parser_color(tokens[5],
 			&color_reflection.color) == NO)
 		return (NO);
 	if (get_valid_float(tokens[6], &color_reflection.reflection) != OK)

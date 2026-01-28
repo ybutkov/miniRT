@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 14:02:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 23:19:03 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:17:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_aabb	box_get_aabb(t_obj *this)
 	t_vec3	corners[8];
 	int		i;
 
+	aabb = get_empty_aabb();
 	box = (t_box *)this->data;
 	calculate_corners(box, corners);
 	aabb.min = corners[0];
