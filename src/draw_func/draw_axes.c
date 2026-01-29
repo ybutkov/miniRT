@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:03:52 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:04:09 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 01:28:30 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	draw_axis_line(t_app *app, t_vec3 axis, int color)
 
 	center_x = WINDOW_WIDTH - AXIS_OFFSET_X;
 	center_y = AXIS_OFFSET_Y;
-	project_axis(app->map->camera, axis, &end_x, &end_y);
+	project_axis(app->map->get_camera(app->map), axis, &end_x, &end_y);
 	line.img = app->img;
 	line.x0 = center_x;
 	line.y0 = center_y;
@@ -52,7 +52,7 @@ static void	draw_axis_line(t_app *app, t_vec3 axis, int color)
 
 void	draw_axes(t_app *app)
 {
-	if (!app->map || !app->map->camera)
+	if (!app->map || !app->map->get_camera(app->map))
 		return ;
 	draw_axis_line(app, create_vector(1, 0, 0), 0xFF0000);
 	draw_axis_line(app, create_vector(0, 1, 0), 0x00FF00);

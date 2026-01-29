@@ -191,7 +191,8 @@ $(MINILIBX):
 v: re
 	valgrind --leak-check=full  --show-leak-kinds=all --track-fds=yes \
 	 		--track-origins=yes \
-		./miniRT scenes/pyramid_sphere.rt 
+			./miniRT scenes/light.rt 
+# 		./miniRT scenes/pyramid_sphere.rt 
 # 		./miniRT scenes/earth2.rt
 #		--suppressions=tools/sub.sub   
 # 		--track-origins=yes --trace-children=yes --suppressions=tools/sub.sub  ./minishell

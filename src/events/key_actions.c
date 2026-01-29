@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2025/12/31 18:03:13 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:10:33 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ static void	init_functions(t_key_actions *key_actions)
 	key_actions->actions[9] = (t_key_action){KEY_A, key_a_action};
 	key_actions->actions[10] = (t_key_action){KEY_D, key_d_action};
 	key_actions->actions[11] = (t_key_action){KEY_Z, key_z_action};
-	key_actions->actions[12] = (t_key_action){KEY_X, key_x_action};
-	key_actions->actions[13] = (t_key_action){KEY_Q, key_q_action};
-	key_actions->actions[14] = (t_key_action){KEY_E, key_e_action};
-	key_actions->actions[15] = (t_key_action){KEY_R, key_r_action};
-	key_actions->actions[16] = (t_key_action){KEY_P, key_p_action};
-	key_actions->actions[17] = (t_key_action){KEY_I, key_i_action};
+	key_actions->actions[12] = (t_key_action){KEY_Q, key_q_action};
+	key_actions->actions[13] = (t_key_action){KEY_TAB, key_tab_action};
 }
 
 static t_key_action	*get_action(t_key_actions *key_actions, int key)

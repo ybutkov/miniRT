@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 23:50:39 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 18:49:06 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 01:41:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ typedef struct s_camera
 	t_vec3					horizontal;
 	t_vec3					vertical;
 	t_vec3					lower_left_pos;
+	char					*number;
+	struct s_camera			*next;
 	void					(*update_fov)(struct s_camera *camera, int delta);
 }							t_camera;
 

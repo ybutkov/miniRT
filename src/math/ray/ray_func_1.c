@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 21:36:28 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/25 01:08:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 01:34:39 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_color	process_light(t_map *map, t_obj *obj, t_vec3 hit_point,
 	double	dot;
 
 	normal = obj->methods->get_normal(obj, hit_point);
-	view_dir = vector_norm(vector_sub(map->camera->pos, hit_point));
+	view_dir = vector_norm(vector_sub(map->get_camera(map)->pos, hit_point));
 	if (vector_dot_product(normal, view_dir) < 0)
 		normal = vector_mult(normal, -1);
 	light_dir = vector_norm(vector_sub(light->pos, hit_point));

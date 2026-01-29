@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:38:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 01:03:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:06:13 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_map
 	void			*mlx;
 	t_obj			*objects;
 	t_camera		*camera;
+	int				amount_cameras;
 	t_ambient		*ambient;
 	t_light			*lights;
 	t_bvh			*bvh;
@@ -43,12 +44,14 @@ typedef struct s_map
 	int				is_change;
 
 	void			(*free)(struct s_map *map);
-	void			(*reset)(struct s_map *map);
 	void			(*shift)(struct s_map *map, int x, int y);
 	void			(*zoom_in)(struct s_map *map, int delta);
 	void			(*add_obj)(struct s_map *map, t_obj *object);
 	int				(*generate_bvh)(t_map *map);
 	void			(*add_light)(struct s_map *map, t_light *light);
+	void			(*add_camera)(struct s_map *map, t_camera *camera);
+	t_camera		*(*get_camera)(struct s_map *map);
+	void			(*finish_preparation)(struct s_map *map);
 }					t_map;
 
 typedef struct s_img

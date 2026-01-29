@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 19:22:19 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:37:59 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 01:33:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_obj	*select_object_at_screen_pos(t_app *app, int screen_x, int screen_y)
 
 	ratio.x = (double)screen_x / (double)app->width;
 	ratio.y = (double)screen_y / (double)app->height;
-	ray = get_ray(app->map->camera, ratio.x, ratio.y);
+	ray = get_ray(app->map->get_camera(app->map), ratio.x, ratio.y);
 	closest_obj = NULL;
 	min_t = INFINITY;
 	obj = app->map->objects;
@@ -56,8 +56,8 @@ void	move_selected_object(t_app *app, int delta_x, int delta_y)
 	if (!app->selected_obj)
 		return ;
 	obj = app->selected_obj;
-	right = app->map->camera->right;
-	up = app->map->camera->up;
+	right = app->map->get_camera(app->map)->right;
+	up = app->map->get_camera(app->map)->up;
 	movement = vector_add(vector_mult(right, (double)delta_x * 0.05),
 			vector_mult(up, (double)(-delta_y) * 0.05));
 	if (obj->data)

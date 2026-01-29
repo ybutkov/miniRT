@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:03:34 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/21 20:35:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 13:39:46 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "miniRT.h"
 
+void	key_esc_action(t_app *app);
 void	key_up_action(t_app *app);
 void	key_down_action(t_app *app);
 void	key_left_action(t_app *app);
@@ -26,12 +27,7 @@ void	key_s_action(t_app *app);
 void	key_a_action(t_app *app);
 void	key_d_action(t_app *app);
 void	key_z_action(t_app *app);
-void	key_x_action(t_app *app);
 void	key_q_action(t_app *app);
-void	key_e_action(t_app *app);
-void	key_r_action(t_app *app);
-void	key_p_action(t_app *app);
-void	key_i_action(t_app *app);
-void	key_esc_action(t_app *app);
+void	key_tab_action(t_app *app);
 
 #endif

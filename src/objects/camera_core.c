@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 00:04:02 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 20:13:01 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:13:56 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 	cam->fov = fov;
 	cam->dir = vector_norm(dir);
 	cam->aspect_ratio = (double)map->width / (double)map->height;
+	cam->next = NULL;
 	update_camera(cam);
 	return (cam);
 }
@@ -77,9 +78,10 @@ t_camera	*create_camera(t_vec3 pos, t_vec3 dir, double fov, t_map *map)
 // check amount of tokens
 int	create_c(t_data_rule rule, char **tokens, t_map *map)
 {
-	t_vec3	pos;
-	t_vec3	dir;
-	float	fov;
+	t_vec3		pos;
+	t_vec3		dir;
+	float		fov;
+	t_camera	*camera;
 
 	(void)rule;
 	if (parser_vec3(tokens[1], &pos) == NO
@@ -88,8 +90,10 @@ int	create_c(t_data_rule rule, char **tokens, t_map *map)
 		return (NO);
 	if (fov < 0 || fov > 180)
 		return (NO);
-	map->camera = create_camera(pos, dir, fov, map);
-	if (map->camera == NULL)
+	camera = create_camera(pos, dir, fov, map);
+	if (camera == NULL)
 		return (NO);
+	camera->number = ft_itoa(++map->amount_cameras);
+	map->add_camera(map, camera);
 	return (OK);
 }

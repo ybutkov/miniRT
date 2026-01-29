@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 13:03:00 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 00:43:42 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:06:09 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	init_map_values(t_map *map)
 	map->background_texture = NULL;
 	map->shift_size = SHIFT_SIZE;
 	map->zoom_size = ZOOM_SIZE_PERCENT;
+	map->amount_cameras = 0;
 	map->is_change = 1;
 }
 
@@ -83,11 +84,13 @@ t_map	*create_map(size_t width, size_t height)
 	map->width = width;
 	map->height = height;
 	map->free = free_map;
-	map->reset = reset_map_transformations;
 	map->shift = shift;
 	map->zoom_in = zoom_in;
 	map->add_light = add_new_light;
 	map->add_obj = add_new_object;
 	map->generate_bvh = generate_bvh;
+	map->get_camera = get_current_camera;
+	map->add_camera = add_camera;
+	map->finish_preparation = finish_preparation;
 	return (map);
 }
