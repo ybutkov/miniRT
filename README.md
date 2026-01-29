@@ -104,6 +104,25 @@ General rules
 
 ---
 
+## Controls
+
+Use the keyboard to move the camera, rotate the view, zoom, reset the scene or quit. Below is a concise reference of the keys implemented by the application. Exact key codes for your platform are defined in `includes/keys.h`.
+
+Quick reference
+- Arrow keys (Up / Down / Left / Right) — rotate the camera around the X and Y axes.
+- W / S — move the camera forward / backward along its viewing direction.
+- A / D — strafe the camera left / right along its right vector.
+- Q / Z — move the camera up / down along its up vector.
+- + / - (Plus / Minus) — zoom in / out.
+- R — reset the scene / camera position to its initial state.
+- ESC — quit / close the window.
+
+Notes
+- The rotation step, movement step and zoom step are defined in the code (constants such as `ROTATE_CAMERA_STEP` and `MOVE_CAMERA_STEP`).
+- Some keys are defined in `includes/keys.h` but currently have no action assigned (for example `P`, `I`, `X`, `E`). You can inspect `src/events/` to see the current action implementations.
+- On macOS some key codes differ; consult `includes/keys.h` for platform-specific values.
+
+
 ## Project structure (important files)
 
 ```

@@ -1,0 +1,13 @@
+A 0.2 255,255,255
+
+# Camera placed on +Z axis looking toward origin
+C 0,0,25 0,0,-1 70
+
+# Light
+L 10,10,20 0.9 255,255,255
+
+# Objects around origin
+sp 0,0,0 3 180,80,160
+sp 2,-1,0 1.5 80,180,200
+cy -2,0,1 0,1,0 1 8 200,120,120
+pl 0,-4,0 0,1,0 120,120,200

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skomyshe <skomyshe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 21:34:14 by skomyshe          #+#    #+#             */
-/*   Updated: 2026/01/29 14:10:14 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:36:18 by skomyshe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "miniRT.h"
 #include "parser.h"
 #include <fcntl.h>
+#include <mlx.h>
 #include <string.h>
 #include <unistd.h>
-#include <mlx.h>
 
 static void	normalize_line(char *line)
 {
