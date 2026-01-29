@@ -6,12 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 20:10:10 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/29 03:21:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 13:53:08 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "objects.h"
 #include "constants.h"
+#include "objects.h"
 #include "parser.h"
 #include <stdlib.h>
 
@@ -30,8 +30,9 @@ t_ambient	*create_ambient(double ratio, t_color color)
 // check amount of tokens
 int	create_a(t_data_rule rule, char **tokens, t_map *map)
 {
-	float	ratio;
-	t_color	color;
+	float		ratio;
+	t_color		color;
+	t_ambient	*ambient;
 
 	(void)rule;
 	if (get_valid_float(tokens[1], &ratio) == NO)
@@ -40,8 +41,11 @@ int	create_a(t_data_rule rule, char **tokens, t_map *map)
 		return (NO);
 	if (parser_color(tokens[2], &color) == NO)
 		return (NO);
-	map->ambient = create_ambient(ratio, color);
-	if (map->ambient == NULL)
+	ambient = create_ambient(ratio, color);
+	if (ambient == NULL)
 		return (NO);
+	if (map->ambient)
+		free(map->ambient);
+	map->ambient = ambient;
 	return (OK);
 }
