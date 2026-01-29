@@ -1,4 +1,0 @@
-A 1.2 255,255,255    # invalid ambient ratio > 1
-C 0,0,10 0,0,-2 60   # invalid normalized direction
-L 10,10,10 1.5 300,0,0  # invalid ratio and color
-X 0,0,0 1 255,255,255    # unknown identifier
