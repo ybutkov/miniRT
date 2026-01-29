@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/01 21:08:54 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/19 00:17:20 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 01:26:49 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_map(t_app *app)
 		while (point.x < app->map->width)
 		{
 			ratio.x = (double)point.x / (app->map->width - 1);
-			ray = get_ray(app->map->camera, ratio.x, ratio.y);
+			ray = get_ray(app->map->get_camera(app->map), ratio.x, ratio.y);
 			color_trace = trace_ray(ray, app->map, REFLECTION_AMOUNT);
 			ft_mlx_pixel_put(app->img, point.x, point.y,
 				color_to_int(color_trace));

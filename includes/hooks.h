@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:35:50 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/01 21:04:22 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:10:41 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "miniRT.h"
 
-# define AMOUNT_OF_KEY_ACTIONS 18
+# define AMOUNT_OF_KEY_ACTIONS 14
 
 typedef struct s_app	t_app;
 

@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:58:17 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 00:56:09 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:05:26 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ static void	free_objects(t_obj *obj, void *mlx)
 	}
 }
 
+static void	free_cameras(t_camera *camera)
+{
+	t_camera	*next;
+	t_camera	*cur;
+
+	cur = camera;
+	while (cur)
+	{
+		if (cur->number)
+			free(cur->number);
+		next = cur->next;
+		free(cur);
+		cur = next;
+		if (cur == camera)
+			break ;
+	}
+}
+
 static void	free_lights(t_light *light)
 {
 	t_light	*next;
@@ -58,8 +76,8 @@ void	free_map(t_map *map)
 		free_objects(map->objects, map->mlx);
 	if (map->lights)
 		free_lights(map->lights);
-	if (map->camera)
-		free(map->camera);
+	if (map->get_camera(map))
+		free_cameras(map->get_camera(map));
 	if (map->ambient)
 		free(map->ambient);
 	if (map->bvh)
@@ -69,13 +87,3 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-static void	init_map_transformations(t_map *map)
-{
-	(void)map;
-}
-
-void	reset_map_transformations(t_map *map)
-{
-	init_map_transformations(map);
-	map->is_change = 1;
-}

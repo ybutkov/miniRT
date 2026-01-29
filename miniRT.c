@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 22:51:11 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:24:49 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,12 @@ int	main(int argc, char const *argv[])
 	map = create_map(WINDOW_WIDTH, WINDOW_HEIGHT);
 	map->mlx = mlx;
 	parse_scene(argv[1], map);
-	if (map->ambient == NULL || map->camera == NULL)
+	if (map->ambient == NULL || map->get_camera(map) == NULL)
 		exit_program(map, ERROR_MSG_PARAMS);
-	printf("finish parsing\n");
+	printf("Parsing - OK!\n");
 	if (map->generate_bvh(map) == NO)
 		exit_program(map, ERROR_MSG_BVH);
+	map->finish_preparation(map);
 	app = init_app(map, "Wild World");
 	mlx_loop(app->mlx);
 	return (0);

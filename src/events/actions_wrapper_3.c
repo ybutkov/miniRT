@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 18:02:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/18 00:22:29 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 03:10:21 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,22 @@
 
 void	key_z_action(t_app *app)
 {
-	app->map->camera->pos = vector_add(app->map->camera->pos,
-			vector_mult(app->map->camera->up, -MOVE_CAMERA_STEP));
-	update_camera(app->map->camera);
-}
-
-void	key_x_action(t_app *app)
-{
-	(void)app;
+	app->map->get_camera(app->map)->pos
+		= vector_add(app->map->get_camera(app->map)->pos,
+			vector_mult(app->map->get_camera(app->map)->up, -MOVE_CAMERA_STEP));
+	update_camera(app->map->get_camera(app->map));
 }
 
 void	key_q_action(t_app *app)
 {
-	app->map->camera->pos = vector_add(app->map->camera->pos,
-			vector_mult(app->map->camera->up, MOVE_CAMERA_STEP));
-	update_camera(app->map->camera);
+	app->map->get_camera(app->map)->pos
+		= vector_add(app->map->get_camera(app->map)->pos,
+			vector_mult(app->map->get_camera(app->map)->up, MOVE_CAMERA_STEP));
+	update_camera(app->map->get_camera(app->map));
 }
 
-void	key_e_action(t_app *app)
+void	key_tab_action(t_app *app)
 {
 	(void)app;
-}
-
-void	key_r_action(t_app *app)
-{
-	app->map->reset(app->map);
+	app->map->camera = app->map->get_camera(app->map)->next;
 }
