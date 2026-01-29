@@ -69,7 +69,6 @@ C_SHELL_FILES += \
 		events/hooks.c \
 		events/mouse_hooks.c \
 		events/key_actions.c \
-		events/object_selection.c \
 		events/actions_wrapper_1.c \
 		events/actions_wrapper_2.c \
 		events/actions_wrapper_3.c \

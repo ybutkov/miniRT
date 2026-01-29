@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 16:53:36 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 13:49:23 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,5 @@ void							parse_file(int fd, t_map *map);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
 t_parse_error					parse_line(char *line, t_map *map);
-
-t_obj							*select_object_at_screen_pos(t_app *app,
-									int screen_x, int screen_y);
-void							move_selected_object(t_app *app, int delta_x,
-									int delta_y);
 
 #endif
