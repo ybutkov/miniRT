@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by [skomyshe](https://profile-v3.intra.42.fr/users/skomyshe).* 
+*This project has been created as part of the 42 curriculum by [skomyshe](https://profile-v3.intra.42.fr/users/skomyshe) and [ybutkov](https://profile-v3.intra.42.fr/users/ybutkov).* 
 
 # miniRT — minimal ray tracer (42 project)
 
