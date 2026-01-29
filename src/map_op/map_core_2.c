@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:58:17 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/29 03:05:26 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 15:36:05 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,3 @@ void	free_map(t_map *map)
 		free_texture(map->mlx, (t_texture *)map->background_texture);
 	free(map);
 }
-

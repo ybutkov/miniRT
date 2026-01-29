@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 17:28:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 22:50:57 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 15:37:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define DEFAULT_BRIGHTNESS 1
 # define DEFAULT_REFLECTION 0.0
 # define EPSILON 1e-4
-# define DEGREE_TO_RAD (2.0 * M_PI / 360.0)
 # define ROTATE_CAMERA_STEP 2
 # define MOVE_CAMERA_STEP 1
 

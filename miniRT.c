@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/29 14:02:07 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 15:35:29 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	exit_program(t_map *map, char *message)
 	perror(message);
 	exit(EXIT_FAILURE);
 }
-
-
 
 static int	loop_hook(t_app *app)
 {
