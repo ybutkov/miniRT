@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:21:05 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/29 03:24:49 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:02:07 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,7 @@ static void	exit_program(t_map *map, char *message)
 	exit(EXIT_FAILURE);
 }
 
-static int	has_extension(const char *filename, const char *extension)
-{
-	size_t len;
 
-	if (!filename)
-		return (NO);
-	len = ft_strlen(filename);
-	if (len < 3)
-		return (NO);
-	return (ft_strcmp(&filename[len - 3], extension) == 0);
-}
 
 static int	loop_hook(t_app *app)
 {

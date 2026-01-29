@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/26 21:24:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:09:13 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_texture	*load_texture(void *mlx, char *path)
 		return (NULL);
 	texture = malloc(sizeof(t_texture));
 	if (!texture)
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	texture->img = mlx_xpm_file_to_image(mlx, path, &texture->width,
 			&texture->height);
 	if (!texture->img)
 	{
 		free(texture);
-		return (NULL);
+		return (HANDLE_ERROR_NULL);
 	}
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
 			&texture->line_len, &texture->endian);

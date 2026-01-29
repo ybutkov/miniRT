@@ -121,7 +121,8 @@ C_SHELL_FILES += \
         parsing/parser_utils.c \
         parsing/utils.c \
 		parsing/utils_2.c \
-		parsing/data_rules.c
+		parsing/data_rules.c \
+		utils/file_utils.c
 
 C_FIlES = $(addprefix $(SRC)/, $(C_SHELL_FILES))
 C_OBJ_FIlES =	$(C_FIlES:%.c=$(BUILD_DIR)/%.o)

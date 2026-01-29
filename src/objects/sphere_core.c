@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 17:49:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/28 20:18:33 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:21:02 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ static void	get_additional_props(char **tokens, t_obj *sphere, t_map *map)
 			sphere->texture_intensity = 1.0;
 		}
 	}
-	else if (tokens[5] && tokens[6] && get_valid_float(tokens[6],
-			&tex_intensity) == OK)
+	else if (tokens[5] && tokens[6]
+		&& has_extension(tokens[5], ".xpm") == OK
+		&& try_open_file(tokens[5]) == OK
+		&& get_valid_float(tokens[6], &tex_intensity) == OK)
 	{
 		sphere->texture = load_texture(map->mlx, tokens[5]);
 		sphere->texture_type = TEXTURE_FILE;

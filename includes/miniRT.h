@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 16:23:11 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/29 13:49:23 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:11:34 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,12 @@ typedef struct s_app
 	void						(*clear_image)(t_img *img);
 }								t_app;
 
-void							print_map(t_map *map);
-
 // --- Parsing functions
 void							parse_scene(const char *filename, t_map *map);
-
-// Parsing helpers
-t_vec3							parse_vec3(char *str);
-t_color							parse_color(char *str);
-void							check_normalized(t_vec3 v);
 
 // Parsing atof
 int								is_validate_real(const char *str);
 float							ft_atof(const char *str);
-
-// Free function
-void							free_object_list(t_obj *objects);
 
 void							exit_with_tokens(char **tokens, t_map *map,
 									const char *msg);
@@ -105,10 +95,11 @@ void							ft_mlx_pixel_put_safe(t_img *img, int x, int y,
 t_app							*create_app(t_map *map);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
-
 void							parse_file(int fd, t_map *map);
 void							parse_error_exit(t_parse_error err,
 									int line_num, char *line);
-t_parse_error					parse_line(char *line, t_map *map);
+int								try_open_file(const char *filename);
+int								has_extension(const char *filename,
+									const char *extension);
 
 #endif
